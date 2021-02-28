@@ -6,6 +6,7 @@ public class ThirdPersonMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
     [SerializeField] private Transform cam;
+    [SerializeField] private Animator anim;
 
     [SerializeField] private float normalSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
@@ -67,6 +68,7 @@ public class ThirdPersonMovement : MonoBehaviour
                 controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime);
             }
         }
+        anim.SetFloat("InputDirection", direction.magnitude);
     }
 
     private void ApplyGravity()
