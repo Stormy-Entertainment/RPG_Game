@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class HealthBarScript : MonoBehaviour
+public class HealthBar_Script : MonoBehaviour
 {
     private Image HealthBar;
     public float CurrentHealth;
@@ -13,6 +12,7 @@ public class HealthBarScript : MonoBehaviour
 
     private void Start()
     {
+        //Find
         HealthBar = GetComponent<Image>();
         Player = FindObjectOfType<PlayerController_Script>();
     }
