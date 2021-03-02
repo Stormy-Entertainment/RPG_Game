@@ -262,7 +262,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179748662}
-  m_LocalRotation: {x: 0.08129206, y: 0.000000017149436, z: -0.0000000013987425, w: 0.99669033}
+  m_LocalRotation: {x: 0.08129206, y: -0.000000017149432, z: 0.0000000013987422, w: 0.99669033}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &189396529
 AudioListener:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 189396528}
-  m_LocalRotation: {x: 0.08940692, y: 0.00053458184, z: -0.000047987505, w: 0.9959951}
+  m_LocalRotation: {x: 0.08940692, y: 0.0005345678, z: -0.000047986243, w: 0.9959951}
   m_LocalPosition: {x: -6.86, y: 4.091296, z: -12.928639}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -513,6 +513,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam1: {fileID: 598388049}
   cam2: {fileID: 574657266}
+  Playercam: {fileID: 1352432373}
+  mainCam: {fileID: 189396528}
 --- !u!4 &397924670
 Transform:
   m_ObjectHideFlags: 0
@@ -1134,7 +1136,6 @@ GameObject:
   m_Component:
   - component: {fileID: 574657270}
   - component: {fileID: 574657269}
-  - component: {fileID: 574657268}
   - component: {fileID: 574657267}
   m_Layer: 0
   m_Name: CutsceneCam2
@@ -1159,14 +1160,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!81 &574657268
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 574657266}
-  m_Enabled: 1
 --- !u!20 &574657269
 Camera:
   m_ObjectHideFlags: 0
@@ -1334,7 +1327,6 @@ GameObject:
   m_Component:
   - component: {fileID: 598388053}
   - component: {fileID: 598388052}
-  - component: {fileID: 598388051}
   - component: {fileID: 598388050}
   m_Layer: 0
   m_Name: CutsceneCam1
@@ -1342,7 +1334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!111 &598388050
 Animation:
   m_ObjectHideFlags: 0
@@ -1359,14 +1351,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!81 &598388051
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 598388049}
-  m_Enabled: 1
 --- !u!20 &598388052
 Camera:
   m_ObjectHideFlags: 0
@@ -1862,7 +1846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1352432374
 MonoBehaviour:
   m_ObjectHideFlags: 0
