@@ -22,11 +22,12 @@ public class ThirdPersonMovement : MonoBehaviour
     private Vector3 velocity;
     [SerializeField] private float gravity = -9.8f;
     [SerializeField] private bool isGounded;
+    private bool isJumping = false;
 
     private void Awake()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -40,7 +41,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && isGounded)
         {
-            CharacterJump();
+            if (!isJumping)
+            {
+                CharacterJump();
+            }
         }
 
         ApplyGravity();
@@ -69,6 +73,7 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
         anim.SetFloat("InputDirection", direction.magnitude);
+        anim.SetFloat("Velocity", controller.velocity.magnitude);
     }
 
     private void ApplyGravity()
@@ -79,6 +84,16 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void CharacterJump()
     {
+        isJumping = true;
         velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
+        anim.SetBool("Jump", true);
+        StartCoroutine(ResetJumpAnim());
+    }
+
+    IEnumerator ResetJumpAnim()
+    {
+        yield return new WaitForSeconds(0.8f);
+        anim.SetBool("Jump", false);
+        isJumping = false;
     }
 }
