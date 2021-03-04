@@ -22,11 +22,6 @@ public class EnemyAI3 : MonoBehaviour
     public bool playerInSightRange, playerInAttackRange;
 
 
-    void Start()
-    {
-        transform.position = wayPoint[wayPointIndex].transform.position;
-    }
-
     //Find player object by name
     private void Awake()
     {
@@ -36,6 +31,7 @@ public class EnemyAI3 : MonoBehaviour
 
     private void Update()
     {
+        agent.enabled = true;
         //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -48,14 +44,15 @@ public class EnemyAI3 : MonoBehaviour
 
     public void Defence()
     {
+
         if (wayPointIndex <= wayPoint.Length - 1)
         {
-            //object moves toward to the index position, 
-            transform.position = Vector3.MoveTowards(transform.position, wayPoint[wayPointIndex].transform.position, 0.02f);
+            agent.SetDestination(wayPoint[wayPointIndex].transform.position);
             transform.LookAt(wayPoint[wayPointIndex]);
 
             //if object location = current location, Index +1
-            if (transform.position == wayPoint[wayPointIndex].transform.position)
+            Vector3 distanceToWalkPoint = transform.position - wayPoint[wayPointIndex].position;
+            if (distanceToWalkPoint.magnitude < 1f) 
             {
                 wayPointIndex += 1;
             }
