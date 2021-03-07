@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyAI2 : MonoBehaviour
 {
+
+    public Animator animator;
+
+
     public NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -47,6 +51,10 @@ public class EnemyAI2 : MonoBehaviour
     //AI wandering on the level, also looking at the walkpoint
     private void Patroling()
     {
+
+        animator.SetBool("Moving", true);
+        animator.SetBool("Attack", false);
+
         if (!walkPointSet) SearchWalkPoint();
         if (walkPointSet) agent.SetDestination(walkPoint);
 
@@ -76,6 +84,9 @@ public class EnemyAI2 : MonoBehaviour
     //moving forward and looking at the player
     private void ChasePlayer()
     {
+        animator.SetBool("Moving", true);
+        animator.SetBool("Attack", false);
+
         agent.SetDestination(player.position);
         transform.LookAt(player);
     }
@@ -83,10 +94,10 @@ public class EnemyAI2 : MonoBehaviour
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
+        animator.SetBool("Attack", true);
+
         agent.SetDestination(transform.position);
-
         transform.LookAt(player);
-
 
         if (!alreadyAttacked)
         {

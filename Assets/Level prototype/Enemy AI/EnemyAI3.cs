@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyAI3 : MonoBehaviour
 {
+    public Animator animator;
+
     public UnityEngine.AI.NavMeshAgent agent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -44,6 +46,8 @@ public class EnemyAI3 : MonoBehaviour
 
     public void Defence()
     {
+        animator.SetBool("Moving", true);
+        animator.SetBool("Attack", false);
 
         if (wayPointIndex <= wayPoint.Length - 1)
         {
@@ -69,6 +73,9 @@ public class EnemyAI3 : MonoBehaviour
     //moving forward and looking at the player
     private void ChasePlayer()
     {
+        animator.SetBool("Moving", true);
+        animator.SetBool("Attack", false);
+
         agent.SetDestination(player.position);
         transform.LookAt(player);
     }
@@ -76,6 +83,8 @@ public class EnemyAI3 : MonoBehaviour
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
+        animator.SetBool("Attack", true);
+
         agent.SetDestination(transform.position);
         transform.LookAt(player);
 
