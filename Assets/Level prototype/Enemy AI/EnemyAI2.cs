@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class EnemyAI2 : MonoBehaviour
 {
-
+    
     public Animator animator;
 
 
@@ -48,6 +48,8 @@ public class EnemyAI2 : MonoBehaviour
 
     }
 
+
+
     //AI wandering on the level, also looking at the walkpoint
     private void Patroling()
     {
@@ -59,9 +61,9 @@ public class EnemyAI2 : MonoBehaviour
         if (walkPointSet) agent.SetDestination(walkPoint);
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
+        if (distanceToWalkPoint.magnitude < 3f) walkPointSet = false;
 
-        transform.rotation = Quaternion.LookRotation(walkPoint);
+        //transform.rotation = Quaternion.LookRotation(walkPoint);
         transform.LookAt(walkPoint);
     }
 
@@ -76,7 +78,7 @@ public class EnemyAI2 : MonoBehaviour
         //using raycast for ground check
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
-            walkPointSet = true;
+                walkPointSet = true;
         }
     }
 
@@ -127,6 +129,8 @@ public class EnemyAI2 : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(walkPoint, new Vector3(1, 1, 1));
     }
 
 }

@@ -40,19 +40,20 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+
     //Back to the defence, if no player find 
     private void Defence()
     {
-        
-        transform.position = Vector3.MoveTowards(transform.position, defPoint.position, 0.04f);
+        agent.destination = defPoint.position;
         transform.LookAt(defPoint);
 
-        agent.SetDestination(transform.position);
-
-        if(transform.position == defPoint.position)
+        //transform.position = Vector3.MoveTowards(transform.position, defPoint.position, 0.04f);
+        Vector3 distanceToDefPoint = transform.position - defPoint.position;
+        if (distanceToDefPoint.magnitude < 0.1f)
         {
             animator.SetBool("Moving", false);
-        }
+            agent.SetDestination(transform.position);
+         }
 
     }
 
