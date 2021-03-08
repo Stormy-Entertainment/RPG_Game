@@ -26,8 +26,9 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Awake()
     {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
@@ -95,5 +96,11 @@ public class ThirdPersonMovement : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         anim.SetBool("Jump", false);
         isJumping = false;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, groundDistance);
     }
 }
