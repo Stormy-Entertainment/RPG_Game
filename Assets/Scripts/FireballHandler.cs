@@ -13,11 +13,11 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform fireBallSpawnPoint;
 
-    public bool m_HitDetect;
-    public float m_MaxDistance;
-    Collider m_Collider;
-    RaycastHit m_Hit;
-
+    private bool m_HitDetect;
+    public Vector3 m_HitBoxRadius;
+    public float m_HitBoxDistance;
+    private Collider m_Collider;
+    private RaycastHit m_Hit;
     public LayerMask enemyLayerMask;
 
     void Start()
@@ -40,8 +40,8 @@ public class FireballHandler : MonoBehaviour
         //Calculate using the center of the GameObject's Collider(could also just use the GameObject's position), half the GameObject's size, the direction, the GameObject's rotation, and the maximum distance as variables.
         //Also fetch the hit data
         m_HitDetect = Physics.BoxCast(m_Collider.bounds.center,
-            transform.localScale, transform.forward,
-            out m_Hit, transform.rotation, m_MaxDistance, enemyLayerMask);
+            m_HitBoxRadius, transform.forward,
+            out m_Hit, transform.rotation, m_HitBoxDistance, enemyLayerMask);
 
         if (m_HitDetect)
         {
@@ -93,23 +93,23 @@ public class FireballHandler : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-
         //Check if there has been a hit yet
         if (m_HitDetect)
         {
+            Gizmos.color = Color.green;
             //Draw a Ray forward from GameObject toward the hit
             Gizmos.DrawRay(transform.position, transform.forward * m_Hit.distance);
             //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit.distance, transform.localScale);
+            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit.distance, m_HitBoxRadius);
         }
         //If there hasn't been a hit yet, draw the ray at the maximum distance
         else
         {
+            Gizmos.color = Color.red;
             //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.forward * m_MaxDistance);
+            Gizmos.DrawRay(transform.position, transform.forward * m_HitBoxDistance);
             //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_MaxDistance, transform.localScale);
+            Gizmos.DrawWireCube(transform.position + transform.forward * m_HitBoxDistance, m_HitBoxRadius);
         }
     }
 }
