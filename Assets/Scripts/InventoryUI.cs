@@ -6,6 +6,7 @@ public class InventoryUI : MonoBehaviour
 {
 	public Transform itemsParent;
 	public GameObject inventoryUI;
+	public static bool isInventoryOpen = false;
 
 	Inventory inventory;
 	InventorySlot[] slots;
@@ -24,15 +25,20 @@ public class InventoryUI : MonoBehaviour
 		// Open and Close Inventory Menu
 		if (Input.GetButtonDown("Inventory"))
 		{
-            if (inventoryUI.activeSelf)
-            {
-				inventoryUI.SetActive(false);
-				GameState.instance.ResumeTheGame();
-			}
-            else
-            {
-				inventoryUI.SetActive(true);
-				GameState.instance.PauseTheGame();
+			if (!PauseUI.isPaused)
+			{
+				if (inventoryUI.activeSelf)
+				{
+					inventoryUI.SetActive(false);
+					GameState.instance.ResumeTheGame();
+					isInventoryOpen = false;
+				}
+				else
+				{
+					inventoryUI.SetActive(true);
+					GameState.instance.PauseTheGame();
+					isInventoryOpen = true;
+				}
 			}
 		}
 	}
