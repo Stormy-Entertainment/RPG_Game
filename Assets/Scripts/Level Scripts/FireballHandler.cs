@@ -80,7 +80,7 @@ public class FireballHandler : MonoBehaviour
     {
         // If raycast hit Enemy tag
         // Assign bullet with target enemy
-        if (m_HitDetect && m_Hit.collider.tag == "Enemy")
+        if (m_HitDetect && m_Hit.collider.tag == "Enemy" && bul != null)
         {
             //If Raycast hit Target
             bul.GetComponent<Fireball>().TargetedFire(m_Hit.collider.gameObject);
