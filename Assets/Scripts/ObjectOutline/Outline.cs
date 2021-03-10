@@ -74,16 +74,16 @@ public class Outline : MonoBehaviour {
   [SerializeField, HideInInspector]
   private List<ListVector3> bakeValues = new List<ListVector3>();
 
-  private Renderer[] renderers;
+  public Renderer[] renderers;
   private Material outlineMaskMaterial;
   private Material outlineFillMaterial;
 
   private bool needsUpdate;
 
-  void Awake() {
-
+  void Awake() 
+    {     
     // Cache renderers
-    renderers = GetComponentsInChildren<Renderer>();
+    //renderers = GetComponentsInChildren<Renderer>();
 
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
@@ -99,8 +99,9 @@ public class Outline : MonoBehaviour {
     needsUpdate = true;
   }
 
-  void OnEnable() {
-    foreach (var renderer in renderers) {
+    void OnEnable() {
+    foreach (var renderer in renderers) 
+        {
 
       // Append outline shaders
       var materials = renderer.sharedMaterials.ToList();

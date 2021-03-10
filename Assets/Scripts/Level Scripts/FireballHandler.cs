@@ -22,6 +22,8 @@ public class FireballHandler : MonoBehaviour
     private RaycastHit m_Hit;
     public LayerMask enemyLayerMask;
 
+    private Outline lastOutline;
+
     void Start()
     {
         //Choose the distance the Box can reach to
@@ -48,11 +50,7 @@ public class FireballHandler : MonoBehaviour
             m_HitBoxRadius, transform.forward,
             out m_Hit, transform.rotation, m_HitBoxDistance, enemyLayerMask);
 
-        if (m_HitDetect)
-        {
-            //Output the name of the Collider your Box hit
-           // Debug.Log("Hit : " + m_Hit.collider.name);
-        }
+            HighLightEnemy();
     }
 
     private void ShootFireBall()
@@ -74,6 +72,31 @@ public class FireballHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(fireBallLoadingTime);
         isFiring = false;
+    }
+
+    private void HighLightEnemy()
+    {
+        Debug.Log("Hit Detect is " + m_HitDetect);
+        if (m_HitDetect)
+        {
+            Debug.Log("Hit Tag is " + m_Hit.collider.tag);
+            if (m_Hit.collider.tag == "Enemy")
+            {
+                //If Raycast hit Target
+                lastOutline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                if (lastOutline != null)
+                {
+                    lastOutline.enabled = true;
+                }
+            }
+        }
+        else
+        {
+            if (lastOutline != null)
+            {
+                lastOutline.enabled = false;
+            }
+        }
     }
 
     private void CheckEnemyAtRange(GameObject bul)
