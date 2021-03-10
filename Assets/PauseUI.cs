@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
-    public static bool isPaused = false;
 
     private void Update()
     {
@@ -18,13 +18,12 @@ public class PauseUI : MonoBehaviour
                 {
                     pauseMenu.SetActive(false);
                     GameState.instance.ResumeTheGame();
-                    isPaused = false;
+                    
                 }
                 else
                 {
                     pauseMenu.SetActive(true);
                     GameState.instance.PauseTheGame();
-                    isPaused = true;
                 }
             }
         }
@@ -34,11 +33,10 @@ public class PauseUI : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         GameState.instance.ResumeTheGame();
-        isPaused = false;
     }
 
-    public void OnQuitBtnClick()
+    public void OnMenuBtnClick()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

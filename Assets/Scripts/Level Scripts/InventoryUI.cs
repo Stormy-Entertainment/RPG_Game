@@ -25,15 +25,15 @@ public class InventoryUI : MonoBehaviour
 		// Open and Close Inventory Menu
 		if (Input.GetButtonDown("Inventory"))
 		{
-			if (!PauseUI.isPaused)
+			if (inventoryUI.activeSelf)
 			{
-				if (inventoryUI.activeSelf)
-				{
-					inventoryUI.SetActive(false);
-					GameState.instance.ResumeTheGame();
-					isInventoryOpen = false;
-				}
-				else
+				inventoryUI.SetActive(false);
+				GameState.instance.ResumeTheGame();
+				isInventoryOpen = false;
+			}
+			else
+			{
+				if (!GameState.isPaused)
 				{
 					inventoryUI.SetActive(true);
 					GameState.instance.PauseTheGame();

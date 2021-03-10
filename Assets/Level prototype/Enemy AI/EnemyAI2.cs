@@ -30,7 +30,7 @@ public class EnemyAI2 : MonoBehaviour
     //Find player object by name
     private void Awake()
     {
-        player = GameObject.Find("Hero").transform;
+        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -103,9 +103,10 @@ public class EnemyAI2 : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            print("hit");
-
             alreadyAttacked = true;
+            print("hit");
+            player.GetComponent<PlayerStats>().DecreaseHealth(15);
+            
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }

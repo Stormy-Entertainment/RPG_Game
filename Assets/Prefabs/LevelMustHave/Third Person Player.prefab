@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8135063134480014464}
   - component: {fileID: 8135063134480014465}
   - component: {fileID: 8135063134480014470}
+  - component: {fileID: 766736007815162249}
   m_Layer: 10
   m_Name: Third Person Player
   m_TagString: Player
@@ -155,7 +156,7 @@ CharacterController:
   m_Height: 1.7
   m_Radius: 0.31
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.65
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.95, z: 0}
@@ -203,6 +204,8 @@ MonoBehaviour:
     type: 3}
   fireBallSpeed: 100
   fireBallLifeTime: 6
+  fireBallLoadingTime: 0.25
+  isFiring: 0
   cameraTransform: {fileID: 8135063134480014466}
   fireBallSpawnPoint: {fileID: 8135063133728386933}
   m_HitBoxRadius: {x: 6, y: 3, z: 6}
@@ -210,6 +213,19 @@ MonoBehaviour:
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+--- !u!114 &766736007815162249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135063134480014467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7da788d7ed5674aa9c8206618a5a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Health: 100
 --- !u!1001 &8135063134530174867
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,8 +20,8 @@ public class ItemPickup : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
 		{
-			Debug.Log("Item collided with player");
 			PickUp();
+			SFXManager.GetInstance().PlaySound("ItemPickUp");
         }
     }
 
@@ -29,8 +29,8 @@ public class ItemPickup : MonoBehaviour
     {
 		if (other.gameObject.tag == "Player")
 		{
-			Debug.Log("Item collided with player");
 			PickUp();
+			SFXManager.GetInstance().PlaySound("ItemPickUp");
 		}
 	}
 }

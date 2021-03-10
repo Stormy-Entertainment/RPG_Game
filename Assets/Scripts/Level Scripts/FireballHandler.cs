@@ -9,6 +9,8 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private GameObject FireBall;
     [SerializeField] private float fireBallSpeed;
     [SerializeField] private float fireBallLifeTime;
+    [SerializeField] private float fireBallLoadingTime = 0.2f;
+    [SerializeField] private bool isFiring = false;
 
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform fireBallSpawnPoint;
@@ -28,9 +30,12 @@ public class FireballHandler : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && !GameState.isPaused)
         {
-            ShootFireBall();
+            if (!isFiring)
+            {
+                ShootFireBall();
+            }
         }
     }
 
@@ -46,40 +51,45 @@ public class FireballHandler : MonoBehaviour
         if (m_HitDetect)
         {
             //Output the name of the Collider your Box hit
-            Debug.Log("Hit : " + m_Hit.collider.name);
+           // Debug.Log("Hit : " + m_Hit.collider.name);
         }
     }
 
     private void ShootFireBall()
     {
+        isFiring = true;
         anim.SetTrigger("FireballShoot");
         GameObject mbullet = Instantiate(FireBall);
         mbullet.transform.position = new Vector3(fireBallSpawnPoint.position.x, fireBallSpawnPoint.position.y, fireBallSpawnPoint.position.z);
         Quaternion playerRotation = this.transform.rotation;
         mbullet.transform.rotation = playerRotation;
 
-        //mbullet.GetComponent<Rigidbody>().AddForce(cameraTransform.forward * fireBallSpeed, ForceMode.Impulse);
-
         CheckEnemyAtRange(mbullet);
-
+        SFXManager.GetInstance().PlaySound("FireballSFX");
         StartCoroutine(DestroyBulletTimer(mbullet));
+        StartCoroutine(ResetFireball());
+    }
+
+    private IEnumerator ResetFireball()
+    {
+        yield return new WaitForSeconds(fireBallLoadingTime);
+        isFiring = false;
     }
 
     private void CheckEnemyAtRange(GameObject bul)
     {
         // If raycast hit Enemy tag
         // Assign bullet with target enemy
-        if (m_HitDetect)
+        if (m_HitDetect && m_Hit.collider.tag == "Enemy")
         {
             //If Raycast hit Target
             bul.GetComponent<Fireball>().TargetedFire(m_Hit.collider.gameObject);
         }
-        else
-        {
-            bul.GetComponent<Fireball>().ImpulseFire(cameraTransform);
-        }
-        //Else
-        
+      //  else
+        //{
+        //    bul.GetComponent<Fireball>().ImpulseFire(cameraTransform);
+       // }
+        //Else       
     }
 
     IEnumerator DestroyBulletTimer(GameObject bullet)

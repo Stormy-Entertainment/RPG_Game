@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class Fireball : MonoBehaviour
 {
-    [SerializeField] private Transform cameraTransform;
     private GameObject target;
+    private Transform player;
+
     public float fireBallImpulseSpeed = 100f;
+    public float Damage = 15f;
     private float moveSpeed = 60f;
     private bool isTargeted = false;
+    private bool impulseFired = false;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+    }
 
     private void Update()
     {
@@ -16,6 +24,10 @@ public class Fireball : MonoBehaviour
         {
             float step = moveSpeed * Time.deltaTime; // calculate distance to move
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, step);
+        }
+        else if(!impulseFired)
+        {
+            ImpulseFire();
         }
     }
 
@@ -25,16 +37,20 @@ public class Fireball : MonoBehaviour
         isTargeted = true;
     }
 
-    public void ImpulseFire(Transform cameraTrans)
+    public void ImpulseFire()
     {
-        GetComponent<Rigidbody>().AddForce(cameraTrans.forward * fireBallImpulseSpeed, ForceMode.Impulse);
+        impulseFired = true;
+        GetComponent<Rigidbody>().AddForce(player.forward * fireBallImpulseSpeed, ForceMode.Impulse);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision other)
     {
-        if(collision.gameObject.tag == "Enemy")
+        if(other.gameObject.tag == "Enemy")
         {
             //Apply damage to enemy helth
+            other.gameObject.GetComponent<EnemyStats>().DecreaseHealth(Damage);
+            SFXManager.GetInstance().PlaySound("FirehitSFX");
+            Destroy(gameObject);
         }
         else
         {

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
     public static GameState instance;
+    public static bool isPaused = false;
 
     private void Awake()
     {
@@ -15,16 +16,23 @@ public class GameState : MonoBehaviour
         instance = this;
     }
 
+    private void Start()
+    {
+        ResumeTheGame();
+    }
+
     public void PauseTheGame()
     {
         Time.timeScale = 0f;
         EnableCorsor();
+        isPaused = true;
     }
 
     public void ResumeTheGame()
     {
         Time.timeScale = 1f;
         DisableCorsor();
+        isPaused = false;
     }
 
     private void EnableCorsor()

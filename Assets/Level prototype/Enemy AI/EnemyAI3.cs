@@ -27,7 +27,7 @@ public class EnemyAI3 : MonoBehaviour
     //Find player object by name
     private void Awake()
     {
-        player = GameObject.Find("Hero").transform;
+        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 

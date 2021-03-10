@@ -14,4 +14,9 @@ public class MenuSceneHandler : MonoBehaviour
     {
 
     }
+
+    public void OnQuitButtonClick()
+    {
+        Application.Quit();
+    }
 }
