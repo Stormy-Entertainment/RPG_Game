@@ -1788,7 +1788,7 @@ Transform:
   m_GameObject: {fileID: 241493839}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1827144585}
   m_RootOrder: 0
@@ -1965,7 +1965,7 @@ Transform:
   m_GameObject: {fileID: 264666245}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1387290090}
   m_RootOrder: 0
@@ -2379,8 +2379,8 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 19.99
   timeBetweenAttacks: 1
-  sightRange: 33.7
-  attackRange: 2.26
+  sightRange: 24.19
+  attackRange: -3.5
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &322946884
@@ -2643,19 +2643,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 371476855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf0c787d6332904f8e27a93a9827d87, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.16857962, g: 1, b: 0.15566039, a: 1}
+  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 2048184225}
-  - {fileID: 495445322}
-  - {fileID: 575641615}
 --- !u!114 &371476858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3813,19 +3811,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 586620988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf0c787d6332904f8e27a93a9827d87, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.16857962, g: 1, b: 0.15566039, a: 1}
+  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 2107314155}
-  - {fileID: 1533864488}
-  - {fileID: 1068184128}
 --- !u!114 &586620991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8582,8 +8578,8 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 19.99
   timeBetweenAttacks: 1
-  sightRange: 33.7
-  attackRange: 2.26
+  sightRange: 24.19
+  attackRange: -3.5
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1323440542
@@ -8996,8 +8992,8 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 19.99
   timeBetweenAttacks: 1
-  sightRange: 33.7
-  attackRange: 2.26
+  sightRange: 24.19
+  attackRange: -3.5
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1387290088
@@ -11105,8 +11101,8 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 19.99
   timeBetweenAttacks: 1
-  sightRange: 33.7
-  attackRange: 2.26
+  sightRange: 24.19
+  attackRange: -3.5
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!195 &1827144583
@@ -11211,21 +11207,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827909011}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf0c787d6332904f8e27a93a9827d87, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.16857962, g: 1, b: 0.15566039, a: 1}
+  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 264666246}
-  - {fileID: 1540562784}
-  - {fileID: 2137388355}
 --- !u!114 &1827909014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12207,19 +12201,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2022189090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aaf0c787d6332904f8e27a93a9827d87, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.16857962, g: 1, b: 0.15566039, a: 1}
+  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 241493841}
-  - {fileID: 1500900117}
-  - {fileID: 2054813208}
 --- !u!1 &2033080854
 GameObject:
   m_ObjectHideFlags: 0
@@ -12440,7 +12432,7 @@ Transform:
   m_GameObject: {fileID: 2048184224}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 1323440544}
   m_RootOrder: 0
@@ -12809,7 +12801,7 @@ Transform:
   m_GameObject: {fileID: 2107314154}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 322946886}
   m_RootOrder: 0
@@ -13367,17 +13359,17 @@ PrefabInstance:
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.12772281
+      value: 0.12772283
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000014779118
+      value: -2.6499866e-15
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.000000001903218
+      value: 4.4892593e-16
       objectReference: {fileID: 0}
     - target: {fileID: 5022174169362435494, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
