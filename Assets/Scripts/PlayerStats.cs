@@ -21,6 +21,7 @@ public class PlayerStats : MonoBehaviour
         m_Health = m_Health - value;
         if (m_Health <= 0f)
         {
+            GameOverUI.instance.GameOver();
             m_Health = 0f;
             Destroy(this.gameObject);
         }
