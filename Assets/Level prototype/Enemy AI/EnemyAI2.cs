@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyAI2 : MonoBehaviour
 {
     
+
     public Animator animator;
 
 

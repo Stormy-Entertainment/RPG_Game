@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {
+    public delegate void EnemyKilled();
+    public static event EnemyKilled OnEnemyKilled;
+
     public float m_Health = 100;
     public float m_XPGains = 15;
 
@@ -24,6 +27,12 @@ public class EnemyStats : MonoBehaviour
         {
             StatsUI.instance.SetExperience(m_XPGains);
             Destroy(transform.parent.gameObject);
+            OnEnemyKilled();
         }
+
+        //if(OnEnemyKilled != null)
+        //{
+            //OnEnemyKilled();
+        //}
     }
 }
