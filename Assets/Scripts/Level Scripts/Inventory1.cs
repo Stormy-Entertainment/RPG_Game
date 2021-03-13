@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory1 : MonoBehaviour
 {
-	public static Inventory instance;
+	public static Inventory1 instance;
 
 	void Awake()
 	{
@@ -12,7 +12,7 @@ public class Inventory1 : MonoBehaviour
 		{
 			return;
 		}
-		//instance = this;
+		instance = this;
 	}
 
 	// Item gets added/removed.

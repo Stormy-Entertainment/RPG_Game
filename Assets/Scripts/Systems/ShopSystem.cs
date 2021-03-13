@@ -43,7 +43,7 @@ public class ShopSystem : MonoBehaviour
 
 	void LoadPlayerItems()
 	{
-		foreach (Item item in playerInventory.items)
+		foreach (New_Item item in playerInventory.items)
 		{
 			AddItemToList(playerItems, item, ItemListing.ListingMode.Sell);
 		}
@@ -51,13 +51,13 @@ public class ShopSystem : MonoBehaviour
 
 	void LoadShopItems()
 	{
-		foreach (Item item in shopkeeper.shopInventory.items)
+		foreach (New_Item item in shopkeeper.shopInventory.items)
 		{
 			AddItemToList(shopItems, item, ItemListing.ListingMode.Buy);
 		}
 	}
 
-	public void AddItemToList(RectTransform list, Item item, ItemListing.ListingMode mode)
+	public void AddItemToList(RectTransform list, New_Item item, ItemListing.ListingMode mode)
 	{
 		GameObject clone = Instantiate(itemListingPrefab, itemListingPrefab.transform.position, Quaternion.identity);
 		ItemListing listing = clone.GetComponent<ItemListing>();
@@ -71,7 +71,7 @@ public class ShopSystem : MonoBehaviour
 		clone.transform.SetParent(list, false);
 	}
 
-	public void RemoveItemFromList(RectTransform list, Item item)
+	public void RemoveItemFromList(RectTransform list, New_Item item)
 	{
 		foreach (RectTransform listing in list.transform)
 		{
@@ -83,7 +83,7 @@ public class ShopSystem : MonoBehaviour
 		}
 	}
 
-	public void SellToShop(Item item)
+	public void SellToShop(New_Item item)
 	{
 		if (!shopkeeper.canSellTo)
 		{
@@ -111,7 +111,7 @@ public class ShopSystem : MonoBehaviour
 		UpdateMoneyUI();
 	}
 
-	public void BuyFromShop(Item item)
+	public void BuyFromShop(New_Item item)
 	{
 		if (playerInventory.money - item.price < 0)
 		{

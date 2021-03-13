@@ -18,6 +18,6 @@ public class Item : ScriptableObject
 
 	public void RemoveFromInventory()
 	{
-		Inventory.instance.Remove(this);
+		Inventory1.instance.Remove(this);
 	}
 }
