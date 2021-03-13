@@ -16,7 +16,15 @@ public class ShopSystem : MonoBehaviour
 	public RectTransform shopItems;
 	public GameObject itemListingPrefab;
 
-	public void OpenShop(Shopkeeper keeper)
+    private void Update()
+    {
+		if (Input.GetButtonDown("ShopKeeper"))
+        {
+			OpenShop(new Shopkeeper());
+        }
+    }
+
+    public void OpenShop(Shopkeeper keeper)
 	{
 		shopOpen = true;
 		shopkeeper = keeper;
