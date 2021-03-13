@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory1 : MonoBehaviour
 {
 	public static Inventory instance;
 
@@ -12,7 +12,7 @@ public class Inventory : MonoBehaviour
 		{
 			return;
 		}
-		instance = this;
+		//instance = this;
 	}
 
 	// Item gets added/removed.
