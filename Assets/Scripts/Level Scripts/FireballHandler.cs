@@ -9,7 +9,6 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private GameObject FireBall;
     [SerializeField] private float fireBallSpeed;
     [SerializeField] private float fireBallLifeTime;
-    [SerializeField] private float fireBallLoadingTime = 0.2f;
     [SerializeField] private bool isFiring = false;
 
     [SerializeField] private Transform cameraTransform;
@@ -70,7 +69,17 @@ public class FireballHandler : MonoBehaviour
 
     private IEnumerator ResetFireball()
     {
-        yield return new WaitForSeconds(fireBallLoadingTime);
+        float OldMax = 1000f;
+        float OldMin = 0f;
+        float NewMax = 0.1f;
+        float NewMin = 1;
+
+        float playerAttactSpeed = GetComponent<PlayerStats>().GetAttactSpeed();
+
+        float OldRange = (OldMax - OldMin);
+        float NewRange = (NewMax - NewMin);
+        float fireballLoadingTime = ((((playerAttactSpeed - OldMin) * NewRange) / OldRange) + NewMin);
+        yield return new WaitForSeconds(fireballLoadingTime);
         isFiring = false;
     }
 

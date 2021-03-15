@@ -10,7 +10,7 @@ public class EnemyAI2 : MonoBehaviour
 
 
     public NavMeshAgent agent;
-    public Transform player;
+    private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
     //Patoring
@@ -30,7 +30,6 @@ public class EnemyAI2 : MonoBehaviour
     //Find player object by name
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -86,27 +85,34 @@ public class EnemyAI2 : MonoBehaviour
     //moving forward and looking at the player
     private void ChasePlayer()
     {
+        player = GameHandler.instance.GetPlayer();
         animator.SetBool("Moving", true);
         animator.SetBool("Attack", false);
 
-        agent.SetDestination(player.position);
-        transform.LookAt(player);
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+            transform.LookAt(player);
+        }
     }
 
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
+        player = GameHandler.instance.GetPlayer();
         animator.SetBool("Attack", true);
 
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        if (player != null)
+        {
+            transform.LookAt(player);
+        }
+
 
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            print("hit");
             player.GetComponent<PlayerStats>().DecreaseHealth(15);
-            
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }

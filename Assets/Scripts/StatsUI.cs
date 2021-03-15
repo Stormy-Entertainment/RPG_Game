@@ -24,11 +24,6 @@ public class StatsUI : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
-    {
-        
-    }
-
     public static int ExpNeedToLvlUp(int currentLevel)
     {
         if (currentLevel == 0)
@@ -66,6 +61,45 @@ public class StatsUI : MonoBehaviour
     {
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
+        UpdatePlayerStats();
+    }
+
+    private void UpdatePlayerStats()
+    {
+        PlayerStats playerStat = FindObjectOfType<PlayerStats>();
+        switch (currentLevel)
+        {
+            case 5:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 10:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 15:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 20:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 25:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 30:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 35:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 40:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 45:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+            case 50:
+                playerStat.IncreaseAttackSpeed(20);
+                break;
+        }
     }
 
     public void UpdateHealthBar(float newHealth)
