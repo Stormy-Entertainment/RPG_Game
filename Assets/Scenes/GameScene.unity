@@ -2965,6 +2965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 322946885}
   agent: {fileID: 322946884}
+  player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -3254,13 +3255,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
+  outlineColor:
+    r: 0.06140983
+    g: 1
+    b: 0
+    a: 1
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 2048184225}
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}
+  needsUpdate: 1
 --- !u!114 &371476858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4463,13 +4471,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
+  outlineColor:
+    r: 0.06140983
+    g: 1
+    b: 0
+    a: 1
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 2107314155}
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}
+  needsUpdate: 1
 --- !u!114 &586620991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5492,13 +5507,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
+  outlineColor:
+    r: 0.06140983
+    g: 1
+    b: 0
+    a: 1
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 70740344}
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}
+  needsUpdate: 1
 --- !u!114 &720915420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9944,6 +9966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1323440543}
   agent: {fileID: 1323440542}
+  player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -10357,6 +10380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1387290089}
   agent: {fileID: 1387290088}
+  player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -12892,6 +12916,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1827144584}
   agent: {fileID: 1827144583}
+  player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -13013,13 +13038,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
+  outlineColor:
+    r: 0.06140983
+    g: 1
+    b: 0
+    a: 1
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 264666246}
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}
+  needsUpdate: 1
 --- !u!114 &1827909014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13427,6 +13459,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 1889970351}
   agent: {fileID: 1889970350}
+  player: {fileID: 0}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
@@ -14301,13 +14334,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 0.06140983, g: 1, b: 0, a: 1}
+  outlineColor:
+    r: 0.06140983
+    g: 1
+    b: 0
+    a: 1
   outlineWidth: 2
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
   renderers:
   - {fileID: 241493841}
+  outlineMaskMaterial: {fileID: 0}
+  outlineFillMaterial: {fileID: 0}
+  needsUpdate: 1
 --- !u!1 &2029446854
 GameObject:
   m_ObjectHideFlags: 0
@@ -15408,7 +15448,7 @@ PrefabInstance:
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0066615343
+      value: 0.0066615357
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -15418,7 +15458,7 @@ PrefabInstance:
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0047857007
+      value: 0.004785702
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -15493,7 +15533,7 @@ PrefabInstance:
     - target: {fileID: 3213696054886569207, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.010234092
+      value: 0.010234095
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054886569207, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -15503,7 +15543,7 @@ PrefabInstance:
     - target: {fileID: 3213696054886569207, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0072310744
+      value: 0.0072310753
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -15528,7 +15568,7 @@ PrefabInstance:
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.03989175
+      value: 0.039891757
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -15538,7 +15578,7 @@ PrefabInstance:
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.028186196
+      value: 0.028186198
       objectReference: {fileID: 0}
     - target: {fileID: 5022174169362435494, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
