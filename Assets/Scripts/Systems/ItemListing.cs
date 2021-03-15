@@ -7,19 +7,19 @@ using TMPro;
 public class ItemListing : MonoBehaviour
 {
 	public ShopSystem shopSystem;
-	public New_Item item;
+	public Item item;
 	public Image icon;
 	public TMP_Text itemName;
 	public TMP_Text price;
 	ListingMode mode;
 
 	//	Mode 0 = sell, mode 1 = buy
-	public void ListItem(New_Item item1, ListingMode mode)
+	public void ListItem(Item item, ListingMode mode)
 	{
 		this.mode = mode;
-		this.item = item1;
+		this.item = item;
 		icon.sprite = item.icon;
-		price.text = item1.price.ToString();
+		price.text = item.price.ToString();
 		itemName.text = item.name;
 	}
 

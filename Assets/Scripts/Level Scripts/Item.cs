@@ -5,6 +5,8 @@ public class Item : ScriptableObject
 {
 	new public string name = "New Item";
 	public Sprite icon = null;
+	public int id;
+	public int price;
 	public bool isDefaultItem = false;
 
 	// Called when the item is pressed in the inventory
@@ -18,6 +20,6 @@ public class Item : ScriptableObject
 
 	public void RemoveFromInventory()
 	{
-		Inventory1.instance.Remove(this);
+		Inventory.instance.Remove(this);
 	}
 }

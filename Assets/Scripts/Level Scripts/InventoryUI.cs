@@ -8,12 +8,12 @@ public class InventoryUI : MonoBehaviour
 	public GameObject inventoryUI;
 	public static bool isInventoryOpen = false;
 
-	Inventory1 inventory;
+	Inventory inventory;
 	InventorySlot[] slots;
 
 	private void Start()
 	{
-		inventory = Inventory1.instance;
+		inventory = Inventory.instance;
 		inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
 
 		// Populate slots array

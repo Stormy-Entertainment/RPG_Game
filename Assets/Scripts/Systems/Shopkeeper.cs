@@ -15,6 +15,15 @@ public class Shopkeeper : MonoBehaviour
 	public bool finiteItems = true;
 	public Inventory shopInventory;
 
+	private void Update()
+	{
+		if (Input.GetButtonDown("ShopKeeper"))
+		{
+			StartTrade();
+			Debug.Log("Shop button Clicked");
+		}
+	}
+
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.transform.tag.Equals(playerTag))
@@ -52,6 +61,7 @@ public class Shopkeeper : MonoBehaviour
 			return false;
 		}
 		shopSystem.OpenShop(this);
+		Debug.Log("Tried to open shop");
 		return true;
 	}
 }

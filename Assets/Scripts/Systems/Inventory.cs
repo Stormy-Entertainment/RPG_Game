@@ -5,16 +5,54 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	public List<New_Item> items = new List<New_Item>();
-	public int money;
+	public static Inventory instance;
 
-	public void RemoveItem(New_Item item)
+	public int money;
+	// Item gets added/removed.
+	public delegate void OnItemChanged();
+	public OnItemChanged onItemChangedCallback;
+
+	public int space = 20;  // Amount of slots in the inventory
+
+	// List of items in inventory
+	public List<Item> items = new List<Item>();
+
+
+	void Awake()
 	{
-		items.Remove(item);
+		if (instance != null)
+		{
+			return;
+		}
+		instance = this;
 	}
 
-	public void AddItem(New_Item item)
+	// Add a new item
+	public bool Add(Item item)
 	{
-		items.Add(item);
+		if (!item.isDefaultItem)
+		{
+			// Check if out of space
+			if (items.Count >= space)
+			{
+				Debug.Log("Not enough room.");
+				return false;
+			}
+
+			items.Add(item);
+
+			if (onItemChangedCallback != null)
+				onItemChangedCallback.Invoke();
+		}
+		return true;
+	}
+
+	// Remove an item
+	public void Remove(Item item)
+	{
+		items.Remove(item);
+
+		if (onItemChangedCallback != null)
+			onItemChangedCallback.Invoke();
 	}
 }
