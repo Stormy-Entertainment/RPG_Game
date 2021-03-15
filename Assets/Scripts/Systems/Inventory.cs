@@ -1,10 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
 	public static Inventory instance;
+
+	public int money;
+	// Item gets added/removed.
+	public delegate void OnItemChanged();
+	public OnItemChanged onItemChangedCallback;
+
+	public int space = 20;  // Amount of slots in the inventory
+
+	// List of items in inventory
+	public List<Item> items = new List<Item>();
+
 
 	void Awake()
 	{
@@ -14,15 +26,6 @@ public class Inventory : MonoBehaviour
 		}
 		instance = this;
 	}
-
-	// Item gets added/removed.
-	public delegate void OnItemChanged();
-	public OnItemChanged onItemChangedCallback;
-
-	public int space = 20;  // Amount of slots in the inventory
-
-	// List of items in inventory
-	public List<Item> items = new List<Item>();
 
 	// Add a new item
 	public bool Add(Item item)
@@ -52,5 +55,4 @@ public class Inventory : MonoBehaviour
 		if (onItemChangedCallback != null)
 			onItemChangedCallback.Invoke();
 	}
-
 }

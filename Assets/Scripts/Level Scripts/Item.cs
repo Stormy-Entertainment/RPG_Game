@@ -5,15 +5,17 @@ public class Item : ScriptableObject
 {
 	new public string name = "New Item";
 	public Sprite icon = null;
+	public int id;
+	public int price;
 	public bool isDefaultItem = false;
 
 	// Called when the item is pressed in the inventory
 	public virtual void Use()
 	{
 		// Use the item
-		FindObjectOfType<PlayerStats>().IncreaseHealth(20);
+		// Something might happen
+
 		Debug.Log("Using " + name);
-		RemoveFromInventory();
 	}
 
 	public void RemoveFromInventory()
