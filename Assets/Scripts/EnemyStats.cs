@@ -23,6 +23,7 @@ public class EnemyStats : MonoBehaviour
         if (m_Health <= 0f)
         {
             StatsUI.instance.SetExperience(m_XPGains);
+            EnemyManager.instance.SpawnNewEnemy();
             Destroy(transform.parent.gameObject);
         }
     }

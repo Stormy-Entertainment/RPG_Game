@@ -38,11 +38,6 @@ public class EnemyAI : MonoBehaviour
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
 
     //Back to the defence, if no player find 
     private void Defence()

@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager instance;
+
     public Transform[] m_SpawnPoints;
     public GameObject m_EnemyPrefab;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        SpawnNewEnemy();
+        if (instance != null)
+        {
+            return;
+        }
+        instance = this;
     }
 
-    void OnEnable()
+    public void SpawnNewEnemy()
     {
-       // EnemyStats.OnEnemyKilled += SpawnNewEnemy;
+        int randomNumber = Random.Range(0, m_SpawnPoints.Length);
+        Instantiate(m_EnemyPrefab, m_SpawnPoints[randomNumber].transform.position, Quaternion.identity);
     }
-
-    void SpawnNewEnemy()
-    {
-        int randomNumber = Mathf.RoundToInt(Random.Range(0f, m_SpawnPoints.Length-1));
-
-        Instantiate(m_EnemyPrefab, m_SpawnPoints[0].transform.position, Quaternion.identity);
-    }
-
 }
