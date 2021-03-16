@@ -7,7 +7,7 @@ public class Shopkeeper : MonoBehaviour
 
 	bool inRange = false;
 	public string playerTag;
-	//public GameObject tooltip;
+	public GameObject tooltip;
 
 	public string shopName;
 	public bool canSellTo = true;
@@ -17,7 +17,7 @@ public class Shopkeeper : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetButtonDown("Interact"))
+		if (Input.GetButtonDown("ShopKeeper"))
 		{
 			StartTrade();
 			Debug.Log("Shop button Clicked");
@@ -51,7 +51,7 @@ public class Shopkeeper : MonoBehaviour
 	void ChangeState(bool state)
 	{
 		inRange = state;
-		//tooltip.SetActive(state);
+		tooltip.SetActive(state);
 	}
 
 	public bool StartTrade()
