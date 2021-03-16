@@ -9,7 +9,8 @@ public class ItemPickup : MonoBehaviour
 	private void PickUp()
 	{
 		Debug.Log("Picking up " + item.name);
-		bool wasPickedUp = Inventory.instance.Add(item);
+		Inventory playerInventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
+		bool wasPickedUp = playerInventory.Add(item);
 
 		// If successfully picked up
 		if (wasPickedUp)

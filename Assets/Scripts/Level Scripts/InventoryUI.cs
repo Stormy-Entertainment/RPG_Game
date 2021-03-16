@@ -13,7 +13,7 @@ public class InventoryUI : MonoBehaviour
 
 	private void Start()
 	{
-		inventory = Inventory.instance;
+		inventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
 		inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
 
 		// Populate slots array

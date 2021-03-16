@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-	public static Inventory instance;
-
 	public int money;
 	// Item gets added/removed.
 	public delegate void OnItemChanged();
@@ -16,16 +14,6 @@ public class Inventory : MonoBehaviour
 
 	// List of items in inventory
 	public List<Item> items = new List<Item>();
-
-
-	void Awake()
-	{
-		if (instance != null)
-		{
-			return;
-		}
-		instance = this;
-	}
 
 	// Add a new item
 	public bool Add(Item item)

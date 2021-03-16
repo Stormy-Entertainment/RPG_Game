@@ -18,14 +18,18 @@ public class ShopSystem : MonoBehaviour
 
     public void OpenShop(Shopkeeper keeper)
 	{
-		shopOpen = true;
-		shopkeeper = keeper;
-		shopName.text = shopkeeper.shopName;
-		//UpdateMoneyUI();
-		ClearListings();
-		LoadPlayerItems();
-		LoadShopItems();
-		shopUI.SetActive(true);
+		if (!GameState.isPaused)
+		{
+			shopOpen = true;
+			shopkeeper = keeper;
+			shopName.text = shopkeeper.shopName;
+			//UpdateMoneyUI();
+			ClearListings();
+			LoadPlayerItems();
+			LoadShopItems();
+			shopUI.SetActive(true);
+			GameState.instance.PauseTheGame();
+		}
 	}
 
 	void ClearListings()
@@ -151,5 +155,6 @@ public class ShopSystem : MonoBehaviour
 		shopkeeper = null;
 		shopUI.SetActive(false);
 		shopOpen = false;
+		GameState.instance.ResumeTheGame();
 	}
 }

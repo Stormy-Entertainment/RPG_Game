@@ -6,27 +6,25 @@ public class Shopkeeper : MonoBehaviour
 	public ShopSystem shopSystem;
 
 	bool inRange = false;
-	public string playerTag;
-	//public GameObject tooltip;
 
 	public string shopName;
 	public bool canSellTo = true;
 	public bool finiteMoney = true;
 	public bool finiteItems = true;
 	public Inventory shopInventory;
+	private bool ShopOpened = false;
 
 	private void Update()
 	{
 		if (Input.GetButtonDown("Interact"))
 		{
 			StartTrade();
-			Debug.Log("Shop button Clicked");
 		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.transform.tag.Equals(playerTag))
+		if (other.transform.tag.Equals("Player"))
 		{
 			ChangeState(true);
 		}
@@ -34,9 +32,10 @@ public class Shopkeeper : MonoBehaviour
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.transform.tag.Equals(playerTag))
+		if (other.transform.tag.Equals("Player"))
 		{
 			ChangeState(false);
+			ShopOpened = false;
 			try
 			{
 				if (shopSystem.shopkeeper.GetInstanceID() == this.GetInstanceID())
@@ -51,17 +50,21 @@ public class Shopkeeper : MonoBehaviour
 	void ChangeState(bool state)
 	{
 		inRange = state;
-		//tooltip.SetActive(state);
 	}
 
-	public bool StartTrade()
+	public void StartTrade()
 	{
-		if (!inRange)
+		if (inRange)
 		{
-			return false;
+			if (!ShopOpened)
+			{
+				ShopOpened = true;
+				shopSystem.OpenShop(this);
+			}
+            else
+            {
+				shopSystem.CloseShop();
+            }
 		}
-		shopSystem.OpenShop(this);
-		Debug.Log("Tried to open shop");
-		return true;
 	}
 }

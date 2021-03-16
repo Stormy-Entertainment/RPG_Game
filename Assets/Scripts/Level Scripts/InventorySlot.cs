@@ -9,9 +9,15 @@ public class InventorySlot : MonoBehaviour
 	public Button removeButton;
 
 	Item item;
+	Inventory inventory;
 
-	// Add item to the slot
-	public void AddItem(Item newItem)
+    private void Awake()
+    {
+		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+	}
+
+    // Add item to the slot
+    public void AddItem(Item newItem)
 	{
 		item = newItem;
 
@@ -33,7 +39,7 @@ public class InventorySlot : MonoBehaviour
 	// Called when the remove button is pressed
 	public void OnRemoveButton()
 	{
-		Inventory.instance.Remove(item);
+		inventory.Remove(item);
 	}
 
 	// Called when the item is pressed

@@ -1043,6 +1043,7 @@ GameObject:
   - component: {fileID: 8396155913108546660}
   - component: {fileID: 8491534282292582888}
   - component: {fileID: 8491534282292582887}
+  - component: {fileID: 433119027}
   m_Layer: 0
   m_Name: Shopkeeper
   m_TagString: Untagged
@@ -1116,12 +1117,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopSystem: {fileID: 0}
   playerTag: Player
-  tooltip: {fileID: 0}
   shopName: Shop
   canSellTo: 1
   finiteMoney: 0
   finiteItems: 1
   shopInventory: {fileID: 0}
+--- !u!114 &433119027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8490513260380576246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d394f6aa39a463d47b504ed6dab3c382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 1000
+  space: 20
+  items:
+  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
 --- !u!1 &8490518927358410366
 GameObject:
   m_ObjectHideFlags: 0
