@@ -20,6 +20,7 @@ public class EnemyAI : MonoBehaviour
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+    private bool dead = false;
 
     //Find player object by name
     private void Awake()
@@ -33,9 +34,9 @@ public class EnemyAI : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Defence();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        if (!playerInSightRange && !playerInAttackRange && !dead) Defence();
+        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
 
@@ -94,6 +95,20 @@ public class EnemyAI : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    public void Death()
+    {
+        dead = true;
+        agent.velocity = Vector3.zero;
+        agent.acceleration = 0;
+        //agent.transform.position = Vector3.zero;
+        animator.SetTrigger("Death");
+    }
+
+    public bool IsDead()
+    {
+        return dead;
     }
 
 

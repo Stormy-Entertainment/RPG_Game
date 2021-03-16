@@ -95,9 +95,13 @@ public class FireballHandler : MonoBehaviour
                 {
                     HighLighted = true;
                 }
-                Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                outline.enabled = true;
-                HighlightedOutline.Add(outline);         
+                EnemyAI2 enemy = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                if (enemy != null && !enemy.IsDead())
+                {
+                    Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                    outline.enabled = true;
+                    HighlightedOutline.Add(outline);
+                }
             }
         }
         else

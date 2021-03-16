@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyAI2 : MonoBehaviour
-{
-    
+{  
     public Animator animator;
-
 
     public NavMeshAgent agent;
     private Transform player;
@@ -26,6 +24,7 @@ public class EnemyAI2 : MonoBehaviour
     //States
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+    private bool dead = false;
 
     //Find player object by name
     private void Awake()
@@ -41,9 +40,9 @@ public class EnemyAI2 : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange) AttackPlayer();
+        if (!playerInSightRange && !playerInAttackRange && !dead) Patroling();
+        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
 
     }
 
@@ -52,7 +51,6 @@ public class EnemyAI2 : MonoBehaviour
     //AI wandering on the level, also looking at the walkpoint
     private void Patroling()
     {
-
         animator.SetBool("Moving", true);
         animator.SetBool("Attack", false);
 
@@ -122,6 +120,19 @@ public class EnemyAI2 : MonoBehaviour
         alreadyAttacked = false;
     }
 
+    public void Death()
+    {
+        dead = true;
+        agent.velocity = Vector3.zero;
+        agent.acceleration = 0;
+       //agent.transform.position = Vector3.zero;
+        animator.SetTrigger("Death");
+    }
+
+    public bool IsDead()
+    {
+        return dead;
+    }
 
     //Showing range area in unity with different color
     void OnDrawGizmos()
