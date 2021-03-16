@@ -21,7 +21,9 @@ public class FireballHandler : MonoBehaviour
     private RaycastHit m_Hit;
     public LayerMask enemyLayerMask;
 
-    private Outline lastOutline;
+    public List<Outline> HighlightedOutline = new List<Outline>();
+    private bool HighLighted = false;
+
 
     void Start()
     {
@@ -85,26 +87,30 @@ public class FireballHandler : MonoBehaviour
 
     private void HighLightEnemy()
     {
-        Debug.Log("Hit Detect is " + m_HitDetect);
-        if (m_HitDetect)
+        if (m_HitDetect && m_Hit.collider.tag == "Enemy")
         {
-            Debug.Log("Hit Tag is " + m_Hit.collider.tag);
-            if (m_Hit.collider.tag == "Enemy")
+            if (!HighLighted)
             {
-                //If Raycast hit Target
-                lastOutline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                if (lastOutline != null)
+                if (HighlightedOutline.Count >= 5)
                 {
-                    lastOutline.enabled = true;
+                    HighLighted = true;
                 }
+                Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                outline.enabled = true;
+                HighlightedOutline.Add(outline);         
             }
         }
         else
         {
-            if (lastOutline != null)
+            foreach (Outline outline in HighlightedOutline)
             {
-                lastOutline.enabled = false;
+                if (outline != null)
+                {
+                    outline.enabled = false;
+                }
             }
+                HighLighted = false;
+                HighlightedOutline.Clear();
         }
     }
 
@@ -112,16 +118,14 @@ public class FireballHandler : MonoBehaviour
     {
         // If raycast hit Enemy tag
         // Assign bullet with target enemy
-        if (m_HitDetect && m_Hit.collider.tag == "Enemy" && bul != null)
+        //If Raycast hit Target
+        if (HighlightedOutline.Count >= 1)
         {
-            //If Raycast hit Target
-            bul.GetComponent<Fireball>().TargetedFire(m_Hit.collider.gameObject);
+            if (bul != null && HighlightedOutline[0] != null)
+            {
+                bul.GetComponent<Fireball>().TargetedFire(HighlightedOutline[0].gameObject);
+            }
         }
-      //  else
-        //{
-        //    bul.GetComponent<Fireball>().ImpulseFire(cameraTransform);
-       // }
-        //Else       
     }
 
     IEnumerator DestroyBulletTimer(GameObject bullet)

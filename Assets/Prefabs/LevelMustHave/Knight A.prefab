@@ -1139,6 +1139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Health: 100
   m_XPGains: 15
+  BloodParticleEffect: {fileID: 6525718543388598434, guid: 6eda552671222204cbf42c7327972e79,
+    type: 3}
 --- !u!114 &2022189091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1146,14 +1148,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3338734577986870148}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aaf0c787d6332904f8e27a93a9827d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
   outlineColor: {r: 0.06132126, g: 1, b: 0, a: 1}
-  outlineWidth: 2
+  outlineWidth: 3
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -1433,10 +1435,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10
-  timeBetweenAttacks: 2
-  sightRange: 25
-  attackRange: 1.5
+  walkPointRange: 10.58
+  timeBetweenAttacks: 1.41
+  sightRange: 16.92
+  attackRange: 1.9
   playerInSightRange: 0
   playerInAttackRange: 0
 --- !u!1 &3338734578338155597
