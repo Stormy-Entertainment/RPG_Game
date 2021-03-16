@@ -3055,7 +3055,7 @@ GameObject:
   - component: {fileID: 1387430552745950643}
   - component: {fileID: 1387430552745950640}
   - component: {fileID: 4488290249310834090}
-  - component: {fileID: 721940237068721741}
+  - component: {fileID: 1054314712}
   m_Layer: 5
   m_Name: OverlayCanvas
   m_TagString: Untagged
@@ -3190,7 +3190,7 @@ MonoBehaviour:
   lvlText: {fileID: 7566746432623502659}
   expBarSlider: {fileID: 1387430552583272318}
   healthBarSlider: {fileID: 1897587505331188338}
---- !u!114 &721940237068721741
+--- !u!114 &1054314712
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3199,7 +3199,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1387430552745950654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3668852745aaf34d89e8796bec1ec13, type: 3}
+  m_Script: {fileID: 11500000, guid: b8bdc9ad65c87b8469c5b004b5186967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 1979177807661394859}
@@ -10417,11 +10417,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd046acde327316458eb0cb3222bddf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shopSystem: {fileID: 0}
-  item: {fileID: 0}
-  icon: {fileID: 0}
-  itemName: {fileID: 0}
-  price: {fileID: 0}
+  shopSystem: {fileID: 1818606752}
+  item: {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  icon: {fileID: 2497673960884235346}
+  itemName: {fileID: 7013318958409998924}
+  price: {fileID: 4763614037000723899}
 --- !u!1 &3497368024343284789
 GameObject:
   m_ObjectHideFlags: 0
@@ -11121,6 +11121,7 @@ GameObject:
   - component: {fileID: 4988832955191881103}
   - component: {fileID: 4988832955191881100}
   - component: {fileID: 4988832955191881099}
+  - component: {fileID: 1818606752}
   m_Layer: 5
   m_Name: ShopMenu
   m_TagString: Untagged
@@ -11204,8 +11205,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   money: 0
   space: 20
-  items:
-  - {fileID: 11400000, guid: d76ad50c589c48c4e92a5d8e3919d300, type: 2}
+  items: []
+--- !u!114 &1818606752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988832955191881098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa42083020315fb42b0a6f53a68e44e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shopOpen: 0
+  shopkeeper: {fileID: 0}
+  playerInventory: {fileID: 0}
+  shopUI: {fileID: 4988832955191881098}
+  playerMoney: {fileID: 3056172584631409834}
+  shopName: {fileID: 2038595057856593969}
+  shopMoney: {fileID: 7835817135921538786}
+  playerItems: {fileID: 4988832955696373254}
+  shopItems: {fileID: 1310607872633098143}
+  itemListingPrefab: {fileID: 307549666600697827, guid: 4a32e13b1916fa74b801c2516e6c7be6,
+    type: 3}
 --- !u!1 &4988832955226180931
 GameObject:
   m_ObjectHideFlags: 0
@@ -18146,7 +18169,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 721940237068721741}
+      - m_Target: {fileID: 0}
         m_MethodName: OnMenuBtnClick
         m_Mode: 1
         m_Arguments:

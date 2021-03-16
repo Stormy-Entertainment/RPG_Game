@@ -278,6 +278,7 @@ GameObject:
   - component: {fileID: 8135063134480014465}
   - component: {fileID: 8135063134480014470}
   - component: {fileID: 766736007815162249}
+  - component: {fileID: 2003247482}
   m_Layer: 10
   m_Name: Third Person Player
   m_TagString: Player
@@ -333,7 +334,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8135063134480014464}
-  cam: {fileID: 0}
   anim: {fileID: 2418179529127969282}
   normalSpeed: 10
   sprintSpeed: 20
@@ -364,7 +364,6 @@ MonoBehaviour:
     type: 3}
   fireBallSpeed: 100
   fireBallLifeTime: 6
-  fireBallLoadingTime: 0.25
   isFiring: 0
   cameraTransform: {fileID: 8135063134480014466}
   fireBallSpawnPoint: {fileID: 8135063133728386933}
@@ -386,6 +385,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 100
+  m_AttackSpeed: 1000
+  m_MoveSpeed: 60
+--- !u!114 &2003247482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8135063134480014467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d394f6aa39a463d47b504ed6dab3c382, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 0
+  space: 20
+  items: []
 --- !u!1001 &8135063134530174867
 PrefabInstance:
   m_ObjectHideFlags: 0
