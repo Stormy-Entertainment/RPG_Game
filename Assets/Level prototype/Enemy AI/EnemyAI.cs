@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
     public Animator animator;
 
     public UnityEngine.AI.NavMeshAgent agent;
-    public Transform player;
+    private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
     //Defence point
@@ -24,7 +24,6 @@ public class EnemyAI : MonoBehaviour
     //Find player object by name
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player").transform;
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
     }
 
@@ -37,7 +36,11 @@ public class EnemyAI : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Defence();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInSightRange && playerInAttackRange) AttackPlayer();
+    }
 
+    private void FixedUpdate()
+    {
+        
     }
 
 
@@ -61,27 +64,34 @@ public class EnemyAI : MonoBehaviour
     //moving forward and looking at the player
     private void ChasePlayer()
     {
+        player = GameHandler.instance.GetPlayer();
         animator.SetBool("Moving", true);
         animator.SetBool("Attack", false);
 
-        agent.SetDestination(player.position);
-        transform.LookAt(player);
+        if (player != null)
+        {
+            agent.SetDestination(player.position);
+            transform.LookAt(player);
+        }
     }
 
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
+        player = GameHandler.instance.GetPlayer();
         animator.SetBool("Attack", true);
 
         agent.SetDestination(transform.position);
-        transform.LookAt(player);
+        if (player != null)
+        {
+            transform.LookAt(player);
+        }
 
 
         if (!alreadyAttacked)
         {
-            print("hit");
-
             alreadyAttacked = true;
+            player.GetComponent<PlayerStats>().DecreaseHealth(15);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
