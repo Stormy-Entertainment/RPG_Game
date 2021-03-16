@@ -15,7 +15,7 @@ public class EnemyManager : MonoBehaviour
 
     void OnEnable()
     {
-        EnemyStats.OnEnemyKilled += SpawnNewEnemy;
+       // EnemyStats.OnEnemyKilled += SpawnNewEnemy;
     }
 
     void SpawnNewEnemy()
