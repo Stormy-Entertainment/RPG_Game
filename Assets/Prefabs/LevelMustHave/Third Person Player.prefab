@@ -362,16 +362,16 @@ MonoBehaviour:
   anim: {fileID: 2418179529127969282}
   FireBall: {fileID: 1570776448752568142, guid: dd084b0d9ce92d14a9ecbf75f1ebd724,
     type: 3}
-  fireBallSpeed: 100
   fireBallLifeTime: 6
   isFiring: 0
   cameraTransform: {fileID: 8135063134480014466}
   fireBallSpawnPoint: {fileID: 8135063133728386933}
-  m_HitBoxRadius: {x: 6, y: 3, z: 6}
+  m_HitBoxRadius: {x: 7.96, y: 2, z: 2}
   m_HitBoxDistance: 22
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 2048
+  HighlightedOutline: []
 --- !u!114 &766736007815162249
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,8 +385,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 100
-  m_AttackSpeed: 1000
+  m_AttackSpeed: 400
   m_MoveSpeed: 60
+  m_Agility: 20
+  m_Intellect: 20
+  m_Stamina: 20
+  m_Strength: 20
 --- !u!114 &2003247482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,7 +403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d394f6aa39a463d47b504ed6dab3c382, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  money: 0
+  money: 1000
   space: 20
   items: []
 --- !u!1001 &8135063134530174867

@@ -7,7 +7,7 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private Animator anim;
 
     [SerializeField] private GameObject FireBall;
-    [SerializeField] private float fireBallSpeed;
+    //[SerializeField] private float fireBallSpeed;
     [SerializeField] private float fireBallLifeTime;
     [SerializeField] private bool isFiring = false;
 

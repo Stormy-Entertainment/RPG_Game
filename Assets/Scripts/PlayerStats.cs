@@ -8,6 +8,12 @@ public class PlayerStats : MonoBehaviour
     public float m_AttackSpeed = 200; //Range(0 - 1000)
     public float m_MoveSpeed = 60; //Range(0 - 100)
 
+    //Stats
+    public int m_Agility = 20; //Increases Damage & Attack Speed
+    public int m_Intellect = 20; //Attack Speed
+    public int m_Stamina = 20; //Increases MoveSpeed & Damage
+    public int m_Strength = 20; //Increases Health Grade & Armor
+
     private void Start()
     {
         StatsUI.instance.UpdateHealthBar(m_Health);
