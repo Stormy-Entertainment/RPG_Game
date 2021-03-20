@@ -10,20 +10,26 @@ public class Teleporting2 : MonoBehaviour
     public GameObject info;
     public GameObject pEffect;
     public AudioSource audioSource;
+    public Camera mainCamera;
 
-    void OnTriggerEnter(Collider other)
+
+    void OnTriggerStay(Collider other)
     {
-
-        if (other == thePlayer)
+        if (other.tag == "Player")
         {
-            Debug.Log("stay");
+            print("stay");
             info.SetActive(true);
-            info.transform.LookAt(Camera.main.transform);
+            info.transform.rotation = Quaternion.LookRotation(info.transform.position - mainCamera.transform.position);
             pEffect.SetActive(true);
 
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKey(KeyCode.E))
             {
+                thePlayer.GetComponent<CharacterController>().enabled = false;
                 thePlayer.transform.position = teleportTarget.transform.position;
+                thePlayer.transform.rotation = teleportTarget.transform.rotation;
+
+                thePlayer.GetComponent<CharacterController>().enabled = true;
+
                 audioSource.Play();
                 print("go");
             }
@@ -33,12 +39,12 @@ public class Teleporting2 : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
 
-        if (other == thePlayer)
+        if (other.tag == "Player")
         {
+            
             print("stay");
             info.SetActive(false);
             pEffect.SetActive(false);
-            info.transform.LookAt(Camera.main.transform);
         }
 
     }
