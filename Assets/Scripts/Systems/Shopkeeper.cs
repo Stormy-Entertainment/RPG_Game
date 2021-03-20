@@ -9,8 +9,8 @@ public class Shopkeeper : MonoBehaviour
 
 	public string shopName;
 	public bool canSellTo = true;
-	public bool finiteMoney = true;
-	public bool finiteItems = true;
+	//public bool finiteMoney = true;
+	//public bool finiteItems = true;
 	public Inventory shopInventory;
 	private bool ShopOpened = false;
 

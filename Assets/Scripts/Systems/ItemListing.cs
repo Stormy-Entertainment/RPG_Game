@@ -19,19 +19,32 @@ public class ItemListing : MonoBehaviour
 		this.mode = mode;
 		this.item = item;
 		icon.sprite = item.icon;
+		icon.enabled = true;
 		price.text = item.price.ToString();
 		itemName.text = item.name;
 	}
 
+	public void ClearSlot()
+	{
+		item = null;
+		icon.sprite = null;
+		icon.enabled = false;
+		itemName.text = "";
+		price.text = "";
+	}
+
 	public void ButtonClicked()
 	{
-		if (mode.Equals(ListingMode.Sell))
+		if (item != null)
 		{
-			shopSystem.SellToShop(item);
-		}
-		else if (mode.Equals(ListingMode.Buy))
-		{
-			shopSystem.BuyFromShop(item);
+			if (mode.Equals(ListingMode.Sell))
+			{
+				shopSystem.SellToShop(item);
+			}
+			else if (mode.Equals(ListingMode.Buy))
+			{
+				shopSystem.BuyFromShop(item);
+			}
 		}
 	}
 

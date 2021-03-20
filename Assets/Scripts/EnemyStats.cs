@@ -10,6 +10,11 @@ public class EnemyStats : MonoBehaviour
     public GameObject BloodParticleEffect;
     private bool Dead = false;
 
+    private void Start()
+    {
+        GetComponentInChildren<EnemyHealthSlider>().ChangeMaxHealth(m_Health);
+    }
+
     public void IncreaseHealth(float value)
     {
         m_Health = m_Health + value;

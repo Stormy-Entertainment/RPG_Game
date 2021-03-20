@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     public Transform defPoint;
 
     //Attacking
+    public float m_Damage = 20;
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 
@@ -87,7 +88,7 @@ public class EnemyAI : MonoBehaviour
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            player.GetComponent<PlayerStats>().DecreaseHealth(15);
+            player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }

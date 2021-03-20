@@ -89,32 +89,61 @@ public class FireballHandler : MonoBehaviour
     {
         if (m_HitDetect && m_Hit.collider.tag == "Enemy")
         {
-            if (!HighLighted)
+            EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+            EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+            if (enemy1 != null)
             {
-                if (HighlightedOutline.Count >= 5)
+                if (!enemy1.IsDead())
                 {
-                    HighLighted = true;
+                    if (!HighLighted)
+                    {
+                        HighLighted = true;
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                    }
                 }
-                EnemyAI2 enemy = m_Hit.collider.GetComponentInParent<EnemyAI2>();
-                if (enemy != null && !enemy.IsDead())
+                else
                 {
-                    Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                    outline.enabled = true;
-                    HighlightedOutline.Add(outline);
+                    for (int i = 0; i < HighlightedOutline.Count; i++)
+                    {
+                        HighlightedOutline[i].enabled = false;
+                    }
+                    HighLighted = false;
+                    HighlightedOutline.Clear();
+                }
+            }
+            else if(enemy2 != null)
+            {
+                if (!enemy2.IsDead())
+                {
+                    if (!HighLighted)
+                    {
+                        HighLighted = true;
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < HighlightedOutline.Count; i++)
+                    {
+                        HighlightedOutline[i].enabled = false;
+                    }
+                    HighLighted = false;
+                    HighlightedOutline.Clear();
                 }
             }
         }
         else
         {
-            foreach (Outline outline in HighlightedOutline)
+            for (int i = 0; i < HighlightedOutline.Count; i++)
             {
-                if (outline != null)
-                {
-                    outline.enabled = false;
-                }
+                HighlightedOutline[i].enabled = false;
             }
-                HighLighted = false;
-                HighlightedOutline.Clear();
+            HighLighted = false;
+            HighlightedOutline.Clear();
         }
     }
 

@@ -4,17 +4,30 @@ using TMPro;
 public class ShopSystem : MonoBehaviour
 {
 	public bool shopOpen = false;
-	public Shopkeeper shopkeeper;
-	public Inventory playerInventory;
+	[HideInInspector] public Shopkeeper shopkeeper;
+	private Inventory playerInventory;
 
 	[Header("UI")]
 	public GameObject shopUI;
 	public TextMeshProUGUI playerMoney;
 	public TextMeshProUGUI shopName;
-	public TextMeshProUGUI shopMoney;
-	public RectTransform playerItems;
-	public RectTransform shopItems;
-	public GameObject itemListingPrefab;
+	public RectTransform InventoryContent;
+	public RectTransform ShopContent;
+
+	public ItemListing[] inventoryItemListing;
+	public ItemListing[] shopItemListing;
+
+    private void Awake()
+    {
+		playerInventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
+		inventoryItemListing = InventoryContent.GetComponentsInChildren<ItemListing>();
+		shopItemListing = ShopContent.GetComponentsInChildren<ItemListing>();
+	}
+
+    public void Start()
+    {
+		ClearListings();
+	}
 
     public void OpenShop(Shopkeeper keeper)
 	{
@@ -23,131 +36,102 @@ public class ShopSystem : MonoBehaviour
 			shopOpen = true;
 			shopkeeper = keeper;
 			shopName.text = shopkeeper.shopName;
-			//UpdateMoneyUI();
-			ClearListings();
-			LoadPlayerItems();
-			LoadShopItems();
 			shopUI.SetActive(true);
+			LoadPlayerItems();
+			LoadShopItems();		
 			GameState.instance.PauseTheGame();
 		}
 	}
 
 	void ClearListings()
 	{
-		foreach (RectTransform listing in playerItems.transform)
+		for (int i = 0; i < inventoryItemListing.Length; i++)
 		{
-			Destroy(listing.gameObject);
+			inventoryItemListing[i].ClearSlot();
 		}
 
-		foreach (RectTransform listing in shopItems.transform)
+		for (int i = 0; i < shopItemListing.Length; i++)
 		{
-			Destroy(listing.gameObject);
+			shopItemListing[i].ClearSlot();
 		}
 	}
 
 	void LoadPlayerItems()
 	{
-		foreach (Item item in playerInventory.items)
+		for (int i = 0; i < inventoryItemListing.Length; i++)
 		{
-			AddItemToList(playerItems, item, ItemListing.ListingMode.Sell);
+			inventoryItemListing[i].shopSystem = this;
+			if (i < playerInventory.items.Count)  // If there is an item to add
+			{
+				inventoryItemListing[i].ListItem(playerInventory.items[i], ItemListing.ListingMode.Sell);   // Add it
+			}
+			else
+			{
+				// clear slot
+				inventoryItemListing[i].ClearSlot();
+			}		
 		}
 	}
 
 	void LoadShopItems()
 	{
-		foreach (Item item in shopkeeper.shopInventory.items)
+		for (int i = 0; i < shopItemListing.Length; i++)
 		{
-			AddItemToList(shopItems, item, ItemListing.ListingMode.Buy);
-		}
-	}
-
-	public void AddItemToList(RectTransform list, Item item, ItemListing.ListingMode mode)
-	{
-		GameObject clone = Instantiate(itemListingPrefab, itemListingPrefab.transform.position, Quaternion.identity);
-		ItemListing listing = clone.GetComponent<ItemListing>();
-		listing.ListItem(item, mode);
-		listing.shopSystem = this;
-		RectTransform rect = clone.GetComponent<RectTransform>();
-
-		//	This shouldn't be hardcoded but it's okay for now...
-		rect.sizeDelta = new Vector2(512, 80);
-
-		clone.transform.SetParent(list, false);
-	}
-
-	public void RemoveItemFromList(RectTransform list, Item item)
-	{
-		foreach (RectTransform listing in list.transform)
-		{
-			if (listing.GetComponent<ItemListing>().item.id == item.id)
+			shopItemListing[i].shopSystem = this;
+			if (i < shopkeeper.shopInventory.items.Count)  // If there is an item to add
 			{
-				Destroy(listing.gameObject);
-				break;
+				shopItemListing[i].ListItem(shopkeeper.shopInventory.items[i], ItemListing.ListingMode.Buy);   // Add it			
+			}
+			else
+			{
+				// clear slot
+				shopItemListing[i].ClearSlot();
 			}
 		}
 	}
 
 	public void SellToShop(Item item)
 	{
-		if (!shopkeeper.canSellTo)
+		if (item != null)
 		{
-			return;
-		}
-		if (shopkeeper.finiteMoney)
-		{
-			if (shopkeeper.shopInventory.money - item.price < 0)
+			if (!shopkeeper.canSellTo)
 			{
 				return;
 			}
+			playerInventory.money += item.price;
+			playerInventory.Remove(item);
+			LoadPlayerItems();
+			UpdateMoneyUI();
 		}
-		playerInventory.money += item.price;
-		playerInventory.Remove(item);
-		RemoveItemFromList(playerItems, item);
-		if (shopkeeper.finiteItems)
+		else
 		{
-			shopkeeper.shopInventory.Add(item);
-			AddItemToList(shopItems, item, ItemListing.ListingMode.Buy);
+			Debug.Log("No Item assigned to the button.");
 		}
-		if (shopkeeper.finiteMoney)
-		{
-			shopkeeper.shopInventory.money -= item.price;
-		}
-		UpdateMoneyUI();
 	}
 
 	public void BuyFromShop(Item item)
 	{
-		if (playerInventory.money - item.price < 0)
+		if (item != null)
 		{
-			return;
-		}
+			if (playerInventory.money - item.price < 0)
+			{
+				return;
+			}
 
-		playerInventory.money -= item.price;
-		if (shopkeeper.finiteItems)
-		{
-			shopkeeper.shopInventory.Remove(item);
-			RemoveItemFromList(shopItems, item);
+			playerInventory.money -= item.price;
+			playerInventory.Add(item);
+			LoadPlayerItems();
+			UpdateMoneyUI();
 		}
-		if (shopkeeper.finiteMoney)
-		{
-			shopkeeper.shopInventory.money += item.price;
-		}
-		playerInventory.Add(item);
-		AddItemToList(playerItems, item, ItemListing.ListingMode.Sell);
-		UpdateMoneyUI();
+        else
+        {
+			Debug.Log("No Item assigned to the button.");
+        }
 	}
 
 	void UpdateMoneyUI()
 	{
 		playerMoney.text = playerInventory.money.ToString();
-		if (shopkeeper.finiteMoney)
-		{
-			shopMoney.text = shopkeeper.shopInventory.money.ToString();
-		}
-		else
-		{
-			shopMoney.text = "oo";
-		}
 	}
 
 	public void CloseShop()

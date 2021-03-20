@@ -64,10 +64,14 @@ public class PlayerStats : MonoBehaviour
         if (m_Health <= 0f)
         {
             m_Health = 0f;
-            GameHandler.instance.DecreaseLives();
-            StatsUI.instance.UpdateHealthBar(m_Health);
-            Destroy(this.gameObject);
+            GameHandler.instance.DecreaseLives(this.gameObject); ;
         }
+        StatsUI.instance.UpdateHealthBar(m_Health);
+    }
+
+    public void ResetHealth()
+    {
+        m_Health = 100;
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
     #endregion

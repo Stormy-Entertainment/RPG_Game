@@ -12,7 +12,8 @@ public class GameHandler : MonoBehaviour
 
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
-    [SerializeField] private GameObject m_PlayerPrefab;
+
+    GameOverUI gameOver;
 
     private void Awake()
     {
@@ -21,6 +22,11 @@ public class GameHandler : MonoBehaviour
             return;
         }
         instance = this;
+        gameOver = FindObjectOfType<GameOverUI>();
+    }
+
+    private void Start()
+    {
         Player = GameObject.FindWithTag("Player").transform;
     }
 
@@ -29,21 +35,20 @@ public class GameHandler : MonoBehaviour
         return Player;
     }
             
-    public void DecreaseLives()
-    {
+    public void DecreaseLives(GameObject Player)
+    {     
         m_PlayerLives--;
-        if(m_PlayerLives >= 0)
+        gameOver.DisableHeart(m_PlayerLives);
+        if (m_PlayerLives > 0)
         {
-            //Respawn
-            GameObject player = Instantiate(m_PlayerPrefab, m_PlayerRespawnPoint.transform.position, m_PlayerRespawnPoint.rotation);
-            Player = player.transform;
-            ThirdPersonCamera.LookAt = player.transform;
-            ThirdPersonCamera.Follow = player.transform;
+            //Change Position of Player
+            Player.transform.position = m_PlayerRespawnPoint.position;
+            Player.GetComponent<PlayerStats>().ResetHealth();
         }
         else
         {
             //GameOver
-            GameOverUI.instance.GameOver();
+            gameOver.GameOver();
         }
     }
 

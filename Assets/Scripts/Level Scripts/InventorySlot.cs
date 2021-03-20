@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
 	public Image icon;
+	public TextMeshProUGUI itemName;
+	public TextMeshProUGUI removeXText;
 	public Button removeButton;
 
 	Item item;
@@ -20,7 +23,8 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Item newItem)
 	{
 		item = newItem;
-
+		itemName.text = newItem.name;
+		removeXText.text = "X";
 		icon.sprite = item.icon;
 		icon.enabled = true;
 		removeButton.interactable = true;
@@ -30,7 +34,8 @@ public class InventorySlot : MonoBehaviour
 	public void ClearSlot()
 	{
 		item = null;
-
+		itemName.text = null;
+		removeXText.text = null;
 		icon.sprite = null;
 		icon.enabled = false;
 		removeButton.interactable = false;

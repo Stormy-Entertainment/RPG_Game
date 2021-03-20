@@ -126,6 +126,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &2280401637430885318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4781960873085391484}
+  m_Layer: 10
+  m_Name: FollowTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4781960873085391484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2280401637430885318}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8135063134480014466}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3122804242193651931
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,6 +330,7 @@ Transform:
   - {fileID: 8606156428894705784}
   - {fileID: 8135063133660523377}
   - {fileID: 791516020}
+  - {fileID: 4781960873085391484}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,8 +397,8 @@ MonoBehaviour:
   isFiring: 0
   cameraTransform: {fileID: 8135063134480014466}
   fireBallSpawnPoint: {fileID: 8135063133728386933}
-  m_HitBoxRadius: {x: 7.96, y: 2, z: 2}
-  m_HitBoxDistance: 22
+  m_HitBoxRadius: {x: 8.26, y: 6.25, z: 0.47}
+  m_HitBoxDistance: 25
   enemyLayerMask:
     serializedVersion: 2
     m_Bits: 2048
@@ -385,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Health: 100
-  m_AttackSpeed: 400
+  m_AttackSpeed: 1000
   m_MoveSpeed: 60
   m_Agility: 20
   m_Intellect: 20

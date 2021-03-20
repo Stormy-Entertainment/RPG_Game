@@ -1,22 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class GameOverUI : MonoBehaviour
 {
-    public static GameOverUI instance;
-
     [SerializeField] private GameObject gameOverMenu;
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            return;
-        }
-        instance = this;
-    }
+    public Image[] hearts;
 
     public void GameOver()
     {
@@ -27,5 +18,13 @@ public class GameOverUI : MonoBehaviour
     public void OnMenuBtnClick()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void DisableHeart(int hearthNo)
+    {
+        Color myColor;
+        myColor = hearts[hearthNo].color;
+        myColor.a = 0.6f;
+        hearts[hearthNo].color = myColor;
     }
 }

@@ -18,6 +18,7 @@ public class InventoryUI : MonoBehaviour
 
 		// Populate slots array
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+		UpdateUI();
 	}
 
 	private void Update()
