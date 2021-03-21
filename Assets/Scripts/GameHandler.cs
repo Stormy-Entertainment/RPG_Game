@@ -46,8 +46,10 @@ public class GameHandler : MonoBehaviour
         if (m_PlayerLives > 0)
         {
             //Change Position of Player
+            Player.GetComponent<CharacterController>().enabled = false;
             Player.transform.position = m_PlayerRespawnPoint.position;
             Player.GetComponent<PlayerStats>().ResetHealth();
+            Player.GetComponent<CharacterController>().enabled = true;
         }
         else
         {
