@@ -26,7 +26,7 @@ public class Teleporting2 : MonoBehaviour
             print("stay");
             pEffect.SetActive(true);
             info.SetActive(true);
-            //info.transform.rotation = Quaternion.LookRotation(info.transform.position - mainCamera.transform.position);
+            info.transform.rotation = Quaternion.LookRotation(info.transform.position - mainCamera.transform.position);
             
 
             if (Input.GetButtonDown("Interact"))
