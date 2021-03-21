@@ -7,6 +7,6 @@ public class PopupMessage : MonoBehaviour
     void Update()
     {
         float y = Mathf.PingPong(Time.time, 1);
-        transform.position = new Vector3(0, y, 0);
+        transform.localPosition = new Vector3(0, y, 0);
     }
 }
