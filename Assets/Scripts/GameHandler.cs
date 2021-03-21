@@ -13,6 +13,9 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
 
+    [SerializeField] private GameObject LevelScene;
+    [SerializeField] private GameObject ArenaScene;
+
     GameOverUI gameOver;
 
     private void Awake()
@@ -28,6 +31,7 @@ public class GameHandler : MonoBehaviour
     private void Start()
     {
         Player = GameObject.FindWithTag("Player").transform;
+        //LevelSetUp();
     }
 
     public Transform GetPlayer()
@@ -52,4 +56,15 @@ public class GameHandler : MonoBehaviour
         }
     }
 
+    public void LevelSetUp()
+    {
+        LevelScene.SetActive(true);
+        ArenaScene.SetActive(false);
+    }
+
+    public void EnableArenaScene()
+    {
+        LevelScene.SetActive(false);
+        ArenaScene.SetActive(true);
+    }
 }
