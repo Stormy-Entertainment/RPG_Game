@@ -34,7 +34,6 @@ public class k_Audio : MonoBehaviour
         {
             if (m_Player.transform.position.z >75)
             {
-                Debug.Log("next song");
                 audio.clip = bossFight;
                 audio.Play();
                 boss = true;
