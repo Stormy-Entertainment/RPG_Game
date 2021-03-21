@@ -24,9 +24,10 @@ public class Teleporting2 : MonoBehaviour
         if (other.tag == "Player")
         {
             print("stay");
+            pEffect.SetActive(true);
             info.SetActive(true);
             info.transform.rotation = Quaternion.LookRotation(info.transform.position - mainCamera.transform.position);
-            pEffect.SetActive(true);
+            
 
             if (Input.GetButtonDown("Interact"))
             {
