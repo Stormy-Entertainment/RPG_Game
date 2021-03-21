@@ -6,12 +6,18 @@ using UnityEngine.UI;
 public class Teleporting2 : MonoBehaviour
 {
     public Transform teleportTarget;
-    public GameObject thePlayer;
     public GameObject info;
     public GameObject pEffect;
     public AudioSource audioSource;
-    public Camera mainCamera;
 
+    private Transform m_Player;
+    private Camera mainCamera;
+
+    private void Start()
+    {
+        m_Player = GameObject.FindWithTag("Player").transform;
+        mainCamera = Camera.main;
+    }
 
     void OnTriggerStay(Collider other)
     {
@@ -22,13 +28,13 @@ public class Teleporting2 : MonoBehaviour
             info.transform.rotation = Quaternion.LookRotation(info.transform.position - mainCamera.transform.position);
             pEffect.SetActive(true);
 
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetButtonDown("Interact"))
             {
-                thePlayer.GetComponent<CharacterController>().enabled = false;
-                thePlayer.transform.position = teleportTarget.transform.position;
-                thePlayer.transform.rotation = teleportTarget.transform.rotation;
-
-                thePlayer.GetComponent<CharacterController>().enabled = true;
+                m_Player.GetComponent<CharacterController>().enabled = false;
+                m_Player.position = teleportTarget.position;
+                m_Player.rotation = teleportTarget.rotation;
+                Debug.Log("Interact sucessful");
+                m_Player.GetComponent<CharacterController>().enabled = true;
 
                 audioSource.Play();
                 print("go");
