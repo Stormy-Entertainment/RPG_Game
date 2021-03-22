@@ -107,15 +107,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
-    agentSlope: 17.7
-    agentClimb: 0.72
+    agentRadius: 0.45
+    agentHeight: 1.33
+    agentSlope: 8.5
+    agentClimb: 1.02
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 1
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.14999999
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -219,7 +219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2612571}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 66.84897, y: 53.402145, z: 16.493109}
+  m_LocalPosition: {x: 65.61, y: 53.402145, z: 9.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2022629456}
@@ -252,10 +252,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10.58
+  walkPointRange: 3.87
   timeBetweenAttacks: 1.41
   m_Damage: 20
-  sightRange: 16.92
+  sightRange: 16.81
   attackRange: 1.9
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -2368,7 +2368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 191581151}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.55897, y: 53.402145, z: -22.436893}
+  m_LocalPosition: {x: 27.25, y: 53.402145, z: -23.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1230781729}
@@ -2401,10 +2401,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10.58
+  walkPointRange: 3.87
   timeBetweenAttacks: 1.41
   m_Damage: 20
-  sightRange: 16.92
+  sightRange: 16.81
   attackRange: 1.9
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -6723,7 +6723,7 @@ GameObject:
   - component: {fileID: 507619760}
   m_Layer: 11
   m_Name: Target (2)
-  m_TagString: Untagged
+  m_TagString: DummyEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11758,27 +11758,27 @@ PrefabInstance:
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9889411
+      value: 0.98894113
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.14815259
+      value: 0.14815257
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0067328
+      value: -0.0067300843
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0010086361
+      value: 0.0010082292
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9889411
+      value: 0.98894113
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -11788,22 +11788,22 @@ PrefabInstance:
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.006732801
+      value: -0.0067300852
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0010086361
+      value: 0.0010082292
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.000000008458009
+      value: -0.000000008458006
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.0000000015738528
+      value: 0.0000000015738522
       objectReference: {fileID: 0}
     - target: {fileID: 5022174169362435494, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -12329,8 +12329,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1055488325}
   m_LocalRotation: {x: -0, y: 0.7080537, z: -0, w: 0.70615864}
-  m_LocalPosition: {x: 37.96, y: 0, z: -2.53}
-  m_LocalScale: {x: 2.8805573, y: 2.2592607, z: 2.2592607}
+  m_LocalPosition: {x: 38.09, y: -0, z: -1.82}
+  m_LocalScale: {x: 2.6478305, y: 2.2592607, z: 1.9665391}
   m_Children: []
   m_Father: {fileID: 1835653695}
   m_RootOrder: 1
@@ -18090,7 +18090,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452714698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 24.55897, y: 53.402145, z: 16.493109}
+  m_LocalPosition: {x: 25.98, y: 53.402145, z: 10.09}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1056337356}
@@ -18123,10 +18123,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 10.58
+  walkPointRange: 3.87
   timeBetweenAttacks: 1.41
   m_Damage: 20
-  sightRange: 16.92
+  sightRange: 16.81
   attackRange: 1.9
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -19978,7 +19978,7 @@ PrefabInstance:
     - target: {fileID: 3338734578324516911, guid: d0cae6fea28e43141b893befb3692f76,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 67.35897
+      value: 63.48
       objectReference: {fileID: 0}
     - target: {fileID: 3338734578324516911, guid: d0cae6fea28e43141b893befb3692f76,
         type: 3}
@@ -19988,7 +19988,7 @@ PrefabInstance:
     - target: {fileID: 3338734578324516911, guid: d0cae6fea28e43141b893befb3692f76,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -22.436893
+      value: -24.15
       objectReference: {fileID: 0}
     - target: {fileID: 3338734578324516911, guid: d0cae6fea28e43141b893befb3692f76,
         type: 3}
@@ -21297,7 +21297,7 @@ GameObject:
   - component: {fileID: 1769335122}
   m_Layer: 11
   m_Name: Target
-  m_TagString: Untagged
+  m_TagString: DummyEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

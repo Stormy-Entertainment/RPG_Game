@@ -89,69 +89,77 @@ public class FireballHandler : MonoBehaviour
     {
         if (m_HitDetect && m_Hit.collider.tag == "Enemy")
         {
-            EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
-            EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
             if (HighLighted)
             {
-                if(m_Hit.collider.name != HighlightedOutline[0].name)
+                if (HighlightedOutline != null) 
                 {
-                    HighlightedOutline[0].enabled = false;
-                    HighlightedOutline.Clear();
-                    HighLighted = true;
-                    Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                    outline.enabled = true;
-                    HighlightedOutline.Add(outline);
+                    EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+                    EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                    if (m_Hit.collider.name != HighlightedOutline[0].name)
+                    {
+                         for (int i = 0; i < HighlightedOutline.Count; i++)
+                         {
+                              HighlightedOutline[i].enabled = false;
+                         }
+                         HighlightedOutline.Clear();
+                         HighLighted = false;
+                    }
+                    else if (enemy1 != null)
+                    {
+                        if (enemy1.IsDead())
+                        {
+                            Debug.Log("Enemy 1 is Dead");
+                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            {
+                                HighlightedOutline[i].enabled = false;
+                            }
+                            HighlightedOutline.Clear();
+                            HighLighted = false;
+                        }
+                    }
+                    else if (enemy2 != null)
+                    {
+                        if (enemy2.IsDead())
+                        {
+                            Debug.Log("Enemy 2 is Dead");
+                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            {
+                                HighlightedOutline[i].enabled = false;
+                            }
+                            HighlightedOutline.Clear();
+                            HighLighted = false;
+                        }
+                    }
                 }
             }
-            else 
-            { 
+
+            else
+            {
+                EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+                EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
                 if (enemy1 != null)
                 {
                     if (!enemy1.IsDead())
                     {
-                        if (!HighLighted)
-                        {
-                            HighLighted = true;
-                            Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                            outline.enabled = true;
-                            HighlightedOutline.Add(outline);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < HighlightedOutline.Count; i++)
-                        {
-                            HighlightedOutline[i].enabled = false;
-                        }
-                        HighLighted = false;
-                        HighlightedOutline.Clear();
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                        HighLighted = true;
                     }
                 }
                 else if (enemy2 != null)
                 {
                     if (!enemy2.IsDead())
                     {
-                        if (!HighLighted)
-                        {
-                            HighLighted = true;
-                            Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                            outline.enabled = true;
-                            HighlightedOutline.Add(outline);
-                        }
-                    }
-                    else
-                    {
-                        for (int i = 0; i < HighlightedOutline.Count; i++)
-                        {
-                            HighlightedOutline[i].enabled = false;
-                        }
-                        HighLighted = false;
-                        HighlightedOutline.Clear();
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                        HighLighted = true;
                     }
                 }
             }
         }
-        else if (m_HitDetect)
+        else if (m_HitDetect && m_Hit.collider.tag == "DummyEnemy")
         {
             if (HighLighted)
             {
@@ -187,12 +195,17 @@ public class FireballHandler : MonoBehaviour
         {
             if (HighlightedOutline != null)
             {
-                HighlightedOutline[0].enabled = false;
+                for (int i = 0; i < HighlightedOutline.Count; i++)
+                {
+                    if (HighlightedOutline[i] != null)
+                    {
+                        HighlightedOutline[i].enabled = false;
+                    }
+                }
             }
-            HighLighted = false;
             HighlightedOutline.Clear();
-        }
-        
+            HighLighted = false;
+        }      
     }
 
     private void CheckEnemyAtRange(GameObject bul)
