@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class SceneSequence : MonoBehaviour
 {
-    public GameObject Cam1;
-    public GameObject playerCam;
+    public GameObject CutsceneCam;
+    private Camera mainCam;
+
+
 
     void Start()
     {
+        mainCam = Camera.main;
         StartCoroutine(TheSequence());
     }
 
     IEnumerator TheSequence()
     {
+        mainCam.gameObject.SetActive(false);
         yield return new WaitForSeconds(6);
-        Cam1.SetActive(false);
-        playerCam.SetActive(true);
+        CutsceneCam.SetActive(false);
+        mainCam.gameObject.SetActive(true);
     }
-
-
-
 }

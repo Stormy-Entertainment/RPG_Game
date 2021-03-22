@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
-    private Transform cam;
+    public Transform cam;
     [SerializeField] private Animator anim;
 
     [SerializeField] private float normalSpeed = 5f;
@@ -29,7 +29,11 @@ public class ThirdPersonMovement : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        cam = Camera.main.transform;
+    }
+
+    private void Start()
+    {
+        //cam = Camera.main.transform;
     }
 
     private void Update()
@@ -57,21 +61,24 @@ public class ThirdPersonMovement : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
-        if (direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
-            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        if (cam != null)
+        { 
+            if (direction.magnitude >= 0.1f)
+            {
+                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
+                Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            if (Input.GetButton("Sprint") && isGounded)
-            {
-                //Increase Speed
-                controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime);
-            }
-            else
-            {
-                controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime);
+                if (Input.GetButton("Sprint") && isGounded)
+                {
+                    //Increase Speed
+                    controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime);
+                }
+                else
+                {
+                    controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime);
+                }
             }
         }
         anim.SetFloat("InputDirection", direction.magnitude);

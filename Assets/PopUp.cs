@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class PopUp : MonoBehaviour
 {
+    Camera mainCamera;
+
+    private void Awake()
+    {
+        mainCamera = Camera.main;
+    }
+
     private void LateUpdate()
     {
-        transform.LookAt(Camera.main.transform);
-        transform.Rotate(0, 180, 0);
+        if (mainCamera != null)
+        {
+            transform.LookAt(mainCamera.transform);
+            transform.Rotate(0, 180, 0);
+        }
     }
 }
