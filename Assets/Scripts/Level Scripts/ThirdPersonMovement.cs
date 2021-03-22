@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
-    public Transform cam;
+    private Transform cam;
     [SerializeField] private Animator anim;
 
     [SerializeField] private float normalSpeed = 5f;
@@ -29,11 +29,7 @@ public class ThirdPersonMovement : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    private void Start()
-    {
-        //cam = Camera.main.transform;
+        cam = Camera.main.transform;
     }
 
     private void Update()
