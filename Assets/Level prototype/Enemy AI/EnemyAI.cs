@@ -10,6 +10,8 @@ public class EnemyAI : MonoBehaviour
     private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
+    public Transform playerPoint;
+
     //Defence point
     public Transform defPoint;
 
@@ -38,21 +40,29 @@ public class EnemyAI : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange && !dead) Defence();
         if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
         if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
+
+        
     }
 
 
     //Back to the defence, if no player find 
     private void Defence()
     {
-        agent.destination = defPoint.position;
-        transform.LookAt(defPoint);
-
         //transform.position = Vector3.MoveTowards(transform.position, defPoint.position, 0.04f);
         Vector3 distanceToDefPoint = transform.position - defPoint.position;
-        if (distanceToDefPoint.magnitude < 0.1f)
+
+        agent.destination = defPoint.position;
+
+        defPoint.position = new Vector3(defPoint.position.x, transform.position.y, defPoint.position.z);
+        transform.LookAt(defPoint);
+        
+
+        if (distanceToDefPoint.magnitude < 1f)
         {
             animator.SetBool("Moving", false);
-            agent.SetDestination(transform.position);
+            //agent.SetDestination(transform.position);
+            
+            transform.rotation = Quaternion.Euler(0, defPoint.rotation.y, 0);
          }
 
     }
@@ -67,8 +77,11 @@ public class EnemyAI : MonoBehaviour
 
         if (player != null)
         {
+            
             agent.SetDestination(player.position);
-            transform.LookAt(player);
+
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            transform.LookAt(playerPoint);
         }
     }
 
@@ -81,7 +94,9 @@ public class EnemyAI : MonoBehaviour
         agent.SetDestination(transform.position);
         if (player != null)
         {
-            transform.LookAt(player);
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            transform.LookAt(playerPoint);
+            //transform.LookAt(player);
         }
 
 
