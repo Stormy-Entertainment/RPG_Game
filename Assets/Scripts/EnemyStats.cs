@@ -40,23 +40,25 @@ public class EnemyStats : MonoBehaviour
             if (enemyAI != null)
             {
                 enemyAI.Death();
+                StartCoroutine(DestroyDelay(7f));
             }
             else if(enemyAI2 != null)
             {
                 enemyAI2.Death();
+                StartCoroutine(DestroyDelay(3f));
             }
             else if (enemyAI3 != null)
             {
                 enemyAI3.Death();
-            }
-            StartCoroutine(DestroyDelay());   
+                StartCoroutine(DestroyDelay(3f));
+            } 
         }
         //Enemy Dead
     }
 
-    IEnumerator DestroyDelay()
+    IEnumerator DestroyDelay(float DelayTime)
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(DelayTime);
         Destroy(transform.parent.gameObject);
     }
 

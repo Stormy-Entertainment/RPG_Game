@@ -38,6 +38,11 @@ public class Teleporting2 : MonoBehaviour
         }
     }
 
+    public void TeleportPlayerToMain()
+    {
+        StartCoroutine(Teleport());
+    }
+
     IEnumerator Teleport()
     {
         chracterController.enabled = false;

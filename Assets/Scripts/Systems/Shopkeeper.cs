@@ -9,8 +9,6 @@ public class Shopkeeper : MonoBehaviour
 
 	public string shopName;
 	public bool canSellTo = true;
-	//public bool finiteMoney = true;
-	//public bool finiteItems = true;
 	public Inventory shopInventory;
 	private bool ShopOpened = false;
 
@@ -26,7 +24,7 @@ public class Shopkeeper : MonoBehaviour
 	{
 		if (other.transform.tag.Equals("Player"))
 		{
-			ChangeState(true);
+			inRange = true;
 		}
 	}
 
@@ -34,7 +32,7 @@ public class Shopkeeper : MonoBehaviour
 	{
 		if (other.transform.tag.Equals("Player"))
 		{
-			ChangeState(false);
+			inRange = false;
 			ShopOpened = false;
 			try
 			{
@@ -45,11 +43,6 @@ public class Shopkeeper : MonoBehaviour
 			}
 			catch (Exception e) { }
 		}
-	}
-
-	void ChangeState(bool state)
-	{
-		inRange = state;
 	}
 
 	public void StartTrade()
@@ -64,7 +57,8 @@ public class Shopkeeper : MonoBehaviour
             else
             {
 				shopSystem.CloseShop();
-            }
+				ShopOpened = false;
+			}
 		}
 	}
 }

@@ -37,6 +37,7 @@ public class ShopSystem : MonoBehaviour
 			shopkeeper = keeper;
 			shopName.text = shopkeeper.shopName;
 			shopUI.SetActive(true);
+			UpdateMoneyUI();
 			LoadPlayerItems();
 			LoadShopItems();		
 			GameState.instance.PauseTheGame();

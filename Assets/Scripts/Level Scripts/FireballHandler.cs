@@ -108,7 +108,6 @@ public class FireballHandler : MonoBehaviour
                     {
                         if (enemy1.IsDead())
                         {
-                            Debug.Log("Enemy 1 is Dead");
                             for (int i = 0; i < HighlightedOutline.Count; i++)
                             {
                                 HighlightedOutline[i].enabled = false;
@@ -121,7 +120,6 @@ public class FireballHandler : MonoBehaviour
                     {
                         if (enemy2.IsDead())
                         {
-                            Debug.Log("Enemy 2 is Dead");
                             for (int i = 0; i < HighlightedOutline.Count; i++)
                             {
                                 HighlightedOutline[i].enabled = false;
