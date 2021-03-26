@@ -48,7 +48,7 @@ public class EnemyAI2 : MonoBehaviour
         if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
         if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
 
-        playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+        
 
     }
 
@@ -97,7 +97,7 @@ public class EnemyAI2 : MonoBehaviour
         {
             agent.SetDestination(player.position);
 
-            
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
 
         }
@@ -112,6 +112,7 @@ public class EnemyAI2 : MonoBehaviour
         agent.SetDestination(transform.position);
         if (player != null)
         {
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
         }
 
