@@ -55,10 +55,11 @@ public class EnemyAI : MonoBehaviour
 
         //transform.position = Vector3.MoveTowards(transform.position, defPoint.position, 0.04f);
         Vector3 distanceToDefPoint = transform.position - defPoint.position;
-        if (distanceToDefPoint.magnitude < 0.1f)
+        if (distanceToDefPoint.magnitude < 1f)
         {
             animator.SetBool("Moving", false);
             agent.SetDestination(transform.position);
+            transform.rotation = defPoint.rotation;
          }
 
     }
