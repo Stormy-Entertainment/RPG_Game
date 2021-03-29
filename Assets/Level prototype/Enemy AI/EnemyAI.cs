@@ -22,11 +22,17 @@ public class EnemyAI : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
     private bool dead = false;
+    private StageMenuUI stageMenu;
 
     //Find player object by name
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        stageMenu = FindObjectOfType<StageMenuUI>();
     }
 
     private void Update()
@@ -49,10 +55,11 @@ public class EnemyAI : MonoBehaviour
 
         //transform.position = Vector3.MoveTowards(transform.position, defPoint.position, 0.04f);
         Vector3 distanceToDefPoint = transform.position - defPoint.position;
-        if (distanceToDefPoint.magnitude < 0.1f)
+        if (distanceToDefPoint.magnitude < 1f)
         {
             animator.SetBool("Moving", false);
             agent.SetDestination(transform.position);
+            transform.rotation = defPoint.rotation;
          }
 
     }
@@ -100,11 +107,27 @@ public class EnemyAI : MonoBehaviour
 
     public void Death()
     {
-        dead = true;
-        agent.velocity = Vector3.zero;
-        agent.acceleration = 0;
-        //agent.transform.position = Vector3.zero;
-        animator.SetTrigger("Death");
+        if (!dead)
+        {
+            dead = true;
+            agent.velocity = Vector3.zero;
+            agent.acceleration = 0;
+            animator.SetTrigger("Death");
+            BossParticle bossParticle = GetComponent<BossParticle>();
+            if (bossParticle != null)
+            {
+                bossParticle.ActivateParticles();
+            }
+            SFXManager.GetInstance().PlaySound("StageCompleted");
+            StartCoroutine(StageCompleted());
+        }
+    }
+
+    private IEnumerator StageCompleted()
+    {
+        yield return new WaitForSeconds(6f);
+        stageMenu.LevelCompleted();
+        Destroy(gameObject);
     }
 
     public bool IsDead()

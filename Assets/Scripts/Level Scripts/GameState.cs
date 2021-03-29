@@ -6,6 +6,8 @@ public class GameState : MonoBehaviour
 {
     public static GameState instance;
     public static bool isPaused = false;
+    public static bool isGameOver = false;
+    public static bool isStageCompleted = false;
 
     private void Awake()
     {

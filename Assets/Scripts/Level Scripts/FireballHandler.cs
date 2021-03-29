@@ -89,62 +89,121 @@ public class FireballHandler : MonoBehaviour
     {
         if (m_HitDetect && m_Hit.collider.tag == "Enemy")
         {
-            EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
-            EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
-            if (enemy1 != null)
+            if (HighLighted)
             {
-                if (!enemy1.IsDead())
+                if (HighlightedOutline != null) 
                 {
-                    if (!HighLighted)
+                    EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+                    EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                    if (m_Hit.collider.name != HighlightedOutline[0].name)
                     {
-                        HighLighted = true;
-                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                        outline.enabled = true;
-                        HighlightedOutline.Add(outline);
+                         for (int i = 0; i < HighlightedOutline.Count; i++)
+                         {
+                              HighlightedOutline[i].enabled = false;
+                         }
+                         HighlightedOutline.Clear();
+                         HighLighted = false;
                     }
-                }
-                else
-                {
-                    for (int i = 0; i < HighlightedOutline.Count; i++)
+                    else if (enemy1 != null)
                     {
-                        HighlightedOutline[i].enabled = false;
+                        if (enemy1.IsDead())
+                        {
+                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            {
+                                HighlightedOutline[i].enabled = false;
+                            }
+                            HighlightedOutline.Clear();
+                            HighLighted = false;
+                        }
                     }
-                    HighLighted = false;
-                    HighlightedOutline.Clear();
+                    else if (enemy2 != null)
+                    {
+                        if (enemy2.IsDead())
+                        {
+                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            {
+                                HighlightedOutline[i].enabled = false;
+                            }
+                            HighlightedOutline.Clear();
+                            HighLighted = false;
+                        }
+                    }
                 }
             }
-            else if(enemy2 != null)
+
+            else
             {
-                if (!enemy2.IsDead())
+                EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+                EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                if (enemy1 != null)
                 {
-                    if (!HighLighted)
+                    if (!enemy1.IsDead())
                     {
-                        HighLighted = true;
                         Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
                         outline.enabled = true;
                         HighlightedOutline.Add(outline);
+                        HighLighted = true;
                     }
                 }
-                else
+                else if (enemy2 != null)
                 {
-                    for (int i = 0; i < HighlightedOutline.Count; i++)
+                    if (!enemy2.IsDead())
                     {
-                        HighlightedOutline[i].enabled = false;
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                        HighLighted = true;
                     }
-                    HighLighted = false;
+                }
+            }
+        }
+        else if (m_HitDetect && m_Hit.collider.tag == "DummyEnemy")
+        {
+            if (HighLighted)
+            {
+                if (m_Hit.collider.name != HighlightedOutline[0].name)
+                {
+                    HighlightedOutline[0].enabled = false;
                     HighlightedOutline.Clear();
+                    HighLighted = true;          
+                    Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                    outline.enabled = true;
+                    HighlightedOutline.Add(outline);
+                }
+            }
+            else
+            {
+                DummyTargetEnemy dummyTarget = m_Hit.collider.GetComponent<DummyTargetEnemy>();
+                if (dummyTarget != null)
+                {
+                    if (dummyTarget.isTargetable)
+                    {
+                        if (!HighLighted)
+                        {
+                            HighLighted = true;
+                            Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                            outline.enabled = true;
+                            HighlightedOutline.Add(outline);
+                        }
+                    }
                 }
             }
         }
         else
         {
-            for (int i = 0; i < HighlightedOutline.Count; i++)
+            if (HighlightedOutline != null)
             {
-                HighlightedOutline[i].enabled = false;
+                for (int i = 0; i < HighlightedOutline.Count; i++)
+                {
+                    if (HighlightedOutline[i] != null)
+                    {
+                        HighlightedOutline[i].enabled = false;
+                    }
+                }
             }
-            HighLighted = false;
             HighlightedOutline.Clear();
-        }
+            HighLighted = false;
+        }      
     }
 
     private void CheckEnemyAtRange(GameObject bul)

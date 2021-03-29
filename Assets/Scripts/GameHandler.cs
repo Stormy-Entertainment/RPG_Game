@@ -16,6 +16,8 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private GameObject LevelScene;
     [SerializeField] private GameObject ArenaScene;
 
+    [SerializeField] private GameObject[] AllMenus;
+
     GameOverUI gameOver;
 
     private void Awake()
@@ -68,5 +70,13 @@ public class GameHandler : MonoBehaviour
     {
         LevelScene.SetActive(false);
         ArenaScene.SetActive(true);
+    }
+
+    public void DisableAllMenus()
+    {
+        for(int i = 0; i < AllMenus.Length; i++)
+        {
+            AllMenus[i].SetActive(false);
+        }
     }
 }

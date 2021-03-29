@@ -11,6 +11,8 @@ public class GameOverUI : MonoBehaviour
 
     public void GameOver()
     {
+        GameHandler.instance.DisableAllMenus();
+        GameState.isGameOver = true;
         gameOverMenu.SetActive(true);
         GameState.instance.PauseTheGame();
     }

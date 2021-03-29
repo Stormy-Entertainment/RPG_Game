@@ -21,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     public void SpawnNewEnemy()
     {
         int randomNumber = Random.Range(0, m_SpawnPoints.Length);
-        Instantiate(m_EnemyPrefab, m_SpawnPoints[randomNumber].transform.position, Quaternion.identity);
+        GameObject Enemy = Instantiate(m_EnemyPrefab, m_SpawnPoints[randomNumber].transform.position, Quaternion.identity);
+        Enemy.transform.parent = gameObject.transform;
     }
 }

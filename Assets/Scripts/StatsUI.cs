@@ -62,44 +62,32 @@ public class StatsUI : MonoBehaviour
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
         UpdatePlayerStats();
+        if(currentLevel == 5)
+        {
+            EnemyManager.instance.SpawnNewEnemy();
+        }
+        else if(currentLevel == 8)
+        {
+            EnemyManager.instance.SpawnNewEnemy();
+        }
+        else if (currentLevel == 12)
+        {
+            EnemyManager.instance.SpawnNewEnemy();
+        }
+        else if (currentLevel == 20)
+        {
+            EnemyManager.instance.SpawnNewEnemy();
+        }
+        else if (currentLevel == 30)
+        {
+            EnemyManager.instance.SpawnNewEnemy();
+        }
     }
 
     private void UpdatePlayerStats()
     {
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
-        switch (currentLevel)
-        {
-            case 5:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 10:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 15:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 20:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 25:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 30:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 35:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 40:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 45:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-            case 50:
-                playerStat.IncreaseAttackSpeed(20);
-                break;
-        }
+        playerStat.IncreaseAttackSpeed(50);
     }
 
     public void UpdateHealthBar(float newHealth)

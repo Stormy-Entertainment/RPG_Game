@@ -12,18 +12,26 @@ public class PauseUI : MonoBehaviour
         // Open and Close Pause Menu
         if (Input.GetButtonDown("Pause"))
         {
-            if (!InventoryUI.isInventoryOpen)
+            if (!GameState.isGameOver && !GameState.isStageCompleted)
             {
                 if (pauseMenu.activeSelf)
                 {
                     pauseMenu.SetActive(false);
                     GameState.instance.ResumeTheGame();
-                    
+
                 }
                 else
                 {
                     pauseMenu.SetActive(true);
                     GameState.instance.PauseTheGame();
+                }
+            }
+            else
+            {
+                if (pauseMenu.activeSelf)
+                {
+                    pauseMenu.SetActive(false);
+                    GameState.instance.ResumeTheGame();
                 }
             }
         }

@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5669212628576481252
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5669212628576481253}
+  - component: {fileID: 5669212628576481254}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5669212628576481253
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669212628576481252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 46.249626, y: 54.405502, z: 10.410795}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5669212628576481254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5669212628576481252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 965d17b77e34c2c4da353f819accbf92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: FireballSFX
+    clip: {fileID: 8300000, guid: afd2fc56879880048adc4d98056e1771, type: 3}
+    pitch: 1
+    volume: 0.25
+  - name: FirehitSFX
+    clip: {fileID: 8300000, guid: 88dde42355c9163448f2146926f35f38, type: 3}
+    pitch: 1
+    volume: 0.5
+  - name: ButtonHover
+    clip: {fileID: 8300000, guid: 64b726fd66ac92944ba1b8e1891fd7a6, type: 3}
+    pitch: 1
+    volume: 0.6
+  - name: ButtonClick
+    clip: {fileID: 8300000, guid: 8e13ecb9de3096c45883576f900a13fd, type: 3}
+    pitch: 1
+    volume: 0.6
+  - name: ItemPickUp
+    clip: {fileID: 8300000, guid: 0ea526f991a12ea41829fce84614b11c, type: 3}
+    pitch: 1
+    volume: 0.6
+  - name: StageCompleted
+    clip: {fileID: 8300000, guid: b92a24f6314f7184793b4722ea367458, type: 3}
+    pitch: 1
+    volume: 0.6
+  SFXMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
+  BGMixerGroup: {fileID: -653028638225705352, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
