@@ -372,7 +372,7 @@ MonoBehaviour:
   turnSmoothTime: 0.1
   turnSmoothVelocity: 15
   groundCheck: {fileID: 8135063133660523377}
-  groundDistance: 0.25
+  groundDistance: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 256
@@ -395,9 +395,8 @@ MonoBehaviour:
     type: 3}
   fireBallLifeTime: 6
   isFiring: 0
-  cameraTransform: {fileID: 0}
   fireBallSpawnPoint: {fileID: 8135063133728386933}
-  m_HitBoxRadius: {x: 8.26, y: 6.25, z: 0.47}
+  m_HitBoxRadius: {x: 3.18, y: 6.25, z: 0.2}
   m_HitBoxDistance: 35
   enemyLayerMask:
     serializedVersion: 2

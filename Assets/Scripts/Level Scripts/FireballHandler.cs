@@ -11,7 +11,7 @@ public class FireballHandler : MonoBehaviour
     [SerializeField] private float fireBallLifeTime;
     [SerializeField] private bool isFiring = false;
 
-    [SerializeField] private Transform cameraTransform;
+  //  [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform fireBallSpawnPoint;
 
     private bool m_HitDetect;
