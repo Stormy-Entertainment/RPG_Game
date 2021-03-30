@@ -15,6 +15,7 @@ public class k_EnemyDef : MonoBehaviour
     public Transform[] defPoint;
     public int defPointNumber;
     private int defPointIndex = 0;
+    public float walkSpeed;
     public float chaseSpeed;
     public float defDirection;
 
@@ -39,6 +40,8 @@ public class k_EnemyDef : MonoBehaviour
     {
         if (defPointIndex <= defPoint.Length - 1)
         {
+            agent.speed = walkSpeed;
+
             agent.SetDestination(defPoint[defPointIndex].transform.position);
             //transform.LookAt(wayPoint[wayPointIndex]);
 
@@ -46,6 +49,7 @@ public class k_EnemyDef : MonoBehaviour
             transform.LookAt(defPoint[defPointIndex]);
             animator.SetBool("Moving", true);
             animator.SetBool("Attack", false);
+            animator.SetBool("Running", false);
 
 
             //if object location = current location, Index +1
@@ -73,7 +77,8 @@ public class k_EnemyDef : MonoBehaviour
         //player = GameHandler.instance.GetPlayer();
         agent.speed = chaseSpeed;
         player = GameObject.Find("Player").transform;
-        animator.SetBool("Moving", true);
+        animator.SetBool("Running", true);
+        animator.SetBool("Moving", false);
         animator.SetBool("Attack", false);
 
         if (player != null)
@@ -92,9 +97,11 @@ public class k_EnemyDef : MonoBehaviour
             //player = GameHandler.instance.GetPlayer();
             player = GameObject.Find("Player").transform;
 
-            animator.SetBool("Attack", true);
+        animator.SetBool("Attack", true);
+        animator.SetBool("Running", false);
+        animator.SetBool("Moving", false);
 
-            agent.SetDestination(transform.position);
+        agent.SetDestination(transform.position);
             if (player != null)
             {
                 playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);

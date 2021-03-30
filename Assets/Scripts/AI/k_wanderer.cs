@@ -26,7 +26,7 @@ public class k_wanderer : MonoBehaviour
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(walkArea.position.x - randomX - 4, transform.position.y, walkArea.position.z - randomZ - 4);
+        walkPoint = new Vector3(walkArea.position.x - randomX, transform.position.y, walkArea.position.z - randomZ);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
@@ -52,7 +52,7 @@ public class k_wanderer : MonoBehaviour
     private void WalkToPoint()
     {
         animator.SetBool("Moving", true);
-        animator.SetBool("Attack", false);
+        //animator.SetBool("Attack", false);
 
         if (!walkPointSet)
         {
