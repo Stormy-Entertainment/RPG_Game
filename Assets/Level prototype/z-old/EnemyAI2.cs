@@ -11,8 +11,6 @@ public class EnemyAI2 : MonoBehaviour
     private Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
 
-    public Transform playerPoint;
-
     //Patoring
     public Vector3 walkPoint;
     bool walkPointSet;
@@ -24,6 +22,7 @@ public class EnemyAI2 : MonoBehaviour
     public float timeBetweenAttacks;
     public float m_Damage = 20;
     bool alreadyAttacked;
+    bool EnemyHit = false;
 
     //States
     public float sightRange, attackRange;
@@ -44,12 +43,9 @@ public class EnemyAI2 : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead) Patroling();
-        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
-
-        
-
+        if (!playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) Patroling();
+        if (playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) ChasePlayer();
+        if (playerInSightRange && playerInAttackRange && !dead && !EnemyHit) AttackPlayer();        
     }
 
 
@@ -96,10 +92,8 @@ public class EnemyAI2 : MonoBehaviour
         if (player != null)
         {
             agent.SetDestination(player.position);
-
-            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            Vector3 playerPoint = new Vector3(player.position.x, transform.position.y, player.position.z);
             transform.LookAt(playerPoint);
-
         }
     }
 
@@ -112,7 +106,7 @@ public class EnemyAI2 : MonoBehaviour
         agent.SetDestination(transform.position);
         if (player != null)
         {
-            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            Vector3 playerPoint = new Vector3(player.position.x, transform.position.y, player.position.z);
             transform.LookAt(playerPoint);
         }
 
@@ -123,6 +117,19 @@ public class EnemyAI2 : MonoBehaviour
             player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+    }
+
+    public void Hit()
+    {
+        StartCoroutine(HitRoutine());
+    }
+
+    IEnumerator HitRoutine()
+    {
+        EnemyHit = true;
+        animator.SetTrigger("Hit");
+        yield return new WaitForSeconds(0.5f);
+        EnemyHit = false;
     }
 
     private void ResetAttack()

@@ -5,13 +5,12 @@ using UnityEngine;
 public class FireballHandler : MonoBehaviour
 {
     [SerializeField] private Animator anim;
-
+    private Camera cam;
     [SerializeField] private GameObject FireBall;
     //[SerializeField] private float fireBallSpeed;
     [SerializeField] private float fireBallLifeTime;
     [SerializeField] private bool isFiring = false;
 
-  //  [SerializeField] private Transform cameraTransform;
     [SerializeField] private Transform fireBallSpawnPoint;
 
     private bool m_HitDetect;
@@ -24,6 +23,10 @@ public class FireballHandler : MonoBehaviour
     public List<Outline> HighlightedOutline = new List<Outline>();
     private bool HighLighted = false;
 
+    private void Awake()
+    {
+        cam = Camera.main;
+    }
 
     void Start()
     {
@@ -48,7 +51,7 @@ public class FireballHandler : MonoBehaviour
         //Calculate using the center of the GameObject's Collider(could also just use the GameObject's position), half the GameObject's size, the direction, the GameObject's rotation, and the maximum distance as variables.
         //Also fetch the hit data
         m_HitDetect = Physics.BoxCast(m_Collider.bounds.center,
-            m_HitBoxRadius, transform.forward,
+            m_HitBoxRadius, cam.transform.forward,
             out m_Hit, transform.rotation, m_HitBoxDistance, enemyLayerMask);
 
             HighLightEnemy();
@@ -58,6 +61,7 @@ public class FireballHandler : MonoBehaviour
     {
         isFiring = true;
         anim.SetTrigger("FireballShoot");
+        GetComponent<ThirdPersonMovement>().UpdateRotation(true);
         GameObject mbullet = Instantiate(FireBall);
         mbullet.transform.position = new Vector3(fireBallSpawnPoint.position.x, fireBallSpawnPoint.position.y, fireBallSpawnPoint.position.z);
         Quaternion playerRotation = this.transform.rotation;
@@ -82,6 +86,7 @@ public class FireballHandler : MonoBehaviour
         float NewRange = (NewMax - NewMin);
         float fireballLoadingTime = ((((playerAttactSpeed - OldMin) * NewRange) / OldRange) + NewMin);
         yield return new WaitForSeconds(fireballLoadingTime);
+        GetComponent<ThirdPersonMovement>().UpdateRotation(false);
         isFiring = false;
     }
 
@@ -91,22 +96,13 @@ public class FireballHandler : MonoBehaviour
         {
             if (HighLighted)
             {
-                if (HighlightedOutline != null) 
+                if (HighlightedOutline != null)
                 {
-                    EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
-                    EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
-                    if (m_Hit.collider.name != HighlightedOutline[0].name)
+                    if (HighlightedOutline[0] != null)
                     {
-                         for (int i = 0; i < HighlightedOutline.Count; i++)
-                         {
-                              HighlightedOutline[i].enabled = false;
-                         }
-                         HighlightedOutline.Clear();
-                         HighLighted = false;
-                    }
-                    else if (enemy1 != null)
-                    {
-                        if (enemy1.IsDead())
+                        EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
+                        EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                        if (m_Hit.collider.name != HighlightedOutline[0].name)
                         {
                             for (int i = 0; i < HighlightedOutline.Count; i++)
                             {
@@ -115,17 +111,29 @@ public class FireballHandler : MonoBehaviour
                             HighlightedOutline.Clear();
                             HighLighted = false;
                         }
-                    }
-                    else if (enemy2 != null)
-                    {
-                        if (enemy2.IsDead())
+                        else if (enemy1 != null)
                         {
-                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            if (enemy1.IsDead())
                             {
-                                HighlightedOutline[i].enabled = false;
+                                for (int i = 0; i < HighlightedOutline.Count; i++)
+                                {
+                                    HighlightedOutline[i].enabled = false;
+                                }
+                                HighlightedOutline.Clear();
+                                HighLighted = false;
                             }
-                            HighlightedOutline.Clear();
-                            HighLighted = false;
+                        }
+                        else if (enemy2 != null)
+                        {
+                            if (enemy2.IsDead())
+                            {
+                                for (int i = 0; i < HighlightedOutline.Count; i++)
+                                {
+                                    HighlightedOutline[i].enabled = false;
+                                }
+                                HighlightedOutline.Clear();
+                                HighLighted = false;
+                            }
                         }
                     }
                 }
@@ -231,23 +239,26 @@ public class FireballHandler : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        //Check if there has been a hit yet
-        if (m_HitDetect)
+        if (cam != null)
         {
-            Gizmos.color = Color.green;
-            //Draw a Ray forward from GameObject toward the hit
-            Gizmos.DrawRay(transform.position, transform.forward * m_Hit.distance);
-            //Draw a cube that extends to where the hit exists
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_Hit.distance, m_HitBoxRadius);
-        }
-        //If there hasn't been a hit yet, draw the ray at the maximum distance
-        else
-        {
-            Gizmos.color = Color.red;
-            //Draw a Ray forward from GameObject toward the maximum distance
-            Gizmos.DrawRay(transform.position, transform.forward * m_HitBoxDistance);
-            //Draw a cube at the maximum distance
-            Gizmos.DrawWireCube(transform.position + transform.forward * m_HitBoxDistance, m_HitBoxRadius);
+            //Check if there has been a hit yet
+            if (m_HitDetect)
+            {
+                Gizmos.color = Color.green;
+                //Draw a Ray forward from GameObject toward the hit
+                Gizmos.DrawRay(transform.position, cam.transform.forward * m_Hit.distance);
+                //Draw a cube that extends to where the hit exists
+                Gizmos.DrawWireCube(transform.position + cam.transform.forward * m_Hit.distance, m_HitBoxRadius);
+            }
+            //If there hasn't been a hit yet, draw the ray at the maximum distance
+            else
+            {
+                Gizmos.color = Color.red;
+                //Draw a Ray forward from GameObject toward the maximum distance
+                Gizmos.DrawRay(transform.position, cam.transform.forward * m_HitBoxDistance);
+                //Draw a cube at the maximum distance
+                Gizmos.DrawWireCube(transform.position + cam.transform.forward * m_HitBoxDistance, m_HitBoxRadius);
+            }
         }
     }
 }
