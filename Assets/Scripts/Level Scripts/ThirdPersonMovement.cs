@@ -24,6 +24,12 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private bool isGounded;
     private bool isJumping = false;
 
+    float horizontal = 0f;
+    float vertical = 0f;
+
+    bool Rotate = false;
+    bool OverrideRotation = false;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -51,20 +57,24 @@ public class ThirdPersonMovement : MonoBehaviour
 
         ApplyGravity();
         //Applied Simulated Gravity
-        ApplyRotation();
-        //Simulated Rotation according to Camera
+        if (Rotate)
+        {
+            ApplyRotation();
+            //Simulated Rotation according to Camera
+        }
 
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
+        horizontal = Input.GetAxisRaw("Horizontal");
+        vertical = Input.GetAxisRaw("Vertical");
 
         Vector3 direction = new Vector3(horizontal, 0f, vertical).normalized;
 
         if (cam != null)
-        { 
+        {
             if (direction.magnitude >= 0.1f)
             {
                 float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cam.eulerAngles.y;
                 Vector3 moveDirection = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+                Rotate = true;
 
                 if (Input.GetButton("Sprint") && isGounded)
                 {
@@ -81,12 +91,26 @@ public class ThirdPersonMovement : MonoBehaviour
             else
             {
                 velocity.x = 0f;
+                if (!OverrideRotation)
+                {
+                    Rotate = false;
+                }
             }
         }
-       anim.SetFloat("Velocity", controller.velocity.magnitude);
-       anim.SetFloat("H", horizontal);
-       anim.SetFloat("V", vertical);
-       // Debug.Log("Velovity " + velocity);
+    }
+
+    private void FixedUpdate()
+    {
+        anim.SetFloat("Velocity", controller.velocity.magnitude);
+        anim.SetFloat("H", horizontal);
+        anim.SetFloat("V", vertical);
+        // Debug.Log("Velovity " + velocity);
+    }
+
+    public void UpdateRotation(bool value)
+    {
+        Rotate = value;
+        OverrideRotation = value;
     }
 
     private void ApplyRotation()

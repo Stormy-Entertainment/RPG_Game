@@ -26,7 +26,6 @@ public class EnemyStats : MonoBehaviour
 
     public void DecreaseHealth(float value)
     {
-        InstantiateBloodParticleEffect();
         m_Health = m_Health - value;
         GetComponentInChildren<EnemyHealthSlider>().UpdateHealthSlider(m_Health);
         if (m_Health <= 0f && !Dead)
@@ -37,6 +36,7 @@ public class EnemyStats : MonoBehaviour
             EnemyAI3 enemyAI3 = GetComponentInParent<EnemyAI3>();
             EnemyAI2 enemyAI2 = GetComponentInParent<EnemyAI2>();
             EnemyAI enemyAI = GetComponentInParent<EnemyAI>();
+            InstantiateBloodParticleEffect();
             if (enemyAI != null)
             {
                 enemyAI.Death();
@@ -52,6 +52,15 @@ public class EnemyStats : MonoBehaviour
                 enemyAI3.Death();
                 StartCoroutine(DestroyDelay(3f));
             } 
+        }
+        else
+        {
+            InstantiateBloodParticleEffect();
+            EnemyAI2 enemy = GetComponentInParent<EnemyAI2>();
+            if (enemy != null)
+            {
+                enemy.Hit();
+            }
         }
         //Enemy Dead
     }
