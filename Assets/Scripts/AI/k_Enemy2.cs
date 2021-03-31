@@ -38,13 +38,13 @@ public class k_Enemy2 : MonoBehaviour
         playerPoint = GameObject.Find("PlayerPoint").transform;
     }
 
-    //Searching walk point inside the AI and NavMesh area. I set the next point have (min. +4). 
+    //Searching walk point inside the AI and NavMesh area. 
     private void SearchWalkPoint()
     {
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(walkArea.position.x - randomX-4, transform.position.y, walkArea.position.z - randomZ-4);
+        walkPoint = new Vector3(walkArea.position.x - randomX, transform.position.y, walkArea.position.z - randomZ);
         
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
@@ -71,6 +71,7 @@ public class k_Enemy2 : MonoBehaviour
     {
         animator.SetBool("Moving", true);
         animator.SetBool("Attack", false);
+        animator.SetBool("Running", false);
 
         if (!walkPointSet)
         {
@@ -93,7 +94,8 @@ public class k_Enemy2 : MonoBehaviour
         //player = GameHandler.instance.GetPlayer();
         agent.speed = chaseSpeed;
         player = GameObject.Find("Player").transform;
-        animator.SetBool("Moving", true);
+        animator.SetBool("Running", true);
+        animator.SetBool("Moving", false);
         animator.SetBool("Attack", false);
 
         if (player != null)
@@ -113,6 +115,8 @@ public class k_Enemy2 : MonoBehaviour
         player = GameObject.Find("Player").transform;
 
         animator.SetBool("Attack", true);
+        animator.SetBool("Running", false);
+        animator.SetBool("Moving", false);
 
         agent.SetDestination(transform.position);
         if (player != null)
@@ -133,6 +137,7 @@ public class k_Enemy2 : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+              
     }
 
     public void Death()
