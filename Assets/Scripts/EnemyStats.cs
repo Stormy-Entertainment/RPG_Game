@@ -8,6 +8,7 @@ public class EnemyStats : MonoBehaviour
     public float m_XPGains = 15;
 
     public GameObject BloodParticleEffect;
+    public GameObject Coin;
     private bool Dead = false;
 
     private void Start()
@@ -37,18 +38,24 @@ public class EnemyStats : MonoBehaviour
             EnemyAI2 enemyAI2 = GetComponentInParent<EnemyAI2>();
             EnemyAI enemyAI = GetComponentInParent<EnemyAI>();
             InstantiateBloodParticleEffect();
+            
             if (enemyAI != null)
             {
+                InstantiateCoin(20);
                 enemyAI.Death();
                 StartCoroutine(DestroyDelay(7f));
             }
             else if(enemyAI2 != null)
             {
+                int RandomCoin = Random.Range(1, 4);
+                InstantiateCoin(RandomCoin);
                 enemyAI2.Death();
                 StartCoroutine(DestroyDelay(3f));
             }
             else if (enemyAI3 != null)
             {
+                int RandomCoin = Random.Range(1, 4);
+                InstantiateCoin(RandomCoin);
                 enemyAI3.Death();
                 StartCoroutine(DestroyDelay(3f));
             } 
@@ -74,5 +81,15 @@ public class EnemyStats : MonoBehaviour
     private void InstantiateBloodParticleEffect()
     {
         Instantiate(BloodParticleEffect, transform.position, Quaternion.identity);
+    }
+
+    private void InstantiateCoin(int NoOfCoins)
+    {
+        for (int i = 0; i < NoOfCoins; i++)
+        {
+            float RandomXPosition = Random.Range(transform.position.x - 2f, transform.position.x + 2f);
+            float RandomYPosition = Random.Range(transform.position.y - 2f, transform.position.y + 2f);
+            Instantiate(Coin, new Vector3(RandomXPosition, RandomYPosition, transform.position.z), Quaternion.identity);
+        }
     }
 }

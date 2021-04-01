@@ -1551,6 +1551,7 @@ MonoBehaviour:
   m_XPGains: 50
   BloodParticleEffect: {fileID: 6525718543388598434, guid: 6eda552671222204cbf42c7327972e79,
     type: 3}
+  Coin: {fileID: 9100997750592192725, guid: 4d0706a959550294691326b8a581a446, type: 3}
 --- !u!136 &88238042
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -14296,6 +14297,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634116173}
   m_Mesh: {fileID: 8254687373856176130, guid: 1c3c65dc88d2595499b876886aa6c26c, type: 3}
+--- !u!1 &641117957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2280401637430885318, guid: 40f30af79061f144ea8620e9f3c02dac,
+    type: 3}
+  m_PrefabInstance: {fileID: 1009811295}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &641117958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 641117957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ea2067bccd2c045b10dc9eb4ce3756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &642175833
 GameObject:
   m_ObjectHideFlags: 0
@@ -18506,6 +18525,7 @@ MonoBehaviour:
   m_XPGains: 15
   BloodParticleEffect: {fileID: 6525718543388598434, guid: 6eda552671222204cbf42c7327972e79,
     type: 3}
+  Coin: {fileID: 9100997750592192725, guid: 4d0706a959550294691326b8a581a446, type: 3}
 --- !u!136 &916140623
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -19123,22 +19143,22 @@ PrefabInstance:
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.98894113
+      value: 0.9889411
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.14815257
+      value: 0.14815259
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.006731427
+      value: -0.0067330343
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054524104252, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0010084305
+      value: 0.0010086714
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054866861564, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -19203,12 +19223,12 @@ PrefabInstance:
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000008458006
+      value: 0.000000008458009
       objectReference: {fileID: 0}
     - target: {fileID: 3213696054943603913, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000015738522
+      value: -0.0000000015738528
       objectReference: {fileID: 0}
     - target: {fileID: 5022174169362435494, guid: 67f0a719a95f82645b8b55c8093e2bc2,
         type: 3}
@@ -27851,7 +27871,7 @@ MonoBehaviour:
   defPoint: {fileID: 380337851}
   m_Damage: 60
   timeBetweenAttacks: 2.2
-  sightRange: 25.87
+  sightRange: 38.9
   attackRange: 4
   playerInSightRange: 0
   playerInAttackRange: 0
@@ -58951,12 +58971,12 @@ PrefabInstance:
     - target: {fileID: 9067473282370656314, guid: 2385e7ddc4f41df4c87975cb4370dd64,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067473282370656314, guid: 2385e7ddc4f41df4c87975cb4370dd64,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9067473282381404361, guid: 2385e7ddc4f41df4c87975cb4370dd64,
         type: 3}

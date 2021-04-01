@@ -43,4 +43,9 @@ public class Inventory : MonoBehaviour
 		if (onItemChangedCallback != null)
 			onItemChangedCallback.Invoke();
 	}
+
+	public void IncreaseCoins(int coins)
+    {
+		money += coins;
+    }
 }
