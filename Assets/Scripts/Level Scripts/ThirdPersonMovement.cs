@@ -130,6 +130,7 @@ public class ThirdPersonMovement : MonoBehaviour
         isJumping = true;
         velocity.y = Mathf.Sqrt(jumpForce * -2f * gravity);
         anim.SetTrigger("Jump");
+        SFXManager.GetInstance().PlaySound("Jump");
         StartCoroutine(ResetJumpAnim());
     }
 
