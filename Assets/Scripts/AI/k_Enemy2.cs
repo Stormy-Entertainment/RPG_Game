@@ -27,9 +27,8 @@ public class k_Enemy2 : MonoBehaviour
     private bool dead = false;
 
     //Attacking
-    public float timeBetweenAttacks;
-    public float m_Damage = 20;
     bool alreadyAttacked;
+    public GameObject weapon;
 
     private void Awake()
     {
@@ -114,6 +113,7 @@ public class k_Enemy2 : MonoBehaviour
         //player = GameHandler.instance.GetPlayer();
         player = GameObject.Find("Player").transform;
 
+        
         animator.SetBool("Attack", true);
         animator.SetBool("Running", false);
         animator.SetBool("Moving", false);
@@ -124,20 +124,18 @@ public class k_Enemy2 : MonoBehaviour
             playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
         }
-
-
-        if (!alreadyAttacked)
-        {
-            alreadyAttacked = true;
-            player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
     }
 
-    private void ResetAttack()
+    //Active collider when attack
+    public void WeaponHit()
     {
-        alreadyAttacked = false;
-              
+        weapon.GetComponent<BoxCollider>().enabled = true;
+               
+    }
+
+    public void WeaponHited()
+    {
+        weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void Death()
