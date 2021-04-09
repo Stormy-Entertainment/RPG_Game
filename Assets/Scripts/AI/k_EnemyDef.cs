@@ -25,9 +25,8 @@ public class k_EnemyDef : MonoBehaviour
     private bool dead = false;
 
     //Attacking
-    public float timeBetweenAttacks;
-    public float m_Damage = 20;
     bool alreadyAttacked;
+    public GameObject weapon;
 
     private void Awake()
     {
@@ -50,6 +49,7 @@ public class k_EnemyDef : MonoBehaviour
             animator.SetBool("Moving", true);
             animator.SetBool("Attack", false);
             animator.SetBool("Running", false);
+            animator.SetBool("Idle", false);
 
 
             //if object location = current location, Index +1
@@ -57,8 +57,7 @@ public class k_EnemyDef : MonoBehaviour
             if (distanceToWalkPoint.magnitude < 1f)
             {
                 defPointIndex += 1;
-
-                animator.SetBool("Moving", false);
+                animator.SetBool("Idle", true);
                 transform.rotation = Quaternion.Euler(0, defDirection, 0);
             }
         }
@@ -80,6 +79,7 @@ public class k_EnemyDef : MonoBehaviour
         animator.SetBool("Running", true);
         animator.SetBool("Moving", false);
         animator.SetBool("Attack", false);
+        animator.SetBool("Idle", false);
 
         if (player != null)
         {
@@ -100,6 +100,7 @@ public class k_EnemyDef : MonoBehaviour
         animator.SetBool("Attack", true);
         animator.SetBool("Running", false);
         animator.SetBool("Moving", false);
+        animator.SetBool("Idle", false);
 
         agent.SetDestination(transform.position);
             if (player != null)
@@ -108,19 +109,20 @@ public class k_EnemyDef : MonoBehaviour
                 transform.LookAt(playerPoint);
             }
 
-
-            if (!alreadyAttacked)
-            {
-                alreadyAttacked = true;
-                player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
-                Invoke(nameof(ResetAttack), timeBetweenAttacks);
-            }
         }
 
-    private void ResetAttack()
+    //Active collider when attack
+    public void WeaponHit()
     {
-        alreadyAttacked = false;
+        weapon.GetComponent<BoxCollider>().enabled = true;
+
     }
+
+    public void WeaponHited()
+    {
+        weapon.GetComponent<BoxCollider>().enabled = false;
+    }
+
 
     public void Death()
     {
