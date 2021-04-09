@@ -19,7 +19,7 @@ public class k_EnemyWeapon : MonoBehaviour
             GetComponent<AudioSource>().Play();
 
             player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
-            Debug.Log("Skeleton Hit");
+            Debug.Log("Hit");
         }
     }
 }
