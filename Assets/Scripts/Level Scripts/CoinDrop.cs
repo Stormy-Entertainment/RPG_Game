@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CoinDrop : MonoBehaviour
 {
+    
     private Transform Target;
     public float Speed = 1.5f;
     public int CoinsPerItem = 100;
@@ -11,6 +12,7 @@ public class CoinDrop : MonoBehaviour
     Vector3 _velocity = Vector3.zero;
     bool _isFollowing = false;
 
+<<<<<<< HEAD
     // Update is called once per frame
     void Update()
     {
@@ -21,15 +23,34 @@ public class CoinDrop : MonoBehaviour
     }
 
     public void FollowPlayer()
+=======
+    private void Start()
     {
-        if (!_isFollowing)
+        FollowingPlayer();
+    }
+
+    private void FollowingPlayer()
+>>>>>>> 46137604eb50a84866dcefbfe5cbe039e4d18613
+    {
+        Target = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerTarget>().transform;
+        _isFollowing = true;
+    }
+
+<<<<<<< HEAD
+    private void OnCollisionEnter(Collision other)
+=======
+    // Update is called once per frame
+    void Update()
+    {
+        if (_isFollowing && Target!=null)
         {
-            Target = GameObject.FindWithTag("Player").GetComponentInChildren<PlayerTarget>().transform;
-            _isFollowing = true;
+            transform.position = Vector3.SmoothDamp(transform.position, Target.position, ref _velocity, Time.deltaTime * Speed);
+            //transform.position = Vector3.Lerp(transform.position, Target.position, Time.deltaTime * Speed);
         }
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
+>>>>>>> 46137604eb50a84866dcefbfe5cbe039e4d18613
     {
         if (other.gameObject.tag == "Player")
         {
