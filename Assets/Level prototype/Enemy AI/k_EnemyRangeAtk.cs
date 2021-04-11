@@ -31,6 +31,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
     //Shooting
     public Transform shootPoint;
     public GameObject bulletPrefab;
+    public bool isShooting;
 
 
     private void Awake()
@@ -43,7 +44,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
     private void Defence()
     {
         if (defPointIndex <= defPoint.Length - 1)
-        {
+        {          
             agent.speed = walkSpeed;
 
             agent.SetDestination(defPoint[defPointIndex].transform.position);
@@ -142,6 +143,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
         playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
         transform.LookAt(playerPoint);
 
+        agent.speed = 0;
     }
 
     public void Shooting()
@@ -171,7 +173,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
         playerInRangeAttackRange = Physics.CheckSphere(transform.position, rangeAttackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead) Defence();
+        if (!playerInSightRange && !playerInAttackRange && !dead && !playerInRangeAttackRange) Defence();
         if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
         if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
 
