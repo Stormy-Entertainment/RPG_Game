@@ -10981,6 +10981,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 149083135}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &150341647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1508094763456582038, guid: ba55c9caf261ce94191214bb93d360cf,
+    type: 3}
+  m_PrefabInstance: {fileID: 3699637565694845207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &150341648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150341647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949dc9e91e211a44e9454199e11677f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: Final Boss Battle
+--- !u!65 &150341649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 150341647}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10.18, y: 12.47, z: 3.24}
+  m_Center: {x: 0.47, y: 4.58, z: -6.58}
 --- !u!1001 &154789887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -85000,6 +85032,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Cave_210330
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800688094711410264, guid: 3eb398e8751887c44b83a80a6d2a28be,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4139744857299963239, guid: 3eb398e8751887c44b83a80a6d2a28be,
         type: 3}
