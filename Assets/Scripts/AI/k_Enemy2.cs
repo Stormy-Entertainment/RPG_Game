@@ -30,11 +30,25 @@ public class k_Enemy2 : MonoBehaviour
     bool alreadyAttacked;
     public GameObject weapon;
 
+    //Sound Effect
+    public AudioClip idle;
+    public AudioClip walking;
+    public AudioClip running;
+    public AudioClip fight;
+    public AudioClip death;
+    public AudioClip getHit;
+
+    public AudioSource audio;
+
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         playerPoint = GameObject.Find("PlayerPoint").transform;
+
+        audio = GetComponent<AudioSource>();
+        
+
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -85,6 +99,8 @@ public class k_Enemy2 : MonoBehaviour
             Vector3 distanceToWalkPoint = transform.position - walkPoint;
             if (distanceToWalkPoint.magnitude < 2f) walkPointSet = false;
         }
+
+
     }
 
     //moving forward and looking at the player
@@ -103,7 +119,6 @@ public class k_Enemy2 : MonoBehaviour
 
             playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
-
         }
     }
 
@@ -124,13 +139,16 @@ public class k_Enemy2 : MonoBehaviour
             playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
         }
+
+
     }
 
     //Active collider when attack
     public void WeaponHit()
     {
         weapon.GetComponent<BoxCollider>().enabled = true;
-               
+        audio.clip = fight; audio.loop = false; audio.Play();
+
     }
 
     public void WeaponHited()
@@ -161,7 +179,7 @@ public class k_Enemy2 : MonoBehaviour
         //Setting AI action in different situration
         if (!playerInSightRange && !playerInAttackRange && !dead) WalkToPoint();
         if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer(); 
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
     void OnDrawGizmos()
@@ -176,4 +194,15 @@ public class k_Enemy2 : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+
+    //Audio play, animation event
+    public void walksSound()
+    {
+        audio.clip = walking; audio.loop = true; audio.Play();
+    }
+
+    public void runSound()
+    {
+        audio.clip = running; audio.loop = true; audio.Play();
+    }
 }
