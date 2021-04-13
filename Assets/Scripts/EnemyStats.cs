@@ -88,8 +88,8 @@ public class EnemyStats : MonoBehaviour
         for (int i = 0; i < NoOfCoins; i++)
         {
             float RandomXPosition = Random.Range(transform.position.x - 2f, transform.position.x + 2f);
-            float RandomZPosition = Random.Range(transform.position.z - 2f, transform.position.z + 2f);
-            Instantiate(Coin, new Vector3(RandomXPosition, transform.position.y, RandomZPosition), Quaternion.identity);
+            float RandomYPosition = Random.Range(transform.position.y - 2f, transform.position.y + 2f);
+            Instantiate(Coin, new Vector3(RandomXPosition, RandomYPosition, transform.position.z), Quaternion.identity);
         }
     }
 }
