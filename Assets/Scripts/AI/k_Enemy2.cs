@@ -31,7 +31,6 @@ public class k_Enemy2 : MonoBehaviour
     public GameObject weapon;
 
     //Sound Effect
-    public AudioClip idle;
     public AudioClip walking;
     public AudioClip running;
     public AudioClip fight;

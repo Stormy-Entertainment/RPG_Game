@@ -33,6 +33,15 @@ public class k_EnemyRangeAtk : MonoBehaviour
     public GameObject bulletPrefab;
     public bool isShooting;
 
+    //Sound Effect
+    public AudioClip walking;
+    public AudioClip running;
+    public AudioClip fight;
+    public AudioClip e_shooting;
+    public AudioClip death;
+    public AudioClip getHit;
+
+    public AudioSource audio;
 
     private void Awake()
     {
@@ -149,6 +158,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
     public void Shooting()
     {
         GameObject.Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
+        //audio.clip = e_shooting; audio.loop = false; audio.Play();
     }
 
     public void Death()
@@ -193,4 +203,14 @@ public class k_EnemyRangeAtk : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, rangeAttackRange);
     }
 
+    //Audio play, animation event
+    public void walksSound()
+    {
+        audio.clip = walking; audio.loop = true; audio.Play();
+    }
+
+    public void runSound()
+    {
+        audio.clip = running; audio.loop = true; audio.Play();
+    }
 }
