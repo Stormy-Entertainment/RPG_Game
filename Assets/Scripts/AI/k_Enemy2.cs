@@ -47,7 +47,6 @@ public class k_Enemy2 : MonoBehaviour
 
         audio = GetComponent<AudioSource>();
         
-
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -162,6 +161,8 @@ public class k_Enemy2 : MonoBehaviour
         agent.acceleration = 0;
         //agent.transform.position = Vector3.zero;
         animator.SetTrigger("Death");
+
+        audio.clip = death; audio.loop = false; audio.Play();
     }
 
     public bool IsDead()

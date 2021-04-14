@@ -53,7 +53,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
     private void Defence()
     {
         if (defPointIndex <= defPoint.Length - 1)
-        {          
+        {        
             agent.speed = walkSpeed;
 
             agent.SetDestination(defPoint[defPointIndex].transform.position);
@@ -75,6 +75,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
                 defPointIndex += 1;
                 animator.SetBool("Idle", true);
                 transform.rotation = Quaternion.Euler(0, defDirection, 0);
+                audio.Stop();
             }
         }
 
@@ -133,7 +134,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
     public void WeaponHit()
     {
         weapon.GetComponent<BoxCollider>().enabled = true;
-
+        audio.clip = fight; audio.loop = false; audio.Play();
     }
 
     public void WeaponHited()
