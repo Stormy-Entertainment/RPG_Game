@@ -16,7 +16,7 @@ public class k_EnemyBullet : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
 
         if (other.gameObject.tag == "Player")
         {
@@ -24,7 +24,7 @@ public class k_EnemyBullet : MonoBehaviour
             audio.clip = hit;
             audio.Play();
 
-            player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
+            //player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
             Debug.Log("bullet hit");
         }
     }

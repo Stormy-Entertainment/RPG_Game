@@ -11,14 +11,14 @@ public class k_EnemyWeapon : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        player = GameObject.Find("Player");
+        //player = GameObject.Find("Player");
 
         if (other.gameObject.tag == "Player")
         {
             audio = GetComponent<AudioSource>();
             GetComponent<AudioSource>().Play();
 
-            player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
+            //player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
             Debug.Log("Hit");
         }
     }

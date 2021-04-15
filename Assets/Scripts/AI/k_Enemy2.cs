@@ -5,7 +5,7 @@ using UnityEngine;
 public class k_Enemy2 : MonoBehaviour
 {
 
-    private Transform playerPoint;
+    public Transform playerPoint;
     private Transform player;
 
 
@@ -42,11 +42,7 @@ public class k_Enemy2 : MonoBehaviour
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
-        playerPoint = GameObject.Find("PlayerPoint").transform;
-
         audio = GetComponent<AudioSource>();
-
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -104,9 +100,10 @@ public class k_Enemy2 : MonoBehaviour
     //moving forward and looking at the player
     private void ChasePlayer()
     {
-        //player = GameHandler.instance.GetPlayer();
+        player = GameHandler.instance.GetPlayer();
+        //player = GameObject.Find("Player").transform;
+
         agent.speed = chaseSpeed;
-        player = GameObject.Find("Player").transform;
         animator.SetBool("Running", true);
         animator.SetBool("Moving", false);
         animator.SetBool("Attack", false);
@@ -123,9 +120,8 @@ public class k_Enemy2 : MonoBehaviour
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
-        //player = GameHandler.instance.GetPlayer();
-        player = GameObject.Find("Player").transform;
-
+        player = GameHandler.instance.GetPlayer();
+        //player = GameObject.Find("Player").transform;
 
         animator.SetBool("Attack", true);
         animator.SetBool("Running", false);
