@@ -27,15 +27,26 @@ public class k_Enemy2 : MonoBehaviour
     private bool dead = false;
 
     //Attacking
-    public float timeBetweenAttacks;
-    public float m_Damage = 20;
     bool alreadyAttacked;
+    public GameObject weapon;
+
+    //Sound Effect
+    public AudioClip walking;
+    public AudioClip running;
+    public AudioClip fight;
+    public AudioClip death;
+    public AudioClip getHit;
+
+    public AudioSource audio;
 
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
         playerPoint = GameObject.Find("PlayerPoint").transform;
+
+        audio = GetComponent<AudioSource>();
+
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -45,13 +56,13 @@ public class k_Enemy2 : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
         walkPoint = new Vector3(walkArea.position.x - randomX, transform.position.y, walkArea.position.z - randomZ);
-        
+
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
-            if(RandomPoint())
+            if (RandomPoint())
             {
                 walkPointSet = true;
-            }            
+            }
         }
 
         //reture true when the position inside NavMesh
@@ -63,7 +74,7 @@ public class k_Enemy2 : MonoBehaviour
                 walkPoint = hit.position;
             }
             return true;
-        }      
+        }
     }
 
     //Walk to the walk point, call search walk point when arrive
@@ -86,6 +97,8 @@ public class k_Enemy2 : MonoBehaviour
             Vector3 distanceToWalkPoint = transform.position - walkPoint;
             if (distanceToWalkPoint.magnitude < 2f) walkPointSet = false;
         }
+
+
     }
 
     //moving forward and looking at the player
@@ -104,7 +117,6 @@ public class k_Enemy2 : MonoBehaviour
 
             playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
-
         }
     }
 
@@ -113,6 +125,7 @@ public class k_Enemy2 : MonoBehaviour
     {
         //player = GameHandler.instance.GetPlayer();
         player = GameObject.Find("Player").transform;
+
 
         animator.SetBool("Attack", true);
         animator.SetBool("Running", false);
@@ -126,18 +139,19 @@ public class k_Enemy2 : MonoBehaviour
         }
 
 
-        if (!alreadyAttacked)
-        {
-            alreadyAttacked = true;
-            player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
-        }
     }
 
-    private void ResetAttack()
+    //Active collider when attack
+    public void WeaponHit()
     {
-        alreadyAttacked = false;
-              
+        weapon.GetComponent<BoxCollider>().enabled = true;
+        audio.clip = fight; audio.loop = false; audio.Play();
+
+    }
+
+    public void WeaponHited()
+    {
+        weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
     public void Death()
@@ -147,6 +161,8 @@ public class k_Enemy2 : MonoBehaviour
         agent.acceleration = 0;
         //agent.transform.position = Vector3.zero;
         animator.SetTrigger("Death");
+
+        audio.clip = death; audio.loop = false; audio.Play();
     }
 
     public bool IsDead()
@@ -163,7 +179,7 @@ public class k_Enemy2 : MonoBehaviour
         //Setting AI action in different situration
         if (!playerInSightRange && !playerInAttackRange && !dead) WalkToPoint();
         if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer(); 
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
     void OnDrawGizmos()
@@ -178,4 +194,15 @@ public class k_Enemy2 : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+
+    //Audio play, animation event
+    public void walksSound()
+    {
+        audio.clip = walking; audio.loop = true; audio.Play();
+    }
+
+    public void runSound()
+    {
+        audio.clip = running; audio.loop = true; audio.Play();
+    }
 }
