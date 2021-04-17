@@ -91,7 +91,23 @@ public class K_dialohue : MonoBehaviour
             image2.SetActive(false);
         }
 
+        if (index == 2 || index == 4)
+        {
+            image1.SetActive(true);
+        }
+        else
+        {
+            image1.SetActive(false);
+        }
 
+        if (index == 3 || index == 5)
+        {
+            image2.SetActive(true);
+        }
+        else
+        {
+            image2.SetActive(false);
+        }
     }
 
     //This part can change to start the game or changing scene
