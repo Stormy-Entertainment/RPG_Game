@@ -517,7 +517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7284f0829d4e68948962e8513f61d9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPoint: {fileID: 0}
   animator: {fileID: 2800196807728664446}
   agent: {fileID: 2800196807728664438}
   whatIsGround:
@@ -528,10 +527,10 @@ MonoBehaviour:
     m_Bits: 1024
   walkArea: {fileID: 7694511960514761893}
   walkPointRange: 10
-  walkSpeed: 1
-  chaseSpeed: 3
+  walkSpeed: 3
+  chaseSpeed: 10
   sightRange: 15
-  attackRange: 1.5
+  attackRange: 2
   playerInSightRange: 0
   playerInAttackRange: 0
   weapon: {fileID: 2023845301885647116}
@@ -553,7 +552,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.495
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0
