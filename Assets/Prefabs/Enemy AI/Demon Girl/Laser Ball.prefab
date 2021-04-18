@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4035823771210690050}
   - component: {fileID: 4035823771210690049}
-  - component: {fileID: 4035823771210690048}
   - component: {fileID: 7872100471477737080}
   - component: {fileID: 2771571611606794134}
+  - component: {fileID: 2701426333399917167}
   m_Layer: 0
   m_Name: Laser Ball
   m_TagString: Untagged
@@ -46,26 +46,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.29
+  m_Radius: 0.46
   m_Height: 0.44
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4035823771210690048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4035823771210690061}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d90038e93e48d24584a0b9408179f51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
-  attackDamage: 20
-  audio: {fileID: 7872100471477737080}
-  hit: {fileID: 8300000, guid: 0c0893ec9525d524f9a52b1c65eeeb7f, type: 3}
 --- !u!82 &7872100471477737080
 AudioSource:
   m_ObjectHideFlags: 0
@@ -76,9 +60,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: afd2fc56879880048adc4d98056e1771, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e1a8ba3cb0cb3e240b99c2164f22723b, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.629
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -152,7 +136,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 1.1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -178,6 +162,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2701426333399917167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035823771210690061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f968ccf9b41584e9d6c7add2c71d5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  attackDamage: 10
+  audio: {fileID: 7872100471477737080}
+  hit: {fileID: 8300000, guid: d2e18650121665e4082777363e5ef71f, type: 3}
 --- !u!1 &4035823771261481652
 GameObject:
   m_ObjectHideFlags: 0
