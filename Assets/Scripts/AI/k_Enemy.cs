@@ -5,7 +5,7 @@ using UnityEngine;
 public class k_Enemy : MonoBehaviour
 {
 
-    //private Transform playerPoint;
+    private Transform playerPoint;
     private Transform player;
 
 
@@ -38,6 +38,11 @@ public class k_Enemy : MonoBehaviour
     public AudioClip getHit;
 
     public AudioSource audio;
+
+    public void Start()
+    {
+        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
+    }
 
     private void Awake()
     {
@@ -111,8 +116,8 @@ public class k_Enemy : MonoBehaviour
         {
             agent.SetDestination(player.position);
 
-            //playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
-            //transform.LookAt(playerPoint);
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            transform.LookAt(playerPoint);
         }
     }
 
@@ -128,8 +133,8 @@ public class k_Enemy : MonoBehaviour
         agent.SetDestination(transform.position);
         if (player != null)
         {
-            //playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
-            //transform.LookAt(playerPoint);
+            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+            transform.LookAt(playerPoint);
         }
 
 
