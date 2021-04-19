@@ -19,7 +19,7 @@ public class MenuSceneHandler : MonoBehaviour
 
     public void OnOptionButtonClick()
     {
-
+        
     }
 
     public void OnQuitButtonClick()
