@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class K_dialohue : MonoBehaviour
+public class K_dialogue_cutscene : MonoBehaviour
 {
 
     //This is a simple dialogue system which using TextMeshPro for the UI text
@@ -73,7 +73,7 @@ public class K_dialohue : MonoBehaviour
         }
 
         //For custom image setting
-        if (index == 0 || index == 2)
+        if (index == 0 || index == 2 || index == 4 || index == 6)
         {
             image1.SetActive(true);
         }
@@ -82,25 +82,7 @@ public class K_dialohue : MonoBehaviour
             image1.SetActive(false);
         }
 
-        if (index == 1 || index == 3)
-        {
-            image2.SetActive(true);
-        }
-        else
-        {
-            image2.SetActive(false);
-        }
-
-        if (index == 2 || index == 4)
-        {
-            image1.SetActive(true);
-        }
-        else
-        {
-            image1.SetActive(false);
-        }
-
-        if (index == 3 || index == 5)
+        if (index == 1 || index == 3 || index == 5 || index == 7)
         {
             image2.SetActive(true);
         }
