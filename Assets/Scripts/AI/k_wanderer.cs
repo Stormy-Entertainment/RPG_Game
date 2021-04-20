@@ -62,7 +62,7 @@ public class k_wanderer : MonoBehaviour
     //Walk to the walk point, call search walk point when arrive
     private void WalkToPoint()
     {
-            animator.SetBool("Moving", true);
+            //animator.SetBool("Moving", true);
             //animator.SetBool("Attack", false);
 
             if (!walkPointSet)
@@ -93,7 +93,10 @@ public class k_wanderer : MonoBehaviour
     {
         howling = true;
         animator.SetTrigger("howl");
-        audioSource.Play();    
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
         StartCoroutine(ResetHowl());
     }
 

@@ -33,15 +33,15 @@ public class EnemyStats : MonoBehaviour
         {
             Dead = true;
             StatsUI.instance.SetExperience(m_XPGains);
-            EnemyManager.instance.SpawnNewEnemy();
-            EnemyAI3 enemyAI3 = GetComponentInParent<EnemyAI3>();
-            EnemyAI2 enemyAI2 = GetComponentInParent<EnemyAI2>();
-            EnemyAI enemyAI = GetComponentInParent<EnemyAI>();
+            k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
+            k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
+
             InstantiateBloodParticleEffect();
             
             if (enemyAI != null)
             {
-                InstantiateCoin(20);
+                int RandomCoin = Random.Range(1, 4);
+                InstantiateCoin(RandomCoin);
                 enemyAI.Death();
                 StartCoroutine(DestroyDelay(7f));
             }
@@ -52,13 +52,6 @@ public class EnemyStats : MonoBehaviour
                 enemyAI2.Death();
                 StartCoroutine(DestroyDelay(3f));
             }
-            else if (enemyAI3 != null)
-            {
-                int RandomCoin = Random.Range(1, 4);
-                InstantiateCoin(RandomCoin);
-                enemyAI3.Death();
-                StartCoroutine(DestroyDelay(3f));
-            } 
         }
         else
         {

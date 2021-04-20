@@ -27,7 +27,9 @@ public class k_Enemy : MonoBehaviour
     private bool dead = false;
 
     //Attacking
-    bool alreadyAttacked;
+    bool alreadyAttacked = false;
+    public float timeBetweenAttacks;
+    public float m_Damage = 20;
     public GameObject weapon;
 
     //Sound Effect
@@ -39,15 +41,27 @@ public class k_Enemy : MonoBehaviour
 
     public AudioSource audio;
 
+    private void Awake()
+    {
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        audio = GetComponent<AudioSource>();
+    }
+
     public void Start()
     {
         playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
     }
 
-    private void Awake()
+    void Update()
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        audio = GetComponent<AudioSource>();
+        //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        //Setting AI action in different situration
+        if (!playerInSightRange && !playerInAttackRange && !dead) WalkToPoint();
+        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -98,8 +112,6 @@ public class k_Enemy : MonoBehaviour
             Vector3 distanceToWalkPoint = transform.position - walkPoint;
             if (distanceToWalkPoint.magnitude < 2f) walkPointSet = false;
         }
-
-
     }
 
     //moving forward and looking at the player
@@ -137,7 +149,17 @@ public class k_Enemy : MonoBehaviour
             transform.LookAt(playerPoint);
         }
 
+        if (!alreadyAttacked)
+        {
+            alreadyAttacked = true;
+            player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
 
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
     }
 
     //Active collider when attack
@@ -167,18 +189,6 @@ public class k_Enemy : MonoBehaviour
     public bool IsDead()
     {
         return dead;
-    }
-
-    void Update()
-    {
-        //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-        //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead) WalkToPoint();
-        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
     void OnDrawGizmos()
