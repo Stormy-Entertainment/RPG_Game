@@ -668,7 +668,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f7b89b274323a9b46b73c169c7af25bb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.495
   m_Pitch: 1
@@ -1208,7 +1208,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &5788231851577978236
@@ -1223,7 +1223,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bd3420ea6345bb488d56cbe03a56f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPoint: {fileID: 0}
   animator: {fileID: 5788231851577978235}
   agent: {fileID: 8894351261766583599}
   whatIsGround:

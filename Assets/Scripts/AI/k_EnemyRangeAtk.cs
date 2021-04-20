@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class k_EnemyRangeAtk : MonoBehaviour
 {
-    public Transform playerPoint;
+    private Transform playerPoint;
     private Transform player;
 
     public Animator animator;
@@ -42,6 +42,11 @@ public class k_EnemyRangeAtk : MonoBehaviour
     public AudioClip getHit;
 
     public AudioSource audio;
+
+    public void Start()
+    {
+        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
+    }
 
     private void Awake()
     {
