@@ -9,13 +9,14 @@ public class PlayerStats : MonoBehaviour
     public float m_MoveSpeed = 60; //Range(0 - 100)
 
     //Stats
-    public int m_Agility = 20; //Increases Damage & Attack Speed
-    public int m_Intellect = 20; //Attack Speed
-    public int m_Stamina = 20; //Increases MoveSpeed & Damage
-    public int m_Strength = 20; //Increases Health Grade & Armor
+    //public int m_Agility = 20; //Increases Damage & Attack Speed
+   // public int m_Intellect = 20; //Attack Speed
+   // public int m_Stamina = 20; //Increases MoveSpeed & Damage
+   // public int m_Strength = 20; //Increases Health Grade & Armor
 
     private void Start()
     {
+        LoadPlayerStats();
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
 
@@ -28,6 +29,7 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseMoveSpeed(float value)
     {
         m_MoveSpeed += value;
+        SavePlayerStats();
     }
     #endregion
 
@@ -44,6 +46,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_AttackSpeed = 1000f;
         }
+        SavePlayerStats();
     }
     #endregion
 
@@ -56,6 +59,7 @@ public class PlayerStats : MonoBehaviour
             m_Health = 100f;
         }
         StatsUI.instance.UpdateHealthBar(m_Health);
+        SavePlayerStats();
     }
 
     public void DecreaseHealth(float value)
@@ -67,6 +71,7 @@ public class PlayerStats : MonoBehaviour
             GameHandler.instance.DecreaseLives(this.gameObject); ;
         }
         StatsUI.instance.UpdateHealthBar(m_Health);
+        SavePlayerStats();
     }
 
     public void ResetHealth()
@@ -75,4 +80,22 @@ public class PlayerStats : MonoBehaviour
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
     #endregion
+
+    #region //Database
+
+    public void LoadPlayerStats()
+    {
+        m_Health = PlayerPrefs.GetFloat("PlayerHealth", 100);
+        m_AttackSpeed = PlayerPrefs.GetFloat("PlayerAttackSpeed", 200);
+        m_MoveSpeed = PlayerPrefs.GetFloat("PlayerMoveSpeed", 60);
+    }
+
+    public void SavePlayerStats()
+    {
+        PlayerPrefs.SetFloat("PlayerHealth", m_Health);
+        PlayerPrefs.SetFloat("PlayerAttackSpeed", m_AttackSpeed);
+        PlayerPrefs.SetFloat("PlayerMoveSpeed", m_MoveSpeed);
+    }
+    #endregion
+
 }
