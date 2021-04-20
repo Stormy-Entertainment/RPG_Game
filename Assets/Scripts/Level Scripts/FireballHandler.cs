@@ -100,8 +100,8 @@ public class FireballHandler : MonoBehaviour
                 {
                     if (HighlightedOutline[0] != null)
                     {
-                        EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
-                        EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                        k_Enemy enemy1 = m_Hit.collider.GetComponentInParent<k_Enemy>();
+                        k_EnemyRangeAtk enemy2 = m_Hit.collider.GetComponentInParent<k_EnemyRangeAtk>();
                         if (m_Hit.collider.name != HighlightedOutline[0].name)
                         {
                             for (int i = 0; i < HighlightedOutline.Count; i++)
@@ -141,8 +141,8 @@ public class FireballHandler : MonoBehaviour
 
             else
             {
-                EnemyAI enemy1 = m_Hit.collider.GetComponentInParent<EnemyAI>();
-                EnemyAI2 enemy2 = m_Hit.collider.GetComponentInParent<EnemyAI2>();
+                k_Enemy enemy1 = m_Hit.collider.GetComponentInParent<k_Enemy>();
+                k_EnemyRangeAtk enemy2 = m_Hit.collider.GetComponentInParent<k_EnemyRangeAtk>();
                 if (enemy1 != null)
                 {
                     if (!enemy1.IsDead())
