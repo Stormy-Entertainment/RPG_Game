@@ -18,7 +18,7 @@ public class k_EnemyWeapon : MonoBehaviour
             audio = GetComponent<AudioSource>();
             GetComponent<AudioSource>().Play();
 
-            //player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
+            player.GetComponent<PlayerStats>().DecreaseHealth(attackDamage);
             Debug.Log("Hit");
         }
     }
