@@ -13,9 +13,6 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
 
-    [SerializeField] private GameObject LevelScene;
-    [SerializeField] private GameObject ArenaScene;
-
     [SerializeField] private GameObject[] AllMenus;
 
     GameOverUI gameOver;
@@ -58,18 +55,6 @@ public class GameHandler : MonoBehaviour
             //GameOver
             gameOver.GameOver();
         }
-    }
-
-    public void LevelSetUp()
-    {
-        LevelScene.SetActive(true);
-        ArenaScene.SetActive(false);
-    }
-
-    public void EnableArenaScene()
-    {
-        LevelScene.SetActive(false);
-        ArenaScene.SetActive(true);
     }
 
     public void DisableAllMenus()
