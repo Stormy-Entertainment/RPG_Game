@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -51,8 +52,15 @@ public class Dialogue : MonoBehaviour
         {
             textDisplay.text = "";
             if (!sceneChanged)
-            {
-                SceneManager.LoadScene(2);
+            {  
+                try
+                {
+                    SceneManager.LoadScene("MainIsland");
+                }
+                catch (Exception e)
+                {
+                    SceneManager.LoadScene(2);
+                }
             }
         }
     }
