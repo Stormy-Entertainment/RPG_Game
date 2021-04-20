@@ -180,7 +180,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &3109752522657739968
@@ -209,9 +209,9 @@ MonoBehaviour:
   walkSpeed: 5
   chaseSpeed: 8
   defDirection: 0
-  sightRange: 15
+  sightRange: 5
   attackRange: 1.5
-  rangeAttackRange: 25
+  rangeAttackRange: 8
   playerInSightRange: 0
   playerInAttackRange: 0
   playerInRangeAttackRange: 0

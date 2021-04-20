@@ -1208,7 +1208,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.1
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &5788231851577978236
@@ -1234,12 +1234,12 @@ MonoBehaviour:
   defPoint:
   - {fileID: 5270383881119361941}
   defPointNumber: 1
-  walkSpeed: 3
+  walkSpeed: 5
   chaseSpeed: 6
   defDirection: 0
-  sightRange: 10
+  sightRange: 5
   attackRange: 2
-  rangeAttackRange: 15
+  rangeAttackRange: 8
   playerInSightRange: 0
   playerInAttackRange: 0
   playerInRangeAttackRange: 0
