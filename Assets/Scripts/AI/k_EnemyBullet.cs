@@ -24,7 +24,7 @@ public class k_EnemyBullet : MonoBehaviour
             audio.clip = hit;
             audio.Play();
 
-            //player.GetComponent<k_hpCon>().DecreaseHealth(attackDamage);
+            player.GetComponent<PlayerStats>().DecreaseHealth(attackDamage);
             Debug.Log("bullet hit");
         }
     }
