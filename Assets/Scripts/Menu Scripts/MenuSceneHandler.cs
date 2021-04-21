@@ -19,7 +19,12 @@ public class MenuSceneHandler : MonoBehaviour
 
     public void OnOptionButtonClick()
     {
-        
+        SceneManager.LoadScene(3);
+    }
+
+    public void OnBackButtonClick()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void OnQuitButtonClick()
