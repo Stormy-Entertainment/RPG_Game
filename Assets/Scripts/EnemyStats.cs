@@ -35,31 +35,32 @@ public class EnemyStats : MonoBehaviour
             StatsUI.instance.SetExperience(m_XPGains);
             k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
             k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
-
-            InstantiateBloodParticleEffect();
             
             if (enemyAI != null)
             {
-                int RandomCoin = Random.Range(1, 4);
-                InstantiateCoin(RandomCoin);
                 enemyAI.Death();
-                StartCoroutine(DestroyDelay(7f));
             }
             else if(enemyAI2 != null)
             {
-                int RandomCoin = Random.Range(1, 4);
-                InstantiateCoin(RandomCoin);
                 enemyAI2.Death();
-                StartCoroutine(DestroyDelay(3f));
             }
+            int RandomCoin = Random.Range(1, 4);
+            InstantiateBloodParticleEffect();
+            InstantiateCoin(RandomCoin);
+            StartCoroutine(DestroyDelay(3f));
         }
         else
         {
             InstantiateBloodParticleEffect();
-            EnemyAI2 enemy = GetComponentInParent<EnemyAI2>();
+            k_Enemy enemy = GetComponentInParent<k_Enemy>();
+            k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
             if (enemy != null)
             {
                 enemy.Hit();
+            }
+            if (enemyAI2 != null)
+            {
+                enemyAI2.Hit();
             }
         }
         //Enemy Dead
@@ -67,8 +68,8 @@ public class EnemyStats : MonoBehaviour
 
     IEnumerator DestroyDelay(float DelayTime)
     {
-        yield return new WaitForSeconds(DelayTime);
-        Destroy(transform.parent.gameObject);
+        yield return new WaitForSeconds(DelayTime);;
+        Destroy(transform.parent.transform.parent.gameObject);
     }
 
     private void InstantiateBloodParticleEffect()
