@@ -25,8 +25,10 @@ public class k_EnemyRangeAtk : MonoBehaviour
     private bool dead = false;
 
     //Attacking
-    bool alreadyAttacked;
+    bool alreadyAttacked = false;
+    float m_AttackSpeed = 0.4f;
     public GameObject weapon;
+    bool EnemyHit = false;
 
     //Shooting
     public Transform shootPoint;
@@ -43,14 +45,28 @@ public class k_EnemyRangeAtk : MonoBehaviour
 
     public AudioSource audio;
 
-    public void Start()
-    {
-        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
-    }
-
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
+    }  
+
+    private void Update()
+    {
+        //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+        playerInRangeAttackRange = Physics.CheckSphere(transform.position, rangeAttackRange, whatIsPlayer);
+
+        //Setting AI action in different situration
+        if (!playerInSightRange && !playerInAttackRange && !dead && !playerInRangeAttackRange) Defence();
+        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
+        if (playerInRangeAttackRange && !playerInSightRange && !playerInAttackRange && !dead) ShootPlayer();
+        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
 
     //Mutli-point defence or only set 1 defence point 
@@ -88,7 +104,6 @@ public class k_EnemyRangeAtk : MonoBehaviour
         {
             defPointIndex = 0;
         }
-
     }
 
     //moving forward and looking at the player
@@ -116,21 +131,31 @@ public class k_EnemyRangeAtk : MonoBehaviour
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
     {
-        player = GameHandler.instance.GetPlayer();
-
-        animator.SetBool("Attack", true);
-        animator.SetBool("Running", false);
-        animator.SetBool("Moving", false);
-        animator.SetBool("Idle", false);
-        animator.SetBool("Shoot", false);
-
-        agent.SetDestination(transform.position);
-        if (player != null)
+        if (!alreadyAttacked)
         {
-            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
-            transform.LookAt(playerPoint);
-        }
+            alreadyAttacked = true;
+            player = GameObject.FindGameObjectWithTag("Player").transform;
 
+            animator.SetBool("Attack", true);
+            animator.SetBool("Running", false);
+            animator.SetBool("Moving", false);
+            animator.SetBool("Idle", false);
+            animator.SetBool("Shoot", false);
+
+            agent.SetDestination(transform.position);
+            if (player != null)
+            {
+                playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+                transform.LookAt(playerPoint);
+            }
+            StartCoroutine(ResetAttack());
+        }
+    }
+
+    private IEnumerator ResetAttack()
+    {
+        yield return new WaitForSeconds(m_AttackSpeed);
+        alreadyAttacked = false;
     }
 
     //Active collider when attack
@@ -165,6 +190,22 @@ public class k_EnemyRangeAtk : MonoBehaviour
         //audio.clip = e_shooting; audio.loop = false; audio.Play();
     }
 
+    public void Hit()
+    {
+        if (!EnemyHit && !dead)
+        {
+            StartCoroutine(HitRoutine());
+        }
+    }
+
+    IEnumerator HitRoutine()
+    {
+        EnemyHit = true;
+        animator.SetTrigger("Hit");
+        yield return new WaitForSeconds(0.5f);
+        EnemyHit = false;
+    }
+
     public void Death()
     {
         dead = true;
@@ -177,22 +218,6 @@ public class k_EnemyRangeAtk : MonoBehaviour
     public bool IsDead()
     {
         return dead;
-    }
-
-    void Update()
-    {
-        //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        playerInRangeAttackRange = Physics.CheckSphere(transform.position, rangeAttackRange, whatIsPlayer);
-
-        //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead && !playerInRangeAttackRange) Defence();
-        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
-
-        if (playerInRangeAttackRange && !playerInSightRange && !playerInAttackRange && !dead) ShootPlayer();
-
     }
 
     void OnDrawGizmos()

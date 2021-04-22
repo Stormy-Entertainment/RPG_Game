@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class k_Enemy : MonoBehaviour
 {
-
     private Transform playerPoint;
     private Transform player;
-
 
     public Animator animator;
     public UnityEngine.AI.NavMeshAgent agent;
@@ -30,6 +28,7 @@ public class k_Enemy : MonoBehaviour
     bool alreadyAttacked = false;
     public float timeBetweenAttacks;
     public float m_Damage = 20;
+    bool EnemyHit = false;
     public GameObject weapon;
 
     //Sound Effect
@@ -47,21 +46,21 @@ public class k_Enemy : MonoBehaviour
         audio = GetComponent<AudioSource>();
     }
 
-    public void Start()
+    private void Start()
     {
         playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
     }
 
-    void Update()
+    private void Update()
     {
         //Setting Sight range and Attack range, create a sphere(position, radius and layerMask)
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead) WalkToPoint();
-        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
-        if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
+        if (!playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) WalkToPoint();
+        if (playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) ChasePlayer();
+        if (playerInSightRange && playerInAttackRange && !dead && !EnemyHit) AttackPlayer();
     }
 
     //Searching walk point inside the AI and NavMesh area. 
@@ -175,12 +174,28 @@ public class k_Enemy : MonoBehaviour
         weapon.GetComponent<BoxCollider>().enabled = false;
     }
 
+    public void Hit()
+    {
+        if (!EnemyHit && !dead)
+        {
+            StartCoroutine(HitRoutine());
+        }
+    }
+
+    IEnumerator HitRoutine()
+    {
+        EnemyHit = true;
+        animator.SetTrigger("Hit");
+        yield return new WaitForSeconds(0.5f);
+        EnemyHit = false;
+    }
+
     public void Death()
     {
         dead = true;
         agent.velocity = Vector3.zero;
         agent.acceleration = 0;
-        agent.transform.position = Vector3.zero;
+       //agent.transform.position = Vector3.zero;
         animator.SetTrigger("Death");
         animator.SetBool("Attack", false);
         animator.SetBool("Running", false);
@@ -194,6 +209,17 @@ public class k_Enemy : MonoBehaviour
         return dead;
     }
 
+    //Audio play, animation event
+    public void walksSound()
+    {
+        audio.clip = walking; audio.loop = true; audio.Play();
+    }
+
+    public void runSound()
+    {
+        audio.clip = running; audio.loop = true; audio.Play();
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -204,17 +230,5 @@ public class k_Enemy : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-    }
-
-
-    //Audio play, animation event
-    public void walksSound()
-    {
-        audio.clip = walking; audio.loop = true; audio.Play();
-    }
-
-    public void runSound()
-    {
-        audio.clip = running; audio.loop = true; audio.Play();
     }
 }
