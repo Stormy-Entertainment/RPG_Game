@@ -180,8 +180,11 @@ public class k_Enemy : MonoBehaviour
         dead = true;
         agent.velocity = Vector3.zero;
         agent.acceleration = 0;
-        //agent.transform.position = Vector3.zero;
+        agent.transform.position = Vector3.zero;
         animator.SetTrigger("Death");
+        animator.SetBool("Attack", false);
+        animator.SetBool("Running", false);
+        animator.SetBool("Moving", false);
 
         audio.clip = death; audio.loop = false; audio.Play();
     }
