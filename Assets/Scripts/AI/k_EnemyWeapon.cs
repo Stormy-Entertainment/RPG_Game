@@ -6,12 +6,12 @@ public class k_EnemyWeapon : MonoBehaviour
 {
     //Attach this script to the weapon, this object collider will active when the attack animation played 
     public float attackDamage;
-    private GameObject player;
+    private Transform player;
     public AudioSource audio;
 
     void OnTriggerEnter(Collider other)
     {
-        player = GameObject.Find("Player");
+        player = GameHandler.instance.GetPlayer();
 
         if (other.gameObject.tag == "Player")
         {

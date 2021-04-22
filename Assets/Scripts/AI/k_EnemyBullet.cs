@@ -11,13 +11,12 @@ public class k_EnemyBullet : MonoBehaviour
 
     public AudioClip hit;
 
-    private GameObject player;
+    private Transform player;
     private float lifeTimer = 1f;
 
     void OnTriggerEnter(Collider other)
     {
-        player = GameObject.Find("Player");
-
+        player = GameHandler.instance.GetPlayer();
         if (other.gameObject.tag == "Player")
         {
             audio = GetComponent<AudioSource>();
