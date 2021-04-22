@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MenuSceneHandler : MonoBehaviour
 {
+    [SerializeField] private  GameObject MainMenu;
+    [SerializeField] private GameObject OptionsMenu;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -19,12 +22,14 @@ public class MenuSceneHandler : MonoBehaviour
 
     public void OnOptionButtonClick()
     {
-        SceneManager.LoadScene(3);
+        OptionsMenu.SetActive(true);
+        MainMenu.SetActive(false);
     }
 
     public void OnBackButtonClick()
     {
-        SceneManager.LoadScene(0);
+        OptionsMenu.SetActive(false);
+        MainMenu.SetActive(true);
     }
 
     public void OnQuitButtonClick()
