@@ -134,7 +134,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            player = GameHandler.instance.GetPlayer();
 
             animator.SetBool("Attack", true);
             animator.SetBool("Running", false);
