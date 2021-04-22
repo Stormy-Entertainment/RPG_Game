@@ -6,20 +6,22 @@ public class k_EnemyWeapon : MonoBehaviour
 {
     //Attach this script to the weapon, this object collider will active when the attack animation played 
     public float attackDamage;
-    private Transform player;
-    public AudioSource audio;
+    private GameObject player;
+    private AudioSource audio;
+
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
 
     void OnTriggerEnter(Collider other)
     {
-        player = GameHandler.instance.GetPlayer();
-
         if (other.gameObject.tag == "Player")
         {
-            audio = GetComponent<AudioSource>();
-            GetComponent<AudioSource>().Play();
+            player = other.gameObject;
+            audio.Play();
 
             player.GetComponent<PlayerStats>().DecreaseHealth(attackDamage);
-            Debug.Log("Hit");
         }
     }
 }

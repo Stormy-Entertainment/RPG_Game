@@ -22,6 +22,7 @@ public class StatsUI : MonoBehaviour
             return;
         }
         instance = this;
+        LoadStatsData();
     }
 
     public static int ExpNeedToLvlUp(int currentLevel)
@@ -55,6 +56,7 @@ public class StatsUI : MonoBehaviour
         {
             expBarSlider.value = 0;
         }
+        SaveStatsData();
     }
 
     public void LevelUp()
@@ -62,32 +64,19 @@ public class StatsUI : MonoBehaviour
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
         UpdatePlayerStats();
-        if(currentLevel == 5)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if(currentLevel == 8)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 12)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 20)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 30)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
     }
 
     private void UpdatePlayerStats()
     {
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
         playerStat.IncreaseAttackSpeed(50);
+        SaveStatsData();
+    }
+
+    public void UpdateStatsUI()
+    {
+        SetExperience(experience);
+        lvlText.text = currentLevel.ToString("");     
     }
 
     public void UpdateHealthBar(float newHealth)
@@ -95,4 +84,19 @@ public class StatsUI : MonoBehaviour
         //Fill Health Bar Slider
         healthBarSlider.value = newHealth / 100;
     }
+
+    #region //Database
+    public void LoadStatsData()
+    {
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        experience = PlayerPrefs.GetFloat("CurrentExperience", 0);
+        UpdateStatsUI();
+    }
+
+    public void SaveStatsData()
+    {
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        PlayerPrefs.SetFloat("CurrentExperience", experience);
+    }
+    #endregion
 }

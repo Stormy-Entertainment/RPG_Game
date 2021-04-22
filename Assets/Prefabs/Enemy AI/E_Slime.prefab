@@ -718,8 +718,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42866775, y: 0.38857388, z: 0.4086213}
-  m_Center: {x: -0.050116792, y: -0.0050116777, z: 0.70664763}
+  m_Size: {x: 0.42866775, y: 0.52843666, z: 0.63625336}
+  m_Center: {x: -0.050116792, y: -0.131114, z: 0.5612469}
 --- !u!54 &5479530081709514688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -873,7 +873,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7877891734153266020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.73995703, z: 0}
+  m_LocalPosition: {x: 0, y: 0.63, z: 0}
   m_LocalScale: {x: 1.5578046, y: 1.5578043, z: 1.5578046}
   m_Children:
   - {fileID: 7877891735537821162}
@@ -890,10 +890,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.2808349
-  m_Height: 0.58956575
+  m_Radius: 0.33602142
+  m_Height: 0.7366288
   m_Direction: 1
-  m_Center: {x: -0.0019225478, y: 0.7609174, z: 0.003909111}
+  m_Center: {x: 0.006454468, y: 0.0413332, z: -0.013492882}
 --- !u!114 &7877891734153266018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +910,7 @@ MonoBehaviour:
   m_XPGains: 15
   BloodParticleEffect: {fileID: 6525718543388598434, guid: 6eda552671222204cbf42c7327972e79,
     type: 3}
-  Coin: {fileID: 0}
+  Coin: {fileID: 9100997750592192725, guid: 4d0706a959550294691326b8a581a446, type: 3}
 --- !u!114 &4829676996185403587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1240,7 +1240,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 1.2649999}
+  m_AnchoredPosition: {x: 0, y: 0.454}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7877891735537821161
