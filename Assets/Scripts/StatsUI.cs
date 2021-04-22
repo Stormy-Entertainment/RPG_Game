@@ -63,26 +63,6 @@ public class StatsUI : MonoBehaviour
     {
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
-        if(currentLevel == 5)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if(currentLevel == 8)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 12)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 20)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
-        else if (currentLevel == 30)
-        {
-            EnemyManager.instance.SpawnNewEnemy();
-        }
         UpdatePlayerStats();
     }
 
@@ -91,6 +71,12 @@ public class StatsUI : MonoBehaviour
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
         playerStat.IncreaseAttackSpeed(50);
         SaveStatsData();
+    }
+
+    public void UpdateStatsUI()
+    {
+        SetExperience(experience);
+        lvlText.text = currentLevel.ToString("");     
     }
 
     public void UpdateHealthBar(float newHealth)
@@ -104,6 +90,7 @@ public class StatsUI : MonoBehaviour
     {
         currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
         experience = PlayerPrefs.GetFloat("CurrentExperience", 0);
+        UpdateStatsUI();
     }
 
     public void SaveStatsData()
