@@ -22,6 +22,7 @@ public class StatsUI : MonoBehaviour
             return;
         }
         instance = this;
+        LoadStatsData();
     }
 
     public static int ExpNeedToLvlUp(int currentLevel)
@@ -55,13 +56,13 @@ public class StatsUI : MonoBehaviour
         {
             expBarSlider.value = 0;
         }
+        SaveStatsData();
     }
 
     public void LevelUp()
     {
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
-        UpdatePlayerStats();
         if(currentLevel == 5)
         {
             EnemyManager.instance.SpawnNewEnemy();
@@ -82,12 +83,14 @@ public class StatsUI : MonoBehaviour
         {
             EnemyManager.instance.SpawnNewEnemy();
         }
+        UpdatePlayerStats();
     }
 
     private void UpdatePlayerStats()
     {
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
         playerStat.IncreaseAttackSpeed(50);
+        SaveStatsData();
     }
 
     public void UpdateHealthBar(float newHealth)
@@ -95,4 +98,18 @@ public class StatsUI : MonoBehaviour
         //Fill Health Bar Slider
         healthBarSlider.value = newHealth / 100;
     }
+
+    #region //Database
+    public void LoadStatsData()
+    {
+        currentLevel = PlayerPrefs.GetInt("CurrentLevel", 1);
+        experience = PlayerPrefs.GetFloat("CurrentExperience", 0);
+    }
+
+    public void SaveStatsData()
+    {
+        PlayerPrefs.SetInt("CurrentLevel", currentLevel);
+        PlayerPrefs.SetFloat("CurrentExperience", experience);
+    }
+    #endregion
 }

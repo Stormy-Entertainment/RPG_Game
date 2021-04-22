@@ -59,7 +59,6 @@ public class PlayerStats : MonoBehaviour
             m_Health = 100f;
         }
         StatsUI.instance.UpdateHealthBar(m_Health);
-        SavePlayerStats();
     }
 
     public void DecreaseHealth(float value)
@@ -71,7 +70,6 @@ public class PlayerStats : MonoBehaviour
             GameHandler.instance.DecreaseLives(this.gameObject); ;
         }
         StatsUI.instance.UpdateHealthBar(m_Health);
-        SavePlayerStats();
     }
 
     public void ResetHealth()
@@ -82,17 +80,16 @@ public class PlayerStats : MonoBehaviour
     #endregion
 
     #region //Database
-
     public void LoadPlayerStats()
     {
-        m_Health = PlayerPrefs.GetFloat("PlayerHealth", 100);
+        //m_Health = PlayerPrefs.GetFloat("PlayerHealth", 100);
         m_AttackSpeed = PlayerPrefs.GetFloat("PlayerAttackSpeed", 200);
         m_MoveSpeed = PlayerPrefs.GetFloat("PlayerMoveSpeed", 60);
     }
 
     public void SavePlayerStats()
     {
-        PlayerPrefs.SetFloat("PlayerHealth", m_Health);
+        //PlayerPrefs.SetFloat("PlayerHealth", m_Health);
         PlayerPrefs.SetFloat("PlayerAttackSpeed", m_AttackSpeed);
         PlayerPrefs.SetFloat("PlayerMoveSpeed", m_MoveSpeed);
     }
