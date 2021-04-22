@@ -148,12 +148,14 @@ public class k_Enemy : MonoBehaviour
             transform.LookAt(playerPoint);
         }
 
+        /*
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
             player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+        */
     }
 
     private void ResetAttack()
