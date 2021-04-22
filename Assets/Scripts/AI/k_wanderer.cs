@@ -5,6 +5,7 @@ using UnityEngine;
 public class k_wanderer : MonoBehaviour
 {
     public Animator animator;
+    public AudioSource audioSource;
     public UnityEngine.AI.NavMeshAgent agent;
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -13,11 +14,21 @@ public class k_wanderer : MonoBehaviour
     public float walkPointRange;
     private Vector3 walkPoint;
     bool walkPointSet;
+    bool howling = false;
     public float walkSpeed;
+    int walkPointCounter = 0;
 
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+    }
+
+    void Update()
+    {
+        if (!howling)
+        {
+            WalkToPoint();
+        }
     }
 
     //Searching walk point inside the AI and NavMesh area. I set the next point have (min. +4). 
@@ -51,28 +62,50 @@ public class k_wanderer : MonoBehaviour
     //Walk to the walk point, call search walk point when arrive
     private void WalkToPoint()
     {
-        animator.SetBool("Moving", true);
-        //animator.SetBool("Attack", false);
+            //animator.SetBool("Moving", true);
+            //animator.SetBool("Attack", false);
 
-        if (!walkPointSet)
-        {
-            SearchWalkPoint();
-        }
+            if (!walkPointSet)
+            {
+                SearchWalkPoint();
+            }
 
-        if (walkPointSet)
-        {
-            agent.speed = walkSpeed;
-            agent.SetDestination(walkPoint);
+            if (walkPointSet)
+            {
+                agent.speed = walkSpeed;
+                agent.SetDestination(walkPoint);
 
-            Vector3 distanceToWalkPoint = transform.position - walkPoint;
-            if (distanceToWalkPoint.magnitude < 2f) walkPointSet = false;
-        }
+                Vector3 distanceToWalkPoint = transform.position - walkPoint;
+                if (distanceToWalkPoint.magnitude < 2f) 
+                {
+                    walkPointSet = false;
+                    walkPointCounter++;
+                    if(walkPointCounter >= 10)
+                    {
+                         Howl();
+                         walkPointCounter = 0;             
+                    }
+                 }
+            }
     }
 
-    void Update()
+    private void Howl()
     {
-        WalkToPoint();
+        howling = true;
+        animator.SetTrigger("howl");
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+        StartCoroutine(ResetHowl());
     }
+
+    private IEnumerator ResetHowl()
+    {
+        yield return new WaitForSeconds(3f);
+        howling = false;
+    }
+
 
     void OnDrawGizmos()
     {
