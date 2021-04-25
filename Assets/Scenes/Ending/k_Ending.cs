@@ -24,7 +24,9 @@ public class k_Ending : MonoBehaviour
     public void Start()
     {
         audio = GetComponent<AudioSource>();
-        
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+
     }
 
     public void Bomb()
