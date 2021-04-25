@@ -9,7 +9,7 @@ public class k_winning : MonoBehaviour
 
     public void Win()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(6);
     }
 
     // Update is called once per frame
