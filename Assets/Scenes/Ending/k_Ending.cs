@@ -31,7 +31,6 @@ public class k_Ending : MonoBehaviour
 
     public void Bomb()
     {
-        Debug.Log("B");
         explosion.SetActive(true);
     }
 
