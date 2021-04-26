@@ -642,8 +642,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0969214, y: 1, z: 1.4652243}
-  m_Center: {x: -0.04846075, y: 0, z: 0.11630583}
+  m_Size: {x: 1.8125291, y: 1, z: 2.6127706}
+  m_Center: {x: -0.25337034, y: -0.00000004060518, z: 0.23934482}
 --- !u!114 &5270383879970920386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,7 +657,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 5
-  audio: {fileID: 5270383879970920387}
 --- !u!82 &5270383879970920387
 AudioSource:
   m_ObjectHideFlags: 0
@@ -670,7 +669,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: f7b89b274323a9b46b73c169c7af25bb, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.495
+  m_Volume: 0.57
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1255,6 +1254,7 @@ MonoBehaviour:
   death: {fileID: 0}
   getHit: {fileID: 0}
   audio: {fileID: 5788231851577978237}
+  stopMoving: 0
 --- !u!82 &5788231851577978237
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1267,7 +1267,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.524
+  m_Volume: 0.79
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -15,7 +15,7 @@ public class k_winning : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!boss)
+        if (boss.GetComponent<EnemyStats>().m_Health <= 0)
         {
             Win();
         }

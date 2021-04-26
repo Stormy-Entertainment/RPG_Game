@@ -2053,11 +2053,11 @@ MonoBehaviour:
   walkPointRange: 5
   walkSpeed: 2
   chaseSpeed: 8
-  sightRange: 5
+  sightRange: 10.44
   attackRange: 1.1
   playerInSightRange: 0
   playerInAttackRange: 0
-  timeBetweenAttacks: 0.4
+  timeBetweenAttacks: 2
   m_Damage: 8
   weapon: {fileID: 6562146496542253885}
   walking: {fileID: 8300000, guid: be57c98b32a968a4e840154f7e50f8b4, type: 3}
@@ -2066,6 +2066,7 @@ MonoBehaviour:
   death: {fileID: 8300000, guid: 7170f4e8108fc4945ac621d30159e1f5, type: 3}
   getHit: {fileID: 8300000, guid: ce524bea02370c542a9d30d23a169ea3, type: 3}
   audio: {fileID: 128034211061572920}
+  stopMoving: 0
 --- !u!1 &128034211061572903
 GameObject:
   m_ObjectHideFlags: 0

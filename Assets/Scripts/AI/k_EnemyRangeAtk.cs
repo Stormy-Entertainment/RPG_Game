@@ -45,6 +45,8 @@ public class k_EnemyRangeAtk : MonoBehaviour
 
     public AudioSource audio;
 
+    public bool stopMoving;
+
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -63,8 +65,8 @@ public class k_EnemyRangeAtk : MonoBehaviour
         playerInRangeAttackRange = Physics.CheckSphere(transform.position, rangeAttackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead && !playerInRangeAttackRange) Defence();
-        if (playerInSightRange && !playerInAttackRange && !dead) ChasePlayer();
+        if (!playerInSightRange && !playerInAttackRange && !dead && !playerInRangeAttackRange && !stopMoving) Defence();
+        if (playerInSightRange && !playerInAttackRange && !dead && !stopMoving) ChasePlayer();
         if (playerInRangeAttackRange && !playerInSightRange && !playerInAttackRange && !dead) ShootPlayer();
         if (playerInSightRange && playerInAttackRange && !dead) AttackPlayer();
     }
@@ -136,15 +138,17 @@ public class k_EnemyRangeAtk : MonoBehaviour
             alreadyAttacked = true;
             player = GameHandler.instance.GetPlayer();
 
-            animator.SetBool("Attack", true);
-            animator.SetBool("Running", false);
-            animator.SetBool("Moving", false);
-            animator.SetBool("Idle", false);
-            animator.SetBool("Shoot", false);
-
             agent.SetDestination(transform.position);
             if (player != null)
             {
+                stopMoving = true;
+
+                animator.SetBool("Attack", true);
+                animator.SetBool("Running", false);
+                animator.SetBool("Moving", false);
+                animator.SetBool("Idle", false);
+                animator.SetBool("Shoot", false);
+
                 playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
                 transform.LookAt(playerPoint);
             }
@@ -178,6 +182,8 @@ public class k_EnemyRangeAtk : MonoBehaviour
         animator.SetBool("Idle", false);
         animator.SetBool("Shoot", true);
 
+        stopMoving = true;
+
         playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
         transform.LookAt(playerPoint);
 
@@ -196,6 +202,11 @@ public class k_EnemyRangeAtk : MonoBehaviour
         {
             StartCoroutine(HitRoutine());
         }
+    }
+
+    public void Hitted()
+    {
+        stopMoving = false;
     }
 
     IEnumerator HitRoutine()
