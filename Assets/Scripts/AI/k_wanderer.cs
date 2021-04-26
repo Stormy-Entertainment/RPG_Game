@@ -91,13 +91,16 @@ public class k_wanderer : MonoBehaviour
 
     private void Howl()
     {
-        howling = true;
-        animator.SetTrigger("howl");
-        if (audioSource != null)
+        if (gameObject.tag == "Wolf")
         {
-            audioSource.Play();
+            howling = true;
+            animator.SetTrigger("howl");
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+            StartCoroutine(ResetHowl());
         }
-        StartCoroutine(ResetHowl());
     }
 
     private IEnumerator ResetHowl()
