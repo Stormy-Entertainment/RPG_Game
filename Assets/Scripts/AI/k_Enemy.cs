@@ -40,6 +40,9 @@ public class k_Enemy : MonoBehaviour
 
     public AudioSource audio;
 
+    //new
+    public bool stopMoving;
+
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -58,8 +61,8 @@ public class k_Enemy : MonoBehaviour
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         //Setting AI action in different situration
-        if (!playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) WalkToPoint();
-        if (playerInSightRange && !playerInAttackRange && !dead && !EnemyHit) ChasePlayer();
+        if (!playerInSightRange && !playerInAttackRange && !dead && !EnemyHit && !stopMoving) WalkToPoint();
+        if (playerInSightRange && !playerInAttackRange && !dead && !EnemyHit && !stopMoving) ChasePlayer();
         if (playerInSightRange && playerInAttackRange && !dead && !EnemyHit) AttackPlayer();
     }
 
@@ -137,25 +140,27 @@ public class k_Enemy : MonoBehaviour
     {
         player = GameHandler.instance.GetPlayer();
 
-        animator.SetBool("Attack", true);
-        animator.SetBool("Running", false);
-        animator.SetBool("Moving", false);
-
         agent.SetDestination(transform.position);
         if (player != null)
         {
+            stopMoving = true;
+            animator.SetTrigger("Attacking");
+            //animator.SetBool("Attack", true);
+            animator.SetBool("Running", false);
+            animator.SetBool("Moving", false);
+
             playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
             transform.LookAt(playerPoint);
         }
 
-        /*
+        
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
+            //player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
-        */
+        
     }
 
     private void ResetAttack()
@@ -190,6 +195,11 @@ public class k_Enemy : MonoBehaviour
         animator.SetTrigger("Hit");
         yield return new WaitForSeconds(0.5f);
         EnemyHit = false;
+    }
+
+    public void Hitted()
+    {
+       stopMoving = false;
     }
 
     public void Death()

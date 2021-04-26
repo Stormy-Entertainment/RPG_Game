@@ -23,6 +23,7 @@ public class StatsUI : MonoBehaviour
         }
         instance = this;
         LoadStatsData();
+        //ResetData();
     }
 
     public static int ExpNeedToLvlUp(int currentLevel)
@@ -75,7 +76,8 @@ public class StatsUI : MonoBehaviour
 
     public void UpdateStatsUI()
     {
-        SetExperience(experience);
+        SetExperience(0);
+        UpdateHealthBar(100);
         lvlText.text = currentLevel.ToString("");     
     }
 
@@ -97,6 +99,12 @@ public class StatsUI : MonoBehaviour
     {
         PlayerPrefs.SetInt("CurrentLevel", currentLevel);
         PlayerPrefs.SetFloat("CurrentExperience", experience);
+    }
+
+    public void ResetData()
+    {
+        PlayerPrefs.SetInt("CurrentLevel", 0);
+        PlayerPrefs.SetFloat("CurrentExperience", 0);
     }
     #endregion
 }

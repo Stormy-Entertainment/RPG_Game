@@ -5,18 +5,18 @@ using UnityEngine;
 public class CoinDrop : MonoBehaviour
 {
     private Transform Target;
-    public float Speed = 1.5f;
-    public int CoinsPerItem = 100;
+    [SerializeField] private float Speed = 10f;
+    [SerializeField] private float exponentialMultiplier = 0.2f;
+    [SerializeField] private int CoinsPerItem = 100;
 
-    Vector3 _velocity = Vector3.zero;
     bool _isFollowing = false;
 
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         if (_isFollowing && Target != null)
         {
-            transform.position = Vector3.SmoothDamp(transform.position, Target.position, ref _velocity, Time.deltaTime * Speed);
+            transform.position = Vector3.MoveTowards(transform.position, Target.position, Time.deltaTime * Speed + exponentialMultiplier);
         }
     }
 

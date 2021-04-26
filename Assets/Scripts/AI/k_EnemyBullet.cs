@@ -12,7 +12,7 @@ public class k_EnemyBullet : MonoBehaviour
     public AudioClip hit;
 
     private Transform player;
-    private float lifeTimer = 1f;
+    public float lifeTimer = 1f;
 
     void OnTriggerEnter(Collider other)
     {

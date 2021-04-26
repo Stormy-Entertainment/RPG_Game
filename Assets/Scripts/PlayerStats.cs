@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
     {
         LoadPlayerStats();
         StatsUI.instance.UpdateHealthBar(m_Health);
+        //ResetData();
     }
 
     #region //Movement Speed
@@ -29,6 +30,10 @@ public class PlayerStats : MonoBehaviour
     public void IncreaseMoveSpeed(float value)
     {
         m_MoveSpeed += value;
+        if (m_MoveSpeed >= 100)
+        {
+            m_MoveSpeed = 100;
+        }
         SavePlayerStats();
     }
     #endregion
@@ -44,7 +49,7 @@ public class PlayerStats : MonoBehaviour
         m_AttackSpeed += value;
         if(m_AttackSpeed >= 1000)
         {
-            m_AttackSpeed = 1000f;
+            m_AttackSpeed = 1000;
         }
         SavePlayerStats();
     }
@@ -82,16 +87,20 @@ public class PlayerStats : MonoBehaviour
     #region //Database
     public void LoadPlayerStats()
     {
-        //m_Health = PlayerPrefs.GetFloat("PlayerHealth", 100);
         m_AttackSpeed = PlayerPrefs.GetFloat("PlayerAttackSpeed", 200);
         m_MoveSpeed = PlayerPrefs.GetFloat("PlayerMoveSpeed", 60);
     }
 
     public void SavePlayerStats()
     {
-        //PlayerPrefs.SetFloat("PlayerHealth", m_Health);
         PlayerPrefs.SetFloat("PlayerAttackSpeed", m_AttackSpeed);
         PlayerPrefs.SetFloat("PlayerMoveSpeed", m_MoveSpeed);
+    }
+
+    public void ResetData()
+    {
+        PlayerPrefs.SetFloat("PlayerAttackSpeed", 0);
+        PlayerPrefs.SetFloat("PlayerMoveSpeed", 0);
     }
     #endregion
 
