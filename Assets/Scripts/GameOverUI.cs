@@ -24,9 +24,6 @@ public class GameOverUI : MonoBehaviour
 
     public void DisableHeart(int hearthNo)
     {
-        Color myColor;
-        myColor = hearts[hearthNo].color;
-        myColor.a = 0.6f;
-        hearts[hearthNo].color = myColor;
+        hearts[hearthNo].gameObject.SetActive(false);
     }
 }
