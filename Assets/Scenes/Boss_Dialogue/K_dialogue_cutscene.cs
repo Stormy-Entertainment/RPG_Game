@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class K_dialogue_cutscene : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class K_dialogue_cutscene : MonoBehaviour
     //Create a empty object and grab this script on that
     //Create a TextMeshPro UI text and button
 
+    public int sceneNunber;
 
     public TextMeshProUGUI textDisplay;
     public string[] sentence;
@@ -27,7 +29,11 @@ public class K_dialogue_cutscene : MonoBehaviour
     {
         StartCoroutine(Type());
         restart.SetActive(false);
+
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
+
 
 
     //showing the sentence like typing
@@ -93,11 +99,9 @@ public class K_dialogue_cutscene : MonoBehaviour
     }
 
     //This part can change to start the game or changing scene
-    public void Restart()
+    public void LoadScene()
     {
-        index = 0;
-        Start();
+        SceneManager.LoadScene(sceneNunber);
     }
-
 
 }
