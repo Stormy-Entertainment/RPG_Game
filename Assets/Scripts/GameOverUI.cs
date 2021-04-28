@@ -22,11 +22,12 @@ public class GameOverUI : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
-    public void DisableHeart(int hearthNo)
+    public void DisableHeart(int heartNo)
     {
-        Color myColor;
-        myColor = hearts[hearthNo].color;
-        myColor.a = 0.6f;
-        hearts[hearthNo].color = myColor;
+        //Color myColor;
+        //myColor = hearts[hearthNo].color;
+        // myColor.a = 0.6f;
+        //hearts[hearthNo].color = myColor;
+        hearts[heartNo].gameObject.SetActive(false);
     }
 }

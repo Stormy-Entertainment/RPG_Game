@@ -99,8 +99,8 @@ public class PlayerStats : MonoBehaviour
 
     public void ResetData()
     {
-        PlayerPrefs.SetFloat("PlayerAttackSpeed", 0);
-        PlayerPrefs.SetFloat("PlayerMoveSpeed", 0);
+        PlayerPrefs.SetFloat("PlayerAttackSpeed", 200);
+        PlayerPrefs.SetFloat("PlayerMoveSpeed", 60);
     }
     #endregion
 

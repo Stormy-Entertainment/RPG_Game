@@ -103,7 +103,7 @@ public class StatsUI : MonoBehaviour
 
     public void ResetData()
     {
-        PlayerPrefs.SetInt("CurrentLevel", 0);
+        PlayerPrefs.SetInt("CurrentLevel", 1);
         PlayerPrefs.SetFloat("CurrentExperience", 0);
     }
     #endregion
