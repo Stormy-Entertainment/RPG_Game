@@ -178,6 +178,7 @@ MonoBehaviour:
   attackDamage: 10
   audio: {fileID: 7872100471477737080}
   hit: {fileID: 8300000, guid: d2e18650121665e4082777363e5ef71f, type: 3}
+  lifeTimer: 1
 --- !u!1 &4035823771261481652
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,9 +399,9 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.93819284, g: 0, b: 1, a: 1}
+      minMaxState: 2
+      minColor: {r: 1, g: 0.7676166, b: 0, a: 1}
+      maxColor: {r: 0.06074225, g: 0.8584906, b: 0.8335233, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -4945,7 +4946,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10308, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 449fdee7a3eb08645bbb949500aa6cd2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5090,7 +5091,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.8318777, g: 0, b: 1, a: 1}
+      key0: {r: 1, g: 0.7327648, b: 0, a: 1}
       key1: {r: 0.5294949, g: 0, b: 0.5566038, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
