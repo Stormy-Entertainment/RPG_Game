@@ -18,6 +18,8 @@ public class k_wanderer : MonoBehaviour
     public float walkSpeed;
     int walkPointCounter = 0;
 
+    public bool stopWalking = false;
+
     private void Awake()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -28,6 +30,11 @@ public class k_wanderer : MonoBehaviour
         if (!howling)
         {
             WalkToPoint();
+        }
+
+        if(stopWalking == true)
+        {
+            agent.speed = 0f;
         }
     }
 
@@ -93,6 +100,7 @@ public class k_wanderer : MonoBehaviour
     {
         if (gameObject.tag == "Wolf")
         {
+            stopWalking = true;
             howling = true;
             animator.SetTrigger("howl");
             if (audioSource != null)
@@ -109,6 +117,10 @@ public class k_wanderer : MonoBehaviour
         howling = false;
     }
 
+    public void AfterHowl()
+    {
+        stopWalking = false;
+    }
 
     void OnDrawGizmos()
     {

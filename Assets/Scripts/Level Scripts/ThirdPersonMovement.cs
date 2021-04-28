@@ -30,6 +30,10 @@ public class ThirdPersonMovement : MonoBehaviour
     bool Rotate = false;
     bool OverrideRotation = false;
 
+    //new, move forward, when player stand on top of the enemy
+    [SerializeField] private bool isEnemy;
+    [SerializeField] private LayerMask enemyMask;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -40,6 +44,16 @@ public class ThirdPersonMovement : MonoBehaviour
 
     private void Update()
     {
+        //new, move forward, when player stand on top of the enemy
+        isEnemy = Physics.CheckSphere(groundCheck.position, groundDistance, enemyMask);
+        if (isEnemy)
+        {
+            Vector3 move = transform.forward * 1;
+            controller.Move(move * Time.deltaTime * 30);
+        }
+
+
+
         isGounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
         if (Input.GetButtonDown("Jump") && isGounded)
