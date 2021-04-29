@@ -13,7 +13,6 @@ public class Teleporting2 : MonoBehaviour
 
     private Camera mainCamera;
     private bool entered = false;
-    public bool targetArenaScene = true;
 
     private void Start()
     {

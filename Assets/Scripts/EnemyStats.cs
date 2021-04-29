@@ -32,22 +32,29 @@ public class EnemyStats : MonoBehaviour
         if (m_Health <= 0f && !Dead)
         {
             Dead = true;
-            StatsUI.instance.SetExperience(m_XPGains);
-            k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
-            k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
-            
-            if (enemyAI != null)
+            if (gameObject.tag == "Boss")
             {
-                enemyAI.Death();
+                FindObjectOfType<k_winning>().Win();
             }
-            else if(enemyAI2 != null)
+            else
             {
-                enemyAI2.Death();
+                StatsUI.instance.SetExperience(m_XPGains);
+                k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
+                k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
+
+                if (enemyAI != null)
+                {
+                    enemyAI.Death();
+                }
+                else if (enemyAI2 != null)
+                {
+                    enemyAI2.Death();
+                }
+                int RandomCoin = Random.Range(1, 4);
+                InstantiateBloodParticleEffect();
+                InstantiateCoin(RandomCoin);
+                StartCoroutine(DestroyDelay(3f));
             }
-            int RandomCoin = Random.Range(1, 4);
-            InstantiateBloodParticleEffect();
-            InstantiateCoin(RandomCoin);
-            StartCoroutine(DestroyDelay(3f));
         }
         else
         {

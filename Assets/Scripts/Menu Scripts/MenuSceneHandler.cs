@@ -17,7 +17,6 @@ public class MenuSceneHandler : MonoBehaviour
 
     public void OnPlayButtonClick()
     {
-        FindObjectOfType<PauseUI>().ActivateUIElement();
         SceneManager.LoadScene(1);
     }
 

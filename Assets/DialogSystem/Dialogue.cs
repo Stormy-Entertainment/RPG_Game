@@ -53,7 +53,7 @@ public class Dialogue : MonoBehaviour
             textDisplay.text = "";
             if (!sceneChanged)
             {
-                FindObjectOfType<PauseUI>().OnResumeBtnClick();
+                FindObjectOfType<PauseUI>().ResumeFromMenu();
                 try
                 {
                     SceneManager.LoadScene("TutorialScene");

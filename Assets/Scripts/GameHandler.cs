@@ -8,7 +8,6 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler instance;
     private Transform Player;
-    [SerializeField] private CinemachineFreeLook ThirdPersonCamera;
 
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
@@ -24,13 +23,6 @@ public class GameHandler : MonoBehaviour
             return;
         }
         instance = this;
-        gameOver = FindObjectOfType<GameOverUI>();
-    }
-
-    private void Start()
-    {
-        Player = GameObject.FindWithTag("Player").transform;
-        //LevelSetUp();
     }
 
     public Transform GetPlayer()
@@ -40,7 +32,8 @@ public class GameHandler : MonoBehaviour
     }
             
     public void DecreaseLives(GameObject Player)
-    {     
+    {
+        gameOver = FindObjectOfType<GameOverUI>();
         m_PlayerLives--;
         gameOver.DisableHeart(m_PlayerLives);
         if (m_PlayerLives > 0)

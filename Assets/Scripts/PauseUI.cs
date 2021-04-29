@@ -66,6 +66,7 @@ public class PauseUI : MonoBehaviour
         pauseMenu.SetActive(false);
         GameState.instance.ResumeTheGame();
         isMenuActivated = false;
+        ActivateUIElement();
     }
 
     public void OnMenuBtnClick()

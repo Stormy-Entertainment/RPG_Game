@@ -8,7 +8,7 @@ public class SkipScene : MonoBehaviour
 {
     public void playGame()
     {
-        FindObjectOfType<PauseUI>().OnResumeBtnClick();
+        FindObjectOfType<PauseUI>().ResumeFromMenu();
         try
         {
             SceneManager.LoadScene("TutorialScene");
