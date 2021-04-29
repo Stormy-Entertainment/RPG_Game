@@ -34,6 +34,10 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private bool isEnemy;
     [SerializeField] private LayerMask enemyMask;
 
+    [SerializeField] private Footstepper leftFootStep;
+    [SerializeField] private Footstepper rightFootStep;
+    bool footStepPlayer = false;
+
     private void Awake()
     {
         Time.timeScale = 1f;
@@ -111,6 +115,56 @@ public class ThirdPersonMovement : MonoBehaviour
                 }
             }
         }
+
+        if (isGounded && direction.magnitude >= 0.1f)
+        {
+
+            if (!footStepPlayer)
+            {
+                if (Input.GetButton("Sprint"))
+                {
+                    StartCoroutine(PlayFootStepsRunning());
+                }
+                else
+                {   
+                    StartCoroutine(PlayFootStepsWalking());
+                }
+            }
+        }
+    }
+
+    IEnumerator PlayFootStepsWalking()
+    {
+        footStepPlayer = true;
+        yield return new WaitForSeconds(0.5f);
+        int ranNo;
+        ranNo = Random.Range(0, 2);
+        if (ranNo == 0)
+        {
+            leftFootStep.PlayFootStep();
+        }
+        else
+        {
+            rightFootStep.PlayFootStep();
+        }
+        footStepPlayer = false;
+    }
+
+    IEnumerator PlayFootStepsRunning()
+    {
+        footStepPlayer = true;
+        yield return new WaitForSeconds(0.3f);
+        int ranNo;
+        ranNo = Random.Range(0, 2);
+        if (ranNo == 0)
+        {
+            leftFootStep.PlayFootStep();
+        }
+        else
+        {
+            rightFootStep.PlayFootStep();
+        }
+        footStepPlayer = false;
     }
 
     private void FixedUpdate()
