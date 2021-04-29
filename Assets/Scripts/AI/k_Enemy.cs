@@ -193,7 +193,7 @@ public class k_Enemy : MonoBehaviour
     {
         EnemyHit = true;
         animator.SetTrigger("Hit");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         EnemyHit = false;
     }
 
