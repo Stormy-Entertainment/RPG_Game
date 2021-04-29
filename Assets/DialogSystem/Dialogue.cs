@@ -52,14 +52,15 @@ public class Dialogue : MonoBehaviour
         {
             textDisplay.text = "";
             if (!sceneChanged)
-            {  
+            {
+                FindObjectOfType<PauseUI>().OnResumeBtnClick();
                 try
                 {
-                    SceneManager.LoadScene("MainIsland");
+                    SceneManager.LoadScene("TutorialScene");
                 }
                 catch (Exception e)
                 {
-                    SceneManager.LoadScene(2);
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
                 }
             }
         }

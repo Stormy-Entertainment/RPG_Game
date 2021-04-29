@@ -34,14 +34,18 @@ public class ShopSystem : MonoBehaviour
 	{
 		if (!GameState.isPaused)
 		{
-			shopOpen = true;
-			shopkeeper = keeper;
-			shopName.text = shopkeeper.shopName;
-			shopUI.SetActive(true);
-			UpdateMoneyUI();
-			LoadPlayerItems();
-			LoadShopItems();		
-			GameState.instance.PauseTheGame();
+			PauseUI pause = FindObjectOfType<PauseUI>();
+			if (!pause.isMenuActivated)
+			{
+				shopOpen = true;
+				shopkeeper = keeper;
+				shopName.text = shopkeeper.shopName;
+				shopUI.SetActive(true);
+				UpdateMoneyUI();
+				LoadPlayerItems();
+				LoadShopItems();
+				GameState.instance.PauseTheGame();
+			}
 		}
 	}
 

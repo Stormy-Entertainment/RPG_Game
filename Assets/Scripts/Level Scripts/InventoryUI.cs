@@ -28,21 +28,25 @@ public class InventoryUI : MonoBehaviour
 		{
 			if (!GameState.isGameOver && !GameState.isStageCompleted)
 			{
+
 				PauseUI pause = FindObjectOfType<PauseUI>();
 				ShopSystem ShopKeeper = FindObjectOfType<ShopSystem>();
-				if (!pause.isPaused && !ShopKeeper.shopOpen)
+				if (!pause.isMenuActivated)
 				{
-					if (inventoryUI.activeSelf)
+					if (!pause.isPaused && !ShopKeeper.shopOpen)
 					{
-						inventoryUI.SetActive(false);
-						GameState.instance.ResumeTheGame();
-						isInventoryOpen = false;
-					}
-					else
-					{
-						inventoryUI.SetActive(true);
-						GameState.instance.PauseTheGame();
-						isInventoryOpen = true;
+						if (inventoryUI.activeSelf)
+						{
+							inventoryUI.SetActive(false);
+							GameState.instance.ResumeTheGame();
+							isInventoryOpen = false;
+						}
+						else
+						{
+							inventoryUI.SetActive(true);
+							GameState.instance.PauseTheGame();
+							isInventoryOpen = true;
+						}
 					}
 				}
 			}

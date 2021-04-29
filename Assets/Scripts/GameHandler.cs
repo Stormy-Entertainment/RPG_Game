@@ -35,6 +35,7 @@ public class GameHandler : MonoBehaviour
 
     public Transform GetPlayer()
     {
+        Player = GameObject.FindWithTag("Player").transform;
         return Player;
     }
             

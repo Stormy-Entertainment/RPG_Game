@@ -22,7 +22,7 @@ public class GameState : MonoBehaviour
 
     private void Start()
     {
-        ResumeTheGame();
+        ResumeMenu();
     }
 
     public void PauseTheGame()
@@ -30,6 +30,13 @@ public class GameState : MonoBehaviour
         Time.timeScale = 0f;
         EnableCorsor();
         isPaused = true;
+    }
+
+    public void ResumeMenu()
+    {
+        Time.timeScale = 1f;
+        EnableCorsor();
+        isPaused = false;
     }
 
     public void ResumeTheGame()

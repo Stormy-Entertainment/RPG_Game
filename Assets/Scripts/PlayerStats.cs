@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public delegate void OnPlayerStatsChanged();
-    public OnPlayerStatsChanged onPlayerStatsChangedCallback;
 
     public int m_Health = 100;
     public int m_AttackSpeed = 200; //Range(0 - 1000)
@@ -38,8 +36,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_MoveSpeed = 100;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
 
@@ -50,8 +47,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_MoveSpeed = 0;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
     #endregion
@@ -69,8 +65,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_AttackSpeed = 1000;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
 
@@ -81,8 +76,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_AttackSpeed = 0;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
     #endregion
@@ -100,8 +94,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_Armor = 100;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
 
@@ -112,8 +105,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_Armor = 0;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
     #endregion
@@ -126,8 +118,7 @@ public class PlayerStats : MonoBehaviour
         {
             m_Health = 100;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
 
@@ -139,8 +130,7 @@ public class PlayerStats : MonoBehaviour
             m_Health = 0;
             GameHandler.instance.DecreaseLives(this.gameObject); ;
         }
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
 
@@ -157,8 +147,7 @@ public class PlayerStats : MonoBehaviour
         m_Health = PlayerPrefs.GetInt("PlayerHealth", 100);
         m_AttackSpeed = PlayerPrefs.GetInt("PlayerAttackSpeed", 200);
         m_MoveSpeed = PlayerPrefs.GetInt("PlayerMoveSpeed", 60);
-        if (onPlayerStatsChangedCallback != null)
-            onPlayerStatsChangedCallback.Invoke();
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
     }
 
     public void SavePlayerStats()

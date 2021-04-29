@@ -6,7 +6,9 @@ using UnityEngine.SceneManagement;
 public class PauseUI : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject UIElement;
     public bool isPaused = false;
+    public bool isMenuActivated = true;
 
     private void Update()
     {
@@ -17,33 +19,36 @@ public class PauseUI : MonoBehaviour
             {
                 InventoryUI InventoryUI = FindObjectOfType<InventoryUI>();
                 ShopSystem ShopKeeper = FindObjectOfType<ShopSystem>();
-                if (!InventoryUI.isInventoryOpen && !ShopKeeper.shopOpen)
+                if (!isMenuActivated)
                 {
-                    if (pauseMenu.activeSelf)
+                    if (!InventoryUI.isInventoryOpen && !ShopKeeper.shopOpen)
                     {
-                        pauseMenu.SetActive(false);
-                        isPaused = false;
-                        GameState.instance.ResumeTheGame();
+                        if (pauseMenu.activeSelf)
+                        {
+                            pauseMenu.SetActive(false);
+                            isPaused = false;
+                            GameState.instance.ResumeTheGame();
 
+                        }
+                        else
+                        {
+                            pauseMenu.SetActive(true);
+                            isPaused = true;
+                            GameState.instance.PauseTheGame();
+                        }
                     }
-                    else
+                    else if (InventoryUI.isInventoryOpen)
                     {
-                        pauseMenu.SetActive(true);
-                        isPaused = true;
-                        GameState.instance.PauseTheGame();
+                        InventoryUI.inventoryUI.SetActive(false);
+                        GameState.instance.ResumeTheGame();
+                        InventoryUI.isInventoryOpen = false;
                     }
-                }
-                else if(InventoryUI.isInventoryOpen)
-                {
-                    InventoryUI.inventoryUI.SetActive(false);
-                    GameState.instance.ResumeTheGame();
-                    InventoryUI.isInventoryOpen = false;
-                }
-                else if (ShopKeeper.shopOpen)
-                {
-                    ShopKeeper.CloseShop();
-                    GameState.instance.ResumeTheGame();
-                    ShopKeeper.shopOpen = false;
+                    else if (ShopKeeper.shopOpen)
+                    {
+                        ShopKeeper.CloseShop();
+                        GameState.instance.ResumeTheGame();
+                        ShopKeeper.shopOpen = false;
+                    }
                 }
             }
         }
@@ -53,10 +58,34 @@ public class PauseUI : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         GameState.instance.ResumeTheGame();
+        isMenuActivated = false;
+    }
+
+    public void ResumeFromMenu()
+    {
+        pauseMenu.SetActive(false);
+        GameState.instance.ResumeTheGame();
+        isMenuActivated = false;
     }
 
     public void OnMenuBtnClick()
     {
+        StartCoroutine(PauseMenuRoutine());
+    }
+
+    IEnumerator PauseMenuRoutine()
+    {
+        pauseMenu.SetActive(false);
+        UIElement.SetActive(false);
+        isPaused = false;
+        isMenuActivated = true;
+        GameState.instance.ResumeMenu();
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(0);
+    }
+
+    public void ActivateUIElement()
+    {
+        UIElement.SetActive(true);
     }
 }

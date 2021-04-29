@@ -70,7 +70,9 @@ public class StatsUI : MonoBehaviour
     private void UpdatePlayerStats()
     {
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
-        playerStat.IncreaseAttackSpeed(50);
+        playerStat.IncreaseAttackSpeed(30);
+        playerStat.IncreaseMoveSpeed(10);
+        playerStat.IncreaseArmor(5);
         SaveStatsData();
     }
 
