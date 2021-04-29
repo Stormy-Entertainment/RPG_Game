@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179380365}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.00008458947, y: -0.0016158468, z: -0.00024250068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
   m_Children: []
   m_Father: {fileID: 250957233893940161}
@@ -42,10 +42,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 179380365}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.09
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &179380368
 MonoBehaviour:
@@ -62,8 +62,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 256
-  Length: 0
-  m_stoneFootSounds:
+  m_footStepSound:
   - {fileID: 8300000, guid: 047574e8f2580f44783b2697d575680a, type: 3}
   - {fileID: 8300000, guid: 6504a713d2606984396a0645e3c8cac0, type: 3}
 --- !u!82 &179380367
@@ -77,7 +76,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -173,11 +172,11 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &399500503
 GameObject:
   m_ObjectHideFlags: 0
@@ -190,6 +189,7 @@ GameObject:
   - component: {fileID: 399500507}
   - component: {fileID: 399500506}
   - component: {fileID: 399500505}
+  - component: {fileID: 1906875495058981693}
   m_Layer: 0
   m_Name: Left Foot
   m_TagString: Untagged
@@ -204,8 +204,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399500503}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: -0.00013726659, y: -0.0025558467, z: -0.0008625007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.01, y: 0.010000002, z: 0.010000002}
   m_Children: []
   m_Father: {fileID: 4944044123674653492}
@@ -219,10 +219,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 399500503}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.09
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &399500506
 MonoBehaviour:
@@ -239,8 +239,7 @@ MonoBehaviour:
   Ground:
     serializedVersion: 2
     m_Bits: 256
-  Length: 0
-  m_stoneFootSounds:
+  m_footStepSound:
   - {fileID: 8300000, guid: 047574e8f2580f44783b2697d575680a, type: 3}
   - {fileID: 8300000, guid: 6504a713d2606984396a0645e3c8cac0, type: 3}
 --- !u!82 &399500505
@@ -254,7 +253,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -339,6 +338,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &1906875495058981693
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399500503}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
 --- !u!1 &145253613368423669
 GameObject:
   m_ObjectHideFlags: 0
@@ -787,7 +802,9 @@ MonoBehaviour:
   isEnemy: 0
   enemyMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
+  leftFootStep: {fileID: 399500506}
+  rightFootStep: {fileID: 179380368}
 --- !u!114 &4663014566655582447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -842,6 +859,7 @@ MonoBehaviour:
   money: 500
   space: 20
   items: []
+  ItemEquiped: 
 --- !u!81 &3841208863384292989
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1088,12 +1106,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cc3aa6f18c3ca446bf6104ae8be9547, type: 3}
---- !u!4 &4944044123674653492 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8997211547571165378, guid: 4cc3aa6f18c3ca446bf6104ae8be9547,
-    type: 3}
-  m_PrefabInstance: {fileID: 4053312044084603894}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &250957233893940161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4268239896707706935, guid: 4cc3aa6f18c3ca446bf6104ae8be9547,
@@ -1115,6 +1127,12 @@ Transform:
 --- !u!95 &3394176788781190518 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1682877426101937792, guid: 4cc3aa6f18c3ca446bf6104ae8be9547,
+    type: 3}
+  m_PrefabInstance: {fileID: 4053312044084603894}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4944044123674653492 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8997211547571165378, guid: 4cc3aa6f18c3ca446bf6104ae8be9547,
     type: 3}
   m_PrefabInstance: {fileID: 4053312044084603894}
   m_PrefabAsset: {fileID: 0}
