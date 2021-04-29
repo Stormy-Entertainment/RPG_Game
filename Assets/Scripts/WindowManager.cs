@@ -5,24 +5,14 @@ using UnityEngine.UI;
 
 public class WindowManager : MonoBehaviour
 {
-    #region Attributes
-
-    #region Play Pref Key Constants
-
     private const string RESOLUTION_PREF_KEY = "resolution";
-
-    #region Resolution
 
     [SerializeField]
     private Text resolutionText;
 
-    private Resolution[] resolutions;
+    [SerializeField] private Resolution[] resolutions;
 
     private int currentResolutionIndex = 0;
-
-    #endregion
-
-    #endregion 
 
     // Start is called before the first frame update
     void Start()
@@ -55,7 +45,6 @@ public class WindowManager : MonoBehaviour
     #endregion
 
     #region Apply Resolution
-
     private void SetAndApplyResolution(int newResolutionIndex)
     {
         currentResolutionIndex = newResolutionIndex;
@@ -78,8 +67,6 @@ public class WindowManager : MonoBehaviour
     #endregion 
 
     #region Misc Helpers
-
-    #region Index Wrap Helpers
     private int GetNextWrappedIndex<T>(IList<T> collection, int currentIndex)
     {
         if (collection.Count < 1) return 0;
@@ -92,9 +79,6 @@ public class WindowManager : MonoBehaviour
         if ((currentIndex - 1) < 0) return collection.Count - 1;
         return (currentIndex - 1) % collection.Count;
     }
-
-    #endregion
-
     #endregion 
 
     public void ApplyChanges()
@@ -103,4 +87,3 @@ public class WindowManager : MonoBehaviour
     }
 
 }
-#endregion 
