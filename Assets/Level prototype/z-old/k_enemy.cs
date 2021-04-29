@@ -27,7 +27,7 @@ public class k_enemy : MonoBehaviour
 
     //Attacking
     public float timeBetweenAttacks;
-    public float m_Damage = 20;
+    public int m_Damage = 20;
     bool alreadyAttacked;
 
 

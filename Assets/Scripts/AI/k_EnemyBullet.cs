@@ -6,7 +6,7 @@ public class k_EnemyBullet : MonoBehaviour
 {
 
     public float speed;
-    public float attackDamage;
+    public int attackDamage;
     public AudioSource audio;
 
     public AudioClip hit;

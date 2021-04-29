@@ -11,11 +11,13 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            return;
-        }
         instance = this;
+        int gameStateCount = FindObjectsOfType<GameState>().Length;
+        if (gameStateCount > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()

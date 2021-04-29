@@ -5,7 +5,7 @@ using UnityEngine;
 public class k_EnemyWeapon : MonoBehaviour
 {
     //Attach this script to the weapon, this object collider will active when the attack animation played 
-    public float attackDamage;
+    public int attackDamage = 10;
     private GameObject player;
     private AudioSource audio;
 

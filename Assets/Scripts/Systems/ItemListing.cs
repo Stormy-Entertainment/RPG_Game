@@ -37,6 +37,7 @@ public class ItemListing : MonoBehaviour
 	{
 		if (item != null)
 		{
+			shopSystem = GameObject.FindGameObjectWithTag("OverlayCanvas").GetComponent<ShopSystem>();
 			if (mode.Equals(ListingMode.Sell))
 			{
 				shopSystem.SellToShop(item);

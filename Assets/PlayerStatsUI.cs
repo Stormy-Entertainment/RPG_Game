@@ -6,8 +6,9 @@ using TMPro;
 public class PlayerStatsUI : MonoBehaviour
 {
     public Transform itemsParent;
-	InventorySlot[] slots;
+	EquipmentSlot[] slots;
 	Inventory inventory;
+	PlayerStats playerStats;
 
 	[SerializeField] private TextMeshProUGUI healthTxt;
 	[SerializeField] private TextMeshProUGUI attackSpeedTxt;
@@ -16,25 +17,29 @@ public class PlayerStatsUI : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI coinTxt;
 
 
-	private void Start()
+	private void Awake()
 	{
-		inventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
-		inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
+		inventory = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>();
+		//inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
+		//inventory.onCoinChangedCallback += UpdateText;
 
-		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
+		playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+
+
+		slots = itemsParent.GetComponentsInChildren<EquipmentSlot>();
 		UpdateUI();
+		UpdateText();
 	}
 
-	void UpdateUI()
+	public void UpdateUI()
 	{
+		inventory = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>();
 		for (int i = 0; i < slots.Length; i++)
 		{
-			if (i < inventory.items.Count)  // If there is an item to add
+			if (i < inventory.equipedItems.Count)  // If there is an item to add
 			{
-				if (inventory.ItemEquiped[i] == true)
-				{
-					slots[i].AddItem(inventory.items[i]);   // Add it
-				}
+				
+				slots[i].AddItem(inventory.equipedItems[i]);   // Add it
 			}
 			else
 			{
@@ -45,7 +50,12 @@ public class PlayerStatsUI : MonoBehaviour
 	}
 
     public void UpdateText()
-    {
-        
-    }
+	{
+		playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+		healthTxt.text = playerStats.m_Health.ToString();
+		attackSpeedTxt.text = playerStats.m_AttackSpeed.ToString();
+		moveSpeedTxt.text = playerStats.GetMovementSpeed().ToString();
+		armorTxt.text = playerStats.m_Armor.ToString();
+		coinTxt.text = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>().money.ToString();
+	}
 }

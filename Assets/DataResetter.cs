@@ -26,8 +26,10 @@ public class DataResetter : MonoBehaviour
     {
         PlayerPrefs.SetInt("CurrentLevel", 1);
         PlayerPrefs.SetFloat("CurrentExperience", 0);
+        PlayerPrefs.SetInt("CurrentMoney", 500);
 
-        PlayerPrefs.SetFloat("PlayerAttackSpeed", 200);
-        PlayerPrefs.SetFloat("PlayerMoveSpeed", 60);
+        PlayerPrefs.SetInt("PlayerHealth", 100);
+        PlayerPrefs.SetInt("PlayerAttackSpeed", 200);
+        PlayerPrefs.SetInt("PlayerMoveSpeed", 60);
     }
 }

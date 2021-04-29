@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseUI : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
+    public bool isPaused = false;
 
     private void Update()
     {
@@ -14,24 +15,35 @@ public class PauseUI : MonoBehaviour
         {
             if (!GameState.isGameOver && !GameState.isStageCompleted)
             {
-                if (pauseMenu.activeSelf)
+                InventoryUI InventoryUI = FindObjectOfType<InventoryUI>();
+                ShopSystem ShopKeeper = FindObjectOfType<ShopSystem>();
+                if (!InventoryUI.isInventoryOpen && !ShopKeeper.shopOpen)
                 {
-                    pauseMenu.SetActive(false);
-                    GameState.instance.ResumeTheGame();
+                    if (pauseMenu.activeSelf)
+                    {
+                        pauseMenu.SetActive(false);
+                        isPaused = false;
+                        GameState.instance.ResumeTheGame();
 
+                    }
+                    else
+                    {
+                        pauseMenu.SetActive(true);
+                        isPaused = true;
+                        GameState.instance.PauseTheGame();
+                    }
                 }
-                else
+                else if(InventoryUI.isInventoryOpen)
                 {
-                    pauseMenu.SetActive(true);
-                    GameState.instance.PauseTheGame();
-                }
-            }
-            else
-            {
-                if (pauseMenu.activeSelf)
-                {
-                    pauseMenu.SetActive(false);
+                    InventoryUI.inventoryUI.SetActive(false);
                     GameState.instance.ResumeTheGame();
+                    InventoryUI.isInventoryOpen = false;
+                }
+                else if (ShopKeeper.shopOpen)
+                {
+                    ShopKeeper.CloseShop();
+                    GameState.instance.ResumeTheGame();
+                    ShopKeeper.shopOpen = false;
                 }
             }
         }

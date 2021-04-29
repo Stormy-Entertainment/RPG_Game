@@ -4,19 +4,33 @@ using UnityEngine;
 public class Shopkeeper : MonoBehaviour
 {
 	public ShopSystem shopSystem;
+	[SerializeField] private GameObject Info;
 
 	bool inRange = false;
 
 	public string shopName;
 	public bool canSellTo = true;
 	public Inventory shopInventory;
-	private bool ShopOpened = false;
+	public bool ShopOpened = false;
 
-	private void Update()
+    private void Awake()
+    {
+		shopSystem = GameObject.FindGameObjectWithTag("OverlayCanvas").GetComponent<ShopSystem>();
+	}
+
+    private void Update()
 	{
 		if (Input.GetButtonDown("Interact"))
 		{
-			StartTrade();
+			if (!GameState.isGameOver && !GameState.isStageCompleted)
+			{
+				PauseUI pause = FindObjectOfType<PauseUI>();
+				InventoryUI InventoryUI = FindObjectOfType<InventoryUI>();
+				if (!pause.isPaused && !InventoryUI.isInventoryOpen)
+				{
+					StartTrade();
+				}
+			}
 		}
 	}
 
@@ -25,6 +39,7 @@ public class Shopkeeper : MonoBehaviour
 		if (other.transform.tag.Equals("Player"))
 		{
 			inRange = true;
+			Info.SetActive(true);
 		}
 	}
 
@@ -33,6 +48,7 @@ public class Shopkeeper : MonoBehaviour
 		if (other.transform.tag.Equals("Player"))
 		{
 			inRange = false;
+			Info.SetActive(false);
 			ShopOpened = false;
 			try
 			{

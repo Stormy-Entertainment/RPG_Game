@@ -16,7 +16,7 @@ public class InventorySlot : MonoBehaviour
 
     private void Awake()
     {
-		inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+		inventory = GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<Inventory>();
 	}
 
     // Add item to the slot
@@ -44,6 +44,7 @@ public class InventorySlot : MonoBehaviour
 	// Called when the remove button is pressed
 	public void OnRemoveButton()
 	{
+		inventory = GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<Inventory>();
 		inventory.Remove(item);
 	}
 
@@ -52,7 +53,15 @@ public class InventorySlot : MonoBehaviour
 	{
 		if (item != null)
 		{
-			item.Equip(inventory);	
+			inventory = GameObject.FindGameObjectWithTag("PlayerInventory").GetComponent<Inventory>();
+			if (inventory.equipedItems.Count <= inventory.equipmentSpace)
+			{
+				if (item.itemType != ItemType.HealthPotion)
+				{
+					inventory.EquipItem(item);
+				}
+				item.Use(inventory);
+			}
 		}
 	}
 }
