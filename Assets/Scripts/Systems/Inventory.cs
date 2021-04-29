@@ -14,9 +14,18 @@ public class Inventory : MonoBehaviour
 
 	// List of items in inventory
 	public List<Item> items = new List<Item>();
+	public bool []ItemEquiped;
 
-	// Add a new item
-	public bool Add(Item item)
+    private void Awake()
+    {
+		for (int i = 0; i < 20; i++)
+		{
+			ItemEquiped[i] = false;
+		}
+    }
+
+    // Add a new item
+    public bool Add(Item item)
 	{
 		if (!item.isDefaultItem)
 		{
