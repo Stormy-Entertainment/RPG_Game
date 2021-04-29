@@ -17,7 +17,6 @@ public class Footstepper : MonoBehaviour
 
     public void PlayFootStep()
     {
-        Debug.Log("hello 2");
         int n = Random.Range(1, m_footStepSound.Length);
         m_AudioSource.clip = m_footStepSound[n];
         m_AudioSource.PlayOneShot(m_AudioSource.clip);
