@@ -18,7 +18,7 @@ public class Item : ScriptableObject
 	public int Strength;
 
 	// Called when the item is pressed in the inventory
-	public virtual void Use(Inventory inventory)
+	public virtual void Equip(Inventory inventory)
 	{
 		// Use the item
 		// Something might 
