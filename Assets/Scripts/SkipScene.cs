@@ -8,15 +8,8 @@ public class SkipScene : MonoBehaviour
 {
     public void playGame()
     {
-        FindObjectOfType<PauseUI>().ResumeFromMenu();
-        try
-        {
-            SceneManager.LoadScene("TutorialScene");
-        }
-        catch (Exception e)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
+          FindObjectOfType<PauseUI>().ResumeFromMenu();         
+          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Back()

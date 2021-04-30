@@ -12,12 +12,6 @@ public class PlayerStats : MonoBehaviour
 
     private int ArmorMultiplier = 0;
 
-    //Stats
-    //public int m_Agility = 20; //Increases Damage & Attack Speed
-    // public int m_Intellect = 20; //Attack Speed
-    // public int m_Stamina = 20; //Increases MoveSpeed & Damage
-    // public int m_Strength = 20; //Increases Health Grade & Armor
-
     private void Start()
     {
         LoadPlayerStats();

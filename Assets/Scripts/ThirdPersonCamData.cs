@@ -13,14 +13,17 @@ public class ThirdPersonCamData : MonoBehaviour
     {
         cinemachineCam = GetComponent<CinemachineFreeLook>();
         LoadCameraDetails();
+        //Load Camera Details on Start up
     }
 
     private void LoadCameraDetails()
     {
         XSpeed = PlayerPrefs.GetFloat("CamXSpeed", 200);
         YSpeed = PlayerPrefs.GetFloat("CamYSpeed", 2);
+        //Loading Datas
 
         cinemachineCam.m_XAxis.m_MaxSpeed = XSpeed;
         cinemachineCam.m_YAxis.m_MaxSpeed = YSpeed;
+        //Applying Changes
     }
 }
