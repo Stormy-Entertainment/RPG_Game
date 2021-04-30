@@ -32,15 +32,15 @@ public class EnemyStats : MonoBehaviour
         if (m_Health <= 0f && !Dead)
         {
             Dead = true;
-            if (gameObject.tag == "Boss")
+            k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
+            k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
+            if (enemyAI.gameObject.tag == "Boss")
             {
                 FindObjectOfType<k_winning>().Win();
             }
             else
             {
                 StatsUI.instance.SetExperience(m_XPGains);
-                k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
-                k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
 
                 if (enemyAI != null)
                 {

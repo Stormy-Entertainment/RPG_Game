@@ -85,6 +85,12 @@ public class PauseUI : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void DisableUIElement()
+    {
+        UIElement.SetActive(false);
+        isMenuActivated = true;
+    }
+
     public void ActivateUIElement()
     {
         UIElement.SetActive(true);

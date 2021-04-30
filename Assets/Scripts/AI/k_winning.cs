@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class k_winning : MonoBehaviour
 {
-    public GameObject boss;
 
     public void Win()
     {

@@ -11,7 +11,6 @@ public class GameOverUI : MonoBehaviour
 
     public void GameOver()
     {
-        GameHandler.instance.DisableAllMenus();
         GameState.isGameOver = true;
         gameOverMenu.SetActive(true);
         GameState.instance.PauseTheGame();
@@ -19,6 +18,15 @@ public class GameOverUI : MonoBehaviour
 
     public void OnMenuBtnClick()
     {
+        StartCoroutine(GameOverMenuRoutine());
+    }
+
+    IEnumerator GameOverMenuRoutine()
+    {
+        gameOverMenu.SetActive(false);
+        FindObjectOfType<PauseUI>().DisableUIElement();
+        GameState.instance.ResumeMenu();
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(0);
     }
 

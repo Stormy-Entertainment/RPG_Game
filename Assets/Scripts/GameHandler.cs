@@ -12,7 +12,10 @@ public class GameHandler : MonoBehaviour
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
 
-    [SerializeField] private GameObject[] AllMenus;
+    [SerializeField] private Transform MainIslandRespawnPoint;
+    [SerializeField] private Transform BonusLevelRespawnPoint;
+    [SerializeField] private Transform FinalBossBattleRespawnPoint;
+    [SerializeField] private Transform CaveRespawnPoint;
 
     GameOverUI gameOver;
 
@@ -33,7 +36,6 @@ public class GameHandler : MonoBehaviour
             
     public void DecreaseLives(GameObject Player)
     {
-        m_PlayerRespawnPoint = this.gameObject.transform.GetChild(0);
         gameOver = FindObjectOfType<GameOverUI>();
         m_PlayerLives--;
         gameOver.DisableHeart(m_PlayerLives);
@@ -52,11 +54,22 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void DisableAllMenus()
+    public void ChangeRespawnPoint(string Name)
     {
-        for(int i = 0; i < AllMenus.Length; i++)
+        switch (Name)
         {
-            AllMenus[i].SetActive(false);
+            case "MainIsland":
+                m_PlayerRespawnPoint = MainIslandRespawnPoint;
+                break;
+            case "Bonus level":
+                m_PlayerRespawnPoint = BonusLevelRespawnPoint;
+                break;
+            case "Final Boss Battle":
+                m_PlayerRespawnPoint = FinalBossBattleRespawnPoint;
+                break;
+            case "Cave":
+                m_PlayerRespawnPoint = CaveRespawnPoint;
+                break;
         }
     }
 }

@@ -25,8 +25,9 @@ public class k_EnemyRangeAtk : MonoBehaviour
     private bool dead = false;
 
     //Attacking
+    public int m_Damage = 10;
     bool alreadyAttacked = false;
-    float m_AttackSpeed = 0.4f;
+    public float m_AttackSpeed = 2f;
     public GameObject weapon;
     bool EnemyHit = false;
 
@@ -162,16 +163,10 @@ public class k_EnemyRangeAtk : MonoBehaviour
         alreadyAttacked = false;
     }
 
-    //Active collider when attack
-    public void WeaponHit()
-    {
-        weapon.GetComponent<BoxCollider>().enabled = true;
-        audio.clip = fight; audio.loop = false; audio.Play();
-    }
-
     public void WeaponHited()
     {
-        weapon.GetComponent<BoxCollider>().enabled = false;
+        audio.clip = fight; audio.loop = false; audio.Play();
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
     }
 
     public void ShootPlayer()

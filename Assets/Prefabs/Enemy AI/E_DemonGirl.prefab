@@ -240,12 +240,14 @@ MonoBehaviour:
   walkSpeed: 5
   chaseSpeed: 8
   defDirection: -50
-  sightRange: 25.6
+  sightRange: 10
   attackRange: 1.92
   rangeAttackRange: 20
   playerInSightRange: 0
   playerInAttackRange: 0
   playerInRangeAttackRange: 0
+  m_Damage: 10
+  m_AttackSpeed: 2
   weapon: {fileID: 7184862079091627006}
   shootPoint: {fileID: 7184862078648566103}
   bulletPrefab: {fileID: 4035823771210690061, guid: fe8d3ae694628664bb655fb029faee9d,
@@ -258,6 +260,7 @@ MonoBehaviour:
   death: {fileID: 8300000, guid: a25eae877db4d26438b5c93ca71dacf4, type: 3}
   getHit: {fileID: 8300000, guid: 0c0893ec9525d524f9a52b1c65eeeb7f, type: 3}
   audio: {fileID: 3109752522657739969}
+  stopMoving: 0
 --- !u!82 &3109752522657739969
 AudioSource:
   m_ObjectHideFlags: 0
@@ -267,7 +270,8 @@ AudioSource:
   m_GameObject: {fileID: 3109752522657739970}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 45b2a3f00595ab845887ff944520f57d, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.51
@@ -3816,7 +3820,8 @@ AudioSource:
   m_GameObject: {fileID: 7184862079091627006}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: f7b89b274323a9b46b73c169c7af25bb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.516

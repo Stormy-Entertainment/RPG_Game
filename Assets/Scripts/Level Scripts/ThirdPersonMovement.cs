@@ -153,7 +153,7 @@ public class ThirdPersonMovement : MonoBehaviour
     IEnumerator PlayFootStepsWalking()
     {
         footStepPlayer = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         if (!leftFootPlayed && controller.velocity.magnitude >= 0.1f) 
         {
             leftFootStep.PlayFootStep();
@@ -170,7 +170,7 @@ public class ThirdPersonMovement : MonoBehaviour
     IEnumerator PlayFootStepsRunning()
     {
         footStepPlayer = true;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.25f);
         if (!leftFootPlayed && controller.velocity.magnitude >= 0.1f)
         {
             leftFootStep.PlayFootStep();
