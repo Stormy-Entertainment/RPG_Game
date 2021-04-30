@@ -219,6 +219,7 @@ public class k_EnemyRangeAtk : MonoBehaviour
         agent.acceleration = 0;
         //agent.transform.position = Vector3.zero;
         animator.SetTrigger("Death");
+       
     }
 
     public bool IsDead()
