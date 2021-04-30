@@ -138,7 +138,7 @@ public class PlayerStats : MonoBehaviour
 
     public void DecreaseHealth(int value)
     {
-        m_Health = m_Health - value + ArmorMultiplier;
+        m_Health = m_Health - (value + ArmorMultiplier);
         if (m_Health <= 0)
         {
             m_Health = 0;
