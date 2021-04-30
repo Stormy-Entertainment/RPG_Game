@@ -6,6 +6,7 @@ using Cinemachine;
 public class SceneSequence : MonoBehaviour
 {
     public CinemachineVirtualCamera CutsceneCam;
+    public float waitForSec = 6;
 
     void Start()
     {
@@ -14,7 +15,7 @@ public class SceneSequence : MonoBehaviour
 
     IEnumerator TheSequence()
     {
-        yield return new WaitForSeconds(6f);
+        yield return new WaitForSeconds(waitForSec);
         CutsceneCam.Priority = 50;
     }
 }

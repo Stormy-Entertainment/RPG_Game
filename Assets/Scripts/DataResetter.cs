@@ -30,6 +30,7 @@ public class DataResetter : MonoBehaviour
 
         PlayerPrefs.SetInt("PlayerHealth", 100);
         PlayerPrefs.SetInt("PlayerAttackSpeed", 200);
-        PlayerPrefs.SetInt("PlayerMoveSpeed", 60);
+        PlayerPrefs.SetInt("PlayerMoveSpeed", 10);
+        PlayerPrefs.SetInt("PlayerArmor", 5);
     }
 }

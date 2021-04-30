@@ -52,10 +52,13 @@ public class PlayerStatsUI : MonoBehaviour
     public void UpdateText()
 	{
 		playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
-		healthTxt.text = playerStats.m_Health.ToString();
-		attackSpeedTxt.text = playerStats.m_AttackSpeed.ToString();
-		moveSpeedTxt.text = playerStats.GetMovementSpeed().ToString();
-		armorTxt.text = playerStats.m_Armor.ToString();
-		coinTxt.text = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>().money.ToString();
+		if (playerStats != null)
+		{
+			healthTxt.text = playerStats.m_Health.ToString();
+			attackSpeedTxt.text = playerStats.m_AttackSpeed.ToString();
+			moveSpeedTxt.text = playerStats.GetMovementSpeed().ToString();
+			armorTxt.text = playerStats.m_Armor.ToString();
+			coinTxt.text = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>().money.ToString();
+		}
 	}
 }

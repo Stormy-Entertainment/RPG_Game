@@ -11,6 +11,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private float normalSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private float jumpForce = 3f;
+    private float MoveMultiplier = 1;
 
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
@@ -99,12 +100,12 @@ public class ThirdPersonMovement : MonoBehaviour
                 if (Input.GetButton("Sprint") && isGounded)
                 {
                     //Increase Speed
-                    controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime);
+                    controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime * MoveMultiplier);
                     velocity.x += sprintSpeed * Time.deltaTime;
                 }
                 else
                 {
-                    controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime);
+                    controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime * MoveMultiplier);
                     velocity.x += normalSpeed * Time.deltaTime;
                 }
             }
@@ -141,6 +142,12 @@ public class ThirdPersonMovement : MonoBehaviour
         anim.SetFloat("H", horizontal);
         anim.SetFloat("V", vertical);
         // Debug.Log("Velovity " + velocity);
+    }
+
+    public void UpdateMoveMultiplier(int value)
+    {
+        float normalizedValue = Mathf.InverseLerp(0, 100, value);
+        MoveMultiplier = Mathf.Lerp(1, 2, normalizedValue);
     }
 
     IEnumerator PlayFootStepsWalking()

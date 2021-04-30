@@ -33,6 +33,7 @@ public class GameHandler : MonoBehaviour
             
     public void DecreaseLives(GameObject Player)
     {
+        m_PlayerRespawnPoint = this.gameObject.transform.GetChild(0);
         gameOver = FindObjectOfType<GameOverUI>();
         m_PlayerLives--;
         gameOver.DisableHeart(m_PlayerLives);
