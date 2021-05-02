@@ -26,7 +26,7 @@ public class k_EnemyDef : MonoBehaviour
 
     //Attacking
     public float timeBetweenAttacks;
-    public float m_Damage = 20;
+    public int m_Damage = 20;
     bool alreadyAttacked;
 
     private void Awake()

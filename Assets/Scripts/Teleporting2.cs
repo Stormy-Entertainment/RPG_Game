@@ -13,7 +13,6 @@ public class Teleporting2 : MonoBehaviour
 
     private Camera mainCamera;
     private bool entered = false;
-    public bool targetArenaScene = true;
 
     private void Start()
     {
@@ -36,15 +35,11 @@ public class Teleporting2 : MonoBehaviour
         }
     }
 
-    public void TeleportPlayerToMain()
-    {
-        StartCoroutine(Teleport());
-    }
-
     IEnumerator Teleport()
     {
         audioSource.Play();
-        yield return new WaitForSeconds(0.02f);
+        GameHandler.instance.ChangeRespawnPoint(TeleportToSceneName);
+        yield return new WaitForSeconds(0.01f);
         SceneManager.LoadScene(TeleportToSceneName);
         entered = false;
     }

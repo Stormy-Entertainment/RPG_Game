@@ -5,19 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class k_winning : MonoBehaviour
 {
-    public GameObject boss;
-
     public void Win()
     {
-        SceneManager.LoadScene(7);
+        StartCoroutine(WinRoutine());
     }
 
-    // Update is called once per frame
-    void Update()
+    private IEnumerator WinRoutine()
     {
-        if (boss.GetComponent<EnemyStats>().m_Health <= 0)
-        {
-            Win();
-        }
+        FindObjectOfType<PauseUI>().DisableUIElement();
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(7);
     }
 }

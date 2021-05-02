@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 225278412712623697}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: E_Golem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208290879756}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208309053778}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208390082093}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Lower_Leg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,7 +135,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208406554274}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Index_Proximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,7 +165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208560875001}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,7 +198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208631842321}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Upper_Leg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208753420295}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364208756422484}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Lower_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364209014471944}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Upper_Arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364209027621531}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Lower_Reg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364209649436583}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Upper_Reg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364209682025788}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Foot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -415,7 +415,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364209981403874}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Toes_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,7 +445,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210015782889}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Upper_Arm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -476,7 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210096807940}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Lower_Arm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 225278412760628219}
   - component: {fileID: 2890364210123117480}
   - component: {fileID: 2890364210123117481}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Golem model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -609,6 +609,8 @@ MonoBehaviour:
   playerInSightRange: 0
   playerInAttackRange: 0
   playerInRangeAttackRange: 0
+  m_Damage: 10
+  m_AttackSpeed: 0.4
   weapon: {fileID: 3561053093670988058}
   shootPoint: {fileID: 3561053094001691342}
   bulletPrefab: {fileID: 5259717227368022140, guid: df00ef494b55a534bb93f3c3d91fd681,
@@ -618,8 +620,8 @@ MonoBehaviour:
   running: {fileID: 8300000, guid: 32a3f4e0041d15a44af1d3618325c5ff, type: 3}
   fight: {fileID: 8300000, guid: 99cb7eb0e78c8d44290a3abb2f9b313a, type: 3}
   e_shooting: {fileID: 8300000, guid: d29e2c1bd6ad63a448b4413ea501bd76, type: 3}
-  death: {fileID: 0}
-  getHit: {fileID: 0}
+  death: {fileID: 8300000, guid: 64c16e05db3da6c43ab3e041bac6f122, type: 3}
+  getHit: {fileID: 8300000, guid: 0c0893ec9525d524f9a52b1c65eeeb7f, type: 3}
   audio: {fileID: 2890364210123117481}
   stopMoving: 0
 --- !u!82 &2890364210123117481
@@ -631,12 +633,13 @@ AudioSource:
   m_GameObject: {fileID: 2890364210123117486}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 0.79
+  OutputAudioMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 3777f5d1f8c0988449480e793099f11d, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.297
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -727,7 +730,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210168873009}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -760,7 +763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210191228395}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Toes_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -790,7 +793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210222332038}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: joint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210273218219}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Foot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -853,7 +856,7 @@ GameObject:
   - component: {fileID: 2890364210310218969}
   - component: {fileID: 2890364210310218950}
   - component: {fileID: 4930746112940944294}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: RockGolemMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -968,7 +971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2890364210378891466}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Index_Proximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -998,7 +1001,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3561053092707063105}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Golem Def.  Pt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1032,7 +1035,7 @@ GameObject:
   - component: {fileID: 3561053093670988054}
   - component: {fileID: 3561053093670988055}
   - component: {fileID: 3561053093670988052}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Golem_Weapon
   m_TagString: Untagged
   m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
@@ -1200,7 +1203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3561053094001691342}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Golem Shoot Point
   m_TagString: Untagged
   m_Icon: {fileID: 7148428337604731935, guid: 0000000000000000d000000000000000, type: 0}
@@ -1286,7 +1289,7 @@ MonoBehaviour:
   m_XPGains: 15
   BloodParticleEffect: {fileID: 6525718543388598434, guid: 6eda552671222204cbf42c7327972e79,
     type: 3}
-  Coin: {fileID: 0}
+  Coin: {fileID: 9100997750592192725, guid: 4d0706a959550294691326b8a581a446, type: 3}
 --- !u!114 &9029146187920830548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1416,7 +1419,7 @@ GameObject:
   - component: {fileID: 5987652211317007743}
   - component: {fileID: 5987652211317007740}
   - component: {fileID: 5987652211317007713}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1525,7 +1528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5987652211543850202}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1563,7 +1566,7 @@ GameObject:
   - component: {fileID: 5987652211795507269}
   - component: {fileID: 5987652211795507271}
   - component: {fileID: 5987652211795507268}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1636,7 +1639,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5987652211863299299}
   - component: {fileID: 5987652211863299298}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1725,7 +1728,7 @@ GameObject:
   - component: {fileID: 5987652211978033875}
   - component: {fileID: 5987652211978033877}
   - component: {fileID: 5987652211978033874}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}

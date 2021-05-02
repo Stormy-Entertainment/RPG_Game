@@ -11,7 +11,7 @@ public class K_dialogue_cutscene : MonoBehaviour
     //Create a empty object and grab this script on that
     //Create a TextMeshPro UI text and button
 
-    public int sceneNunber;
+    public string sceneName;
 
     public TextMeshProUGUI textDisplay;
     public string[] sentence;
@@ -101,7 +101,14 @@ public class K_dialogue_cutscene : MonoBehaviour
     //This part can change to start the game or changing scene
     public void LoadScene()
     {
-        SceneManager.LoadScene(sceneNunber);
+        StartCoroutine(LoadSceneRoutine());
     }
 
+    private IEnumerator LoadSceneRoutine()
+    {
+        GameHandler.instance.ChangeRespawnPoint("");
+        FindObjectOfType<PauseUI>().DialogSceneClosed();
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(sceneName);
+    }
 }

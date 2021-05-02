@@ -8,12 +8,14 @@ public class GameHandler : MonoBehaviour
 {
     public static GameHandler instance;
     private Transform Player;
-    [SerializeField] private CinemachineFreeLook ThirdPersonCamera;
 
     [SerializeField] private int m_PlayerLives = 3;
     [SerializeField] private Transform m_PlayerRespawnPoint;
 
-    [SerializeField] private GameObject[] AllMenus;
+    [SerializeField] private Transform MainIslandRespawnPoint;
+    [SerializeField] private Transform BonusLevelRespawnPoint;
+    [SerializeField] private Transform FinalBossBattleRespawnPoint;
+    [SerializeField] private Transform CaveRespawnPoint;
 
     GameOverUI gameOver;
 
@@ -24,22 +26,17 @@ public class GameHandler : MonoBehaviour
             return;
         }
         instance = this;
-        gameOver = FindObjectOfType<GameOverUI>();
-    }
-
-    private void Start()
-    {
-        Player = GameObject.FindWithTag("Player").transform;
-        //LevelSetUp();
     }
 
     public Transform GetPlayer()
     {
+        Player = GameObject.FindWithTag("Player").transform;
         return Player;
     }
             
     public void DecreaseLives(GameObject Player)
-    {     
+    {
+        gameOver = FindObjectOfType<GameOverUI>();
         m_PlayerLives--;
         gameOver.DisableHeart(m_PlayerLives);
         if (m_PlayerLives > 0)
@@ -57,11 +54,22 @@ public class GameHandler : MonoBehaviour
         }
     }
 
-    public void DisableAllMenus()
+    public void ChangeRespawnPoint(string Name)
     {
-        for(int i = 0; i < AllMenus.Length; i++)
+        switch (Name)
         {
-            AllMenus[i].SetActive(false);
+            case "MainIsland":
+                m_PlayerRespawnPoint = MainIslandRespawnPoint;
+                break;
+            case "Bonus level":
+                m_PlayerRespawnPoint = BonusLevelRespawnPoint;
+                break;
+            case "Final Boss Battle":
+                m_PlayerRespawnPoint = FinalBossBattleRespawnPoint;
+                break;
+            case "Cave":
+                m_PlayerRespawnPoint = CaveRespawnPoint;
+                break;
         }
     }
 }

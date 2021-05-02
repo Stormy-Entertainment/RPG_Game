@@ -5,11 +5,9 @@ using UnityEngine;
 public class StageMenuUI : MonoBehaviour
 {
     [SerializeField] private GameObject stageMenu;
-    public Teleporting2 teleporter;
 
     public void LevelCompleted()
     {
-        GameHandler.instance.DisableAllMenus();
         GameState.isStageCompleted = true;
         stageMenu.SetActive(true);
         GameState.instance.PauseTheGame();
@@ -20,6 +18,5 @@ public class StageMenuUI : MonoBehaviour
         GameState.isStageCompleted = false;
         GameState.instance.ResumeTheGame();
         stageMenu.SetActive(false);
-        teleporter.TeleportPlayerToMain();
     }
 }

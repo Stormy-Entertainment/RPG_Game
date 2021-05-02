@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float m_Health = 100;
-    public float m_AttackSpeed = 200; //Range(0 - 1000)
-    public float m_MoveSpeed = 60; //Range(0 - 100)
 
-    //Stats
-    //public int m_Agility = 20; //Increases Damage & Attack Speed
-   // public int m_Intellect = 20; //Attack Speed
-   // public int m_Stamina = 20; //Increases MoveSpeed & Damage
-   // public int m_Strength = 20; //Increases Health Grade & Armor
+    public int m_Health = 100;
+    public int m_AttackSpeed = 200; //Range(0 - 1000)
+    public int m_MoveSpeed = 10; //Range(0 - 100)
+    public int m_Armor = 5; //Range(0 - 100)
+
+    private int ArmorMultiplier = 0;
 
     private void Start()
     {
         LoadPlayerStats();
         StatsUI.instance.UpdateHealthBar(m_Health);
+        GetComponent<ThirdPersonMovement>().UpdateMoveMultiplier(m_MoveSpeed);
+        UpdateArmorMultiplier(m_Armor);
         //ResetData();
     }
 
@@ -27,13 +27,27 @@ public class PlayerStats : MonoBehaviour
         return m_MoveSpeed;
     }
 
-    public void IncreaseMoveSpeed(float value)
+    public void IncreaseMoveSpeed(int value)
     {
         m_MoveSpeed += value;
         if (m_MoveSpeed >= 100)
         {
             m_MoveSpeed = 100;
         }
+        GetComponent<ThirdPersonMovement>().UpdateMoveMultiplier(m_MoveSpeed);
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
+        SavePlayerStats();
+    }
+
+    public void DecreaseMoveSpeed(int value)
+    {
+        m_MoveSpeed -= value;
+        if (m_MoveSpeed <= 0)
+        {
+            m_MoveSpeed = 0;
+        }
+        GetComponent<ThirdPersonMovement>().UpdateMoveMultiplier(m_MoveSpeed);
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
     #endregion
@@ -44,36 +58,87 @@ public class PlayerStats : MonoBehaviour
         return m_AttackSpeed;
     }
 
-    public void IncreaseAttackSpeed(float value)
+    public void IncreaseAttackSpeed(int value)
     {
         m_AttackSpeed += value;
         if(m_AttackSpeed >= 1000)
         {
             m_AttackSpeed = 1000;
         }
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
+        SavePlayerStats();
+    }
+
+    public void DecreaseAttackSpeed(int value)
+    {
+        m_AttackSpeed -= value;
+        if (m_AttackSpeed <= 0)
+        {
+            m_AttackSpeed = 0;
+        }
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         SavePlayerStats();
     }
     #endregion
 
-    #region //Health
-    public void IncreaseHealth(float value)
+    #region //Armor
+    public float GetArmor()
     {
-        m_Health = m_Health + value;
-        if(m_Health >= 100f)
+        return m_Armor;
+    }
+
+    public void IncreaseArmor(int value)
+    {
+        m_Armor += value;
+        if (m_Armor >= 100)
         {
-            m_Health = 100f;
+            m_Armor = 100;
         }
+        UpdateArmorMultiplier(m_Armor);
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
+        SavePlayerStats();
+    }
+
+    public void DecreaseArmor(int value)
+    {
+        m_Armor -= value;
+        if (m_Armor <= 0)
+        {
+            m_Armor = 0;
+        }
+        UpdateArmorMultiplier(m_Armor);
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
+        SavePlayerStats();
+    }
+
+    public void UpdateArmorMultiplier(int value)
+    {
+        float normalizedValue = Mathf.InverseLerp(0, 100, value);
+        ArmorMultiplier = Mathf.RoundToInt(Mathf.Lerp(0, 10, normalizedValue));
+    }
+    #endregion
+
+    #region //Health
+    public void IncreaseHealth(int value)
+    {
+        m_Health = m_Health + value + ArmorMultiplier;
+        if(m_Health >= 100)
+        {
+            m_Health = 100;
+        }
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
 
-    public void DecreaseHealth(float value)
+    public void DecreaseHealth(int value)
     {
-        m_Health = m_Health - value;
-        if (m_Health <= 0f)
+        m_Health = m_Health - (value + ArmorMultiplier);
+        if (m_Health <= 0)
         {
-            m_Health = 0f;
+            m_Health = 0;
             GameHandler.instance.DecreaseLives(this.gameObject); ;
         }
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
         StatsUI.instance.UpdateHealthBar(m_Health);
     }
 
@@ -87,20 +152,19 @@ public class PlayerStats : MonoBehaviour
     #region //Database
     public void LoadPlayerStats()
     {
-        m_AttackSpeed = PlayerPrefs.GetFloat("PlayerAttackSpeed", 200);
-        m_MoveSpeed = PlayerPrefs.GetFloat("PlayerMoveSpeed", 60);
+        m_Health = PlayerPrefs.GetInt("PlayerHealth", 100);
+        m_AttackSpeed = PlayerPrefs.GetInt("PlayerAttackSpeed", 200);
+        m_MoveSpeed = PlayerPrefs.GetInt("PlayerMoveSpeed", 10);
+        m_Armor = PlayerPrefs.GetInt("PlayerArmor", 5);
+        FindObjectOfType<PlayerStatsUI>().UpdateText();
     }
 
     public void SavePlayerStats()
     {
-        PlayerPrefs.SetFloat("PlayerAttackSpeed", m_AttackSpeed);
-        PlayerPrefs.SetFloat("PlayerMoveSpeed", m_MoveSpeed);
-    }
-
-    public void ResetData()
-    {
-        PlayerPrefs.SetFloat("PlayerAttackSpeed", 200);
-        PlayerPrefs.SetFloat("PlayerMoveSpeed", 60);
+        PlayerPrefs.SetInt("PlayerHealth", m_Health);
+        PlayerPrefs.SetInt("PlayerAttackSpeed", m_AttackSpeed);
+        PlayerPrefs.SetInt("PlayerMoveSpeed", m_MoveSpeed);
+        PlayerPrefs.SetInt("PlayerArmor", m_Armor);
     }
     #endregion
 

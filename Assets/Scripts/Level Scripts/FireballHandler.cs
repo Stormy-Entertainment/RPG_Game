@@ -92,52 +92,86 @@ public class FireballHandler : MonoBehaviour
 
     private void HighLightEnemy()
     {
-        if (m_HitDetect && m_Hit.collider.tag == "Enemy")
+        if (m_HitDetect && m_Hit.collider.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            if (HighLighted)
+            if (m_Hit.collider.tag == "DummyEnemy")
             {
-                if (HighlightedOutline != null)
+                if (HighLighted)
                 {
-                    if (HighlightedOutline[0] != null)
+                    if (m_Hit.collider.name != HighlightedOutline[0].name)
                     {
-                        k_Enemy enemy1 = m_Hit.collider.GetComponentInParent<k_Enemy>();
-                        k_EnemyRangeAtk enemy2 = m_Hit.collider.GetComponentInParent<k_EnemyRangeAtk>();
-                        if (m_Hit.collider.name != HighlightedOutline[0].name)
+                        HighlightedOutline[0].enabled = false;
+                        HighlightedOutline.Clear();
+                        HighLighted = true;
+                        Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                        outline.enabled = true;
+                        HighlightedOutline.Add(outline);
+                    }
+                }
+                else
+                {
+                    DummyTargetEnemy dummyTarget = m_Hit.collider.GetComponent<DummyTargetEnemy>();
+                    if (dummyTarget != null)
+                    {
+                        if (dummyTarget.isTargetable)
                         {
-                            for (int i = 0; i < HighlightedOutline.Count; i++)
+                            if (!HighLighted)
                             {
-                                HighlightedOutline[i].enabled = false;
-                            }
-                            HighlightedOutline.Clear();
-                            HighLighted = false;
-                        }
-                        else if (enemy1 != null)
-                        {
-                            if (enemy1.IsDead())
-                            {
-                                for (int i = 0; i < HighlightedOutline.Count; i++)
-                                {
-                                    HighlightedOutline[i].enabled = false;
-                                }
-                                HighlightedOutline.Clear();
-                                HighLighted = false;
-                            }
-                        }
-                        else if (enemy2 != null)
-                        {
-                            if (enemy2.IsDead())
-                            {
-                                for (int i = 0; i < HighlightedOutline.Count; i++)
-                                {
-                                    HighlightedOutline[i].enabled = false;
-                                }
-                                HighlightedOutline.Clear();
-                                HighLighted = false;
+                                HighLighted = true;
+                                Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
+                                outline.enabled = true;
+                                HighlightedOutline.Add(outline);
                             }
                         }
                     }
                 }
             }
+            else
+            {
+                if (HighLighted) 
+                {
+                    if (HighlightedOutline != null)
+                    {
+                        if (HighlightedOutline[0] != null)
+                        {
+                            k_Enemy enemy1 = m_Hit.collider.GetComponentInParent<k_Enemy>();
+                            k_EnemyRangeAtk enemy2 = m_Hit.collider.GetComponentInParent<k_EnemyRangeAtk>();
+                            if (m_Hit.collider.name != HighlightedOutline[0].name)
+                            {
+                                 for (int i = 0; i < HighlightedOutline.Count; i++)
+                                 {
+                                     HighlightedOutline[i].enabled = false;
+                                 }
+                                 HighlightedOutline.Clear();
+                                 HighLighted = false;
+                            }
+                            else if (enemy1 != null)
+                            {
+                                 if (enemy1.IsDead())
+                                 {
+                                     for (int i = 0; i < HighlightedOutline.Count; i++)
+                                     {
+                                         HighlightedOutline[i].enabled = false;
+                                     }
+                                     HighlightedOutline.Clear();
+                                     HighLighted = false;
+                                 }
+                            }
+                            else if (enemy2 != null)
+                            {
+                                 if (enemy2.IsDead())
+                                 {
+                                     for (int i = 0; i < HighlightedOutline.Count; i++)
+                                     {
+                                         HighlightedOutline[i].enabled = false;
+                                     }
+                                     HighlightedOutline.Clear();
+                                     HighLighted = false;
+                                 }
+                            }
+                        }
+                    }
+                }
 
             else
             {
@@ -165,37 +199,6 @@ public class FireballHandler : MonoBehaviour
                 }
             }
         }
-        else if (m_HitDetect && m_Hit.collider.tag == "DummyEnemy")
-        {
-            if (HighLighted)
-            {
-                if (m_Hit.collider.name != HighlightedOutline[0].name)
-                {
-                    HighlightedOutline[0].enabled = false;
-                    HighlightedOutline.Clear();
-                    HighLighted = true;          
-                    Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                    outline.enabled = true;
-                    HighlightedOutline.Add(outline);
-                }
-            }
-            else
-            {
-                DummyTargetEnemy dummyTarget = m_Hit.collider.GetComponent<DummyTargetEnemy>();
-                if (dummyTarget != null)
-                {
-                    if (dummyTarget.isTargetable)
-                    {
-                        if (!HighLighted)
-                        {
-                            HighLighted = true;
-                            Outline outline = m_Hit.collider.gameObject.GetComponent<Outline>();
-                            outline.enabled = true;
-                            HighlightedOutline.Add(outline);
-                        }
-                    }
-                }
-            }
         }
         else
         {

@@ -34,7 +34,7 @@ public class CoinDrop : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             SFXManager.GetInstance().PlaySound("CoinPickUp");
-            other.gameObject.GetComponentInParent<Inventory>().IncreaseCoins(CoinsPerItem);
+            GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>().IncreaseCoins(CoinsPerItem);
             Destroy(this.gameObject);
         }
     }

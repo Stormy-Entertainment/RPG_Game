@@ -15,6 +15,8 @@ public class StatsUI : MonoBehaviour
     [SerializeField] private Slider expBarSlider;
     [SerializeField] private Slider healthBarSlider;
 
+    bool maxLevelReached = false;
+
     void Awake()
     {
         if (instance != null)
@@ -36,32 +38,36 @@ public class StatsUI : MonoBehaviour
 
     public void SetExperience(float exp)
     {
-        experience += exp;
-
-        float expNeeded = ExpNeedToLvlUp(currentLevel);
-        float previousExperience = ExpNeedToLvlUp(currentLevel - 1);
-
-        //Level up with Exp
-        if (experience >= expNeeded)
+        if (!maxLevelReached)
         {
-            LevelUp();
-            expNeeded = ExpNeedToLvlUp(currentLevel);
-            previousExperience = ExpNeedToLvlUp(currentLevel - 1);
-        }
+            experience += exp;
 
-        //Fill Exp Bar Slider with Exp
-        expBarSlider.value = (experience - previousExperience) / (expNeeded - previousExperience);
+            float expNeeded = ExpNeedToLvlUp(currentLevel);
+            float previousExperience = ExpNeedToLvlUp(currentLevel - 1);
 
-        //Reset the Fillbar
-        if (expBarSlider.value == 1)
-        {
-            expBarSlider.value = 0;
+            //Level up with Exp
+            if (experience >= expNeeded)
+            {
+                LevelUp();
+                expNeeded = ExpNeedToLvlUp(currentLevel);
+                previousExperience = ExpNeedToLvlUp(currentLevel - 1);
+            }
+
+            //Fill Exp Bar Slider with Exp
+            expBarSlider.value = (experience - previousExperience) / (expNeeded - previousExperience);
+
+            //Reset the Fillbar
+            if (expBarSlider.value == 1)
+            {
+                expBarSlider.value = 0;
+            }
+            SaveStatsData();
         }
-        SaveStatsData();
     }
 
     public void LevelUp()
     {
+
         currentLevel++;
         lvlText.text = currentLevel.ToString("");
         UpdatePlayerStats();
@@ -70,7 +76,23 @@ public class StatsUI : MonoBehaviour
     private void UpdatePlayerStats()
     {
         PlayerStats playerStat = FindObjectOfType<PlayerStats>();
-        playerStat.IncreaseAttackSpeed(50);
+        playerStat.IncreaseAttackSpeed(30);
+        playerStat.IncreaseMoveSpeed(5);
+        playerStat.IncreaseArmor(3);
+        SaveStatsData();
+        if(playerStat.m_AttackSpeed >= 1000 
+                && playerStat.m_MoveSpeed >= 100
+                        && playerStat.m_Armor >= 100)
+            {
+               MaxLevelReached();
+            }
+    }
+
+    public void MaxLevelReached()
+    {
+        maxLevelReached = true;
+        expBarSlider.value = 1;
+        lvlText.text = "MAX";
         SaveStatsData();
     }
 

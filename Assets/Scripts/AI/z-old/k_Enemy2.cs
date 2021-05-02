@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class k_Enemy2 : MonoBehaviour
 {
-
     private Transform playerPoint;
     private Transform player;
-
 
     public Animator animator;
     public UnityEngine.AI.NavMeshAgent agent;
@@ -28,7 +26,7 @@ public class k_Enemy2 : MonoBehaviour
 
     //Attacking
     public float timeBetweenAttacks;
-    public float m_Damage = 20;
+    public int m_Damage = 20;
     bool alreadyAttacked;
 
     private void Awake()

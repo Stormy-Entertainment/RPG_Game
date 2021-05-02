@@ -6,15 +6,15 @@ public class InventoryUI : MonoBehaviour
 {
 	public Transform itemsParent;
 	public GameObject inventoryUI;
-	public static bool isInventoryOpen = false;
+	public bool isInventoryOpen = false;
 
 	Inventory inventory;
 	InventorySlot[] slots;
 
 	private void Start()
 	{
-		inventory = GameObject.FindWithTag("Player").GetComponent<Inventory>();
-		inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
+		inventory = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>();
+		//inventory.onItemChangedCallback += UpdateUI;    // Subscribe to the onItemChanged callback
 
 		// Populate slots array
 		slots = itemsParent.GetComponentsInChildren<InventorySlot>();
@@ -26,27 +26,37 @@ public class InventoryUI : MonoBehaviour
 		// Open and Close Inventory Menu
 		if (Input.GetButtonDown("Inventory"))
 		{
-			if (inventoryUI.activeSelf)
+			if (!GameState.isGameOver && !GameState.isStageCompleted)
 			{
-				inventoryUI.SetActive(false);
-				GameState.instance.ResumeTheGame();
-				isInventoryOpen = false;
-			}
-			else
-			{
-				if (!GameState.isPaused)
+
+				PauseUI pause = FindObjectOfType<PauseUI>();
+				ShopSystem ShopKeeper = FindObjectOfType<ShopSystem>();
+				if (!pause.isMenuActivated)
 				{
-					inventoryUI.SetActive(true);
-					GameState.instance.PauseTheGame();
-					isInventoryOpen = true;
+					if (!pause.isPaused && !ShopKeeper.shopOpen)
+					{
+						if (inventoryUI.activeSelf)
+						{
+							inventoryUI.SetActive(false);
+							GameState.instance.ResumeTheGame();
+							isInventoryOpen = false;
+						}
+						else
+						{
+							inventoryUI.SetActive(true);
+							GameState.instance.PauseTheGame();
+							isInventoryOpen = true;
+						}
+					}
 				}
 			}
 		}
 	}
 
 	// Called by delegate on the Inventory
-	void UpdateUI()
+	public void UpdateUI()
 	{
+		inventory = GameObject.FindWithTag("PlayerInventory").GetComponent<Inventory>();
 		for (int i = 0; i < slots.Length; i++)
 		{
 			if (i < inventory.items.Count)  // If there is an item to add

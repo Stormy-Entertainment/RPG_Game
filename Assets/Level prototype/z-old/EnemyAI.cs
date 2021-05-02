@@ -14,7 +14,7 @@ public class EnemyAI : MonoBehaviour
     public Transform defPoint;
 
     //Attacking
-    public float m_Damage = 20;
+    public int m_Damage = 20;
     public float timeBetweenAttacks;
     bool alreadyAttacked;
 

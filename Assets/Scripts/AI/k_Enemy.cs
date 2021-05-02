@@ -26,10 +26,10 @@ public class k_Enemy : MonoBehaviour
 
     //Attacking
     bool alreadyAttacked = false;
-    public float timeBetweenAttacks;
-    public float m_Damage = 20;
+    public float timeBetweenAttacks = 2f;
+    public int m_Damage = 20;
     bool EnemyHit = false;
-    public GameObject weapon;
+    //public GameObject weapon;
 
     //Sound Effect
     public AudioClip walking;
@@ -137,27 +137,24 @@ public class k_Enemy : MonoBehaviour
 
     //Attack and look at the player, also having between time again. Need to add attack script for the attack function.
     private void AttackPlayer()
-    {
-        player = GameHandler.instance.GetPlayer();
-
-        agent.SetDestination(transform.position);
-        if (player != null)
-        {
-            stopMoving = true;
-            animator.SetTrigger("Attacking");
-            //animator.SetBool("Attack", true);
-            animator.SetBool("Running", false);
-            animator.SetBool("Moving", false);
-
-            playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
-            transform.LookAt(playerPoint);
-        }
-
-        
+    {      
         if (!alreadyAttacked)
         {
             alreadyAttacked = true;
-            //player.GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
+            player = GameHandler.instance.GetPlayer();
+
+            agent.SetDestination(transform.position);
+            if (player != null)
+            {
+                stopMoving = true;
+                animator.SetTrigger("Attacking");
+                //animator.SetBool("Attack", true);
+                animator.SetBool("Running", false);
+                animator.SetBool("Moving", false);
+
+                playerPoint.position = new Vector3(playerPoint.position.x, transform.position.y, playerPoint.position.z);
+                transform.LookAt(playerPoint);
+            }
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
         
@@ -171,14 +168,8 @@ public class k_Enemy : MonoBehaviour
     //Active collider when attack
     public void WeaponHit()
     {
-        weapon.GetComponent<BoxCollider>().enabled = true;
         audio.clip = fight; audio.loop = false; audio.Play();
-
-    }
-
-    public void WeaponHited()
-    {
-        weapon.GetComponent<BoxCollider>().enabled = false;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().DecreaseHealth(m_Damage);
     }
 
     public void Hit()

@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1549878646155690275}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 42.6925, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 21.181347, y: -90, z: 0}
 --- !u!1 &1551692270743859101
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1549802434445762325}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 61.03062, y: -90, z: 180}
+  m_LocalEulerAnglesHint: {x: 79.03938, y: 90, z: 0}
 --- !u!1 &1552072856199774181
 GameObject:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ Transform:
   - {fileID: 1550156127031585531}
   m_Father: {fileID: 1549878646155690275}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -3.3076567e-15, y: -180, z: 64.4709}
+  m_LocalEulerAnglesHint: {x: -2.2082522e-15, y: -180, z: 57.858025}
 --- !u!1 &1553473085826814087
 GameObject:
   m_ObjectHideFlags: 0
@@ -507,10 +507,9 @@ MonoBehaviour:
   playerInAttackRange: 0
   timeBetweenAttacks: 2
   m_Damage: 10
-  weapon: {fileID: 5479530081709514692}
   walking: {fileID: 8300000, guid: 791c6cb6b90268b4a82cf4e5483d2db6, type: 3}
   running: {fileID: 8300000, guid: 791c6cb6b90268b4a82cf4e5483d2db6, type: 3}
-  fight: {fileID: 0}
+  fight: {fileID: 8300000, guid: 791c6cb6b90268b4a82cf4e5483d2db6, type: 3}
   death: {fileID: 8300000, guid: 791c6cb6b90268b4a82cf4e5483d2db6, type: 3}
   getHit: {fileID: 8300000, guid: 3b7bc6f86d6d5974ab53c3ccfbf4df8f, type: 3}
   audio: {fileID: 1553473085826814080}
@@ -524,7 +523,8 @@ AudioSource:
   m_GameObject: {fileID: 1553473085826814087}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 791c6cb6b90268b4a82cf4e5483d2db6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.397
@@ -719,8 +719,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.42866775, y: 0.52843666, z: 0.63625336}
-  m_Center: {x: -0.050116792, y: -0.131114, z: 0.5612469}
+  m_Size: {x: 0.42866775, y: 0.5591316, z: 0.75258636}
+  m_Center: {x: -0.050116792, y: -0.115766525, z: 0.46194077}
 --- !u!54 &5479530081709514688
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -759,10 +759,11 @@ AudioSource:
   m_GameObject: {fileID: 5479530081709514692}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2620577155267799677, guid: cc9547ee1331bff47baf65de233e8358,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d2e18650121665e4082777363e5ef71f, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.55
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

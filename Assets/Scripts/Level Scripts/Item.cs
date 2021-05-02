@@ -12,13 +12,12 @@ public class Item : ScriptableObject
 
 	//Stats
 	public int Health;
-	public int Agility;
-	public int Intellect;
-	public int Stamina;
-	public int Strength;
+	public int AttackSpeed;
+	public int MoveSpeed;
+	public int Armor;
 
 	// Called when the item is pressed in the inventory
-	public virtual void Equip(Inventory inventory)
+	public virtual void Use(Inventory inventory)
 	{
 		// Use the item
 		// Something might 
@@ -26,26 +25,28 @@ public class Item : ScriptableObject
         {
 			FindObjectOfType<PlayerStats>().IncreaseHealth(Health);
 		}
-		else if(itemType == ItemType.Armor)
+        else
         {
-		}
-		else if (itemType == ItemType.Helmet)
-		{
-		}
-		else if (itemType == ItemType.Clock)
-		{
-		}
-		else if (itemType == ItemType.Pants)
-		{
-		}
-		else if (itemType == ItemType.Boot)
-		{
-		}
-		else if (itemType == ItemType.Gloves)
-		{
+			PlayerStats playerStat = FindObjectOfType<PlayerStats>();
+			playerStat.IncreaseAttackSpeed(AttackSpeed);
+			playerStat.IncreaseMoveSpeed(MoveSpeed);
+			playerStat.IncreaseArmor(Armor);
+			FindObjectOfType<PlayerStatsUI>().UpdateText();
 		}
 		RemoveFromInventory(inventory);
 		//Remove Item after using It
+	}
+
+	public virtual void DecreaseStats()
+    {
+		if(itemType != ItemType.HealthPotion)
+		{
+			PlayerStats playerStat = FindObjectOfType<PlayerStats>();
+			playerStat.DecreaseAttackSpeed(AttackSpeed);
+			playerStat.DecreaseMoveSpeed(MoveSpeed);
+			playerStat.DecreaseArmor(Armor);
+			FindObjectOfType<PlayerStatsUI>().UpdateText();
+		}
 	}
 
 	public void RemoveFromInventory(Inventory inventory)

@@ -11,16 +11,18 @@ public class GameState : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            return;
-        }
         instance = this;
+        int gameStateCount = FindObjectsOfType<GameState>().Length;
+        if (gameStateCount > 1)
+        {
+            Destroy(this.gameObject);
+        }
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Start()
     {
-        ResumeTheGame();
+        ResumeMenu();
     }
 
     public void PauseTheGame()
@@ -28,6 +30,13 @@ public class GameState : MonoBehaviour
         Time.timeScale = 0f;
         EnableCorsor();
         isPaused = true;
+    }
+
+    public void ResumeMenu()
+    {
+        Time.timeScale = 1f;
+        EnableCorsor();
+        isPaused = false;
     }
 
     public void ResumeTheGame()

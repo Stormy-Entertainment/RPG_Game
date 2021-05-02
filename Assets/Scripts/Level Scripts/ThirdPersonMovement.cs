@@ -11,6 +11,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private float normalSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
     [SerializeField] private float jumpForce = 3f;
+    private float MoveMultiplier = 1;
 
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float turnSmoothVelocity;
@@ -37,6 +38,7 @@ public class ThirdPersonMovement : MonoBehaviour
     [SerializeField] private Footstepper leftFootStep;
     [SerializeField] private Footstepper rightFootStep;
     bool footStepPlayer = false;
+    bool leftFootPlayed = false;
 
     private void Awake()
     {
@@ -56,10 +58,10 @@ public class ThirdPersonMovement : MonoBehaviour
             controller.Move(move * Time.deltaTime * 30);
         }
 
-
-
+        //Check Grounded
         isGounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
 
+        //If Jump Button Pressed
         if (Input.GetButtonDown("Jump") && isGounded)
         {
             if (!isJumping)
@@ -75,6 +77,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         ApplyGravity();
         //Applied Simulated Gravity
+
         if (Rotate)
         {
             ApplyRotation();
@@ -97,12 +100,12 @@ public class ThirdPersonMovement : MonoBehaviour
                 if (Input.GetButton("Sprint") && isGounded)
                 {
                     //Increase Speed
-                    controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime);
+                    controller.Move(moveDirection.normalized * sprintSpeed * Time.deltaTime * MoveMultiplier);
                     velocity.x += sprintSpeed * Time.deltaTime;
                 }
                 else
                 {
-                    controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime);
+                    controller.Move(moveDirection.normalized * normalSpeed * Time.deltaTime * MoveMultiplier);
                     velocity.x += normalSpeed * Time.deltaTime;
                 }
             }
@@ -116,9 +119,9 @@ public class ThirdPersonMovement : MonoBehaviour
             }
         }
 
+        //Play foot step when is grounded and moving
         if (isGounded && direction.magnitude >= 0.1f)
         {
-
             if (!footStepPlayer)
             {
                 if (Input.GetButton("Sprint"))
@@ -133,19 +136,33 @@ public class ThirdPersonMovement : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        anim.SetFloat("Velocity", controller.velocity.magnitude);
+        anim.SetFloat("H", horizontal);
+        anim.SetFloat("V", vertical);
+        // Debug.Log("Velovity " + velocity);
+    }
+
+    public void UpdateMoveMultiplier(int value)
+    {
+        float normalizedValue = Mathf.InverseLerp(0, 100, value);
+        MoveMultiplier = Mathf.Lerp(1, 2, normalizedValue);
+    }
+
     IEnumerator PlayFootStepsWalking()
     {
         footStepPlayer = true;
-        yield return new WaitForSeconds(0.5f);
-        int ranNo;
-        ranNo = Random.Range(0, 2);
-        if (ranNo == 0)
+        yield return new WaitForSeconds(0.4f);
+        if (!leftFootPlayed && controller.velocity.magnitude >= 0.1f) 
         {
             leftFootStep.PlayFootStep();
+            leftFootPlayed = true;
         }
-        else
+        else if(controller.velocity.magnitude >= 0.1f)
         {
             rightFootStep.PlayFootStep();
+            leftFootPlayed = false;
         }
         footStepPlayer = false;
     }
@@ -153,26 +170,18 @@ public class ThirdPersonMovement : MonoBehaviour
     IEnumerator PlayFootStepsRunning()
     {
         footStepPlayer = true;
-        yield return new WaitForSeconds(0.3f);
-        int ranNo;
-        ranNo = Random.Range(0, 2);
-        if (ranNo == 0)
+        yield return new WaitForSeconds(0.25f);
+        if (!leftFootPlayed && controller.velocity.magnitude >= 0.1f)
         {
             leftFootStep.PlayFootStep();
+            leftFootPlayed = true;
         }
-        else
+        else if (controller.velocity.magnitude >= 0.1f)
         {
             rightFootStep.PlayFootStep();
+            leftFootPlayed = false;
         }
         footStepPlayer = false;
-    }
-
-    private void FixedUpdate()
-    {
-        anim.SetFloat("Velocity", controller.velocity.magnitude);
-        anim.SetFloat("H", horizontal);
-        anim.SetFloat("V", vertical);
-        // Debug.Log("Velovity " + velocity);
     }
 
     public void UpdateRotation(bool value)
@@ -205,7 +214,6 @@ public class ThirdPersonMovement : MonoBehaviour
     IEnumerator ResetJumpAnim()
     {
         yield return new WaitForSeconds(0.8f);
-        //anim.SetBool("Jump", false);
         isJumping = false;
     }
 
