@@ -6,14 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class SkipScene : MonoBehaviour
 {
+    public String sceneName;
+
     public void playGame()
     {
-          FindObjectOfType<PauseUI>().ResumeFromMenu();         
-          SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(LoadSceneRoutine());
     }
 
-    public void Back()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-    }
+private IEnumerator LoadSceneRoutine()
+{
+    GameHandler.instance.ChangeRespawnPoint(sceneName);
+    FindObjectOfType<PauseUI>().DialogSceneClosed();
+    yield return new WaitForSeconds(0.1f);
+    SceneManager.LoadScene(sceneName);
+}
 }

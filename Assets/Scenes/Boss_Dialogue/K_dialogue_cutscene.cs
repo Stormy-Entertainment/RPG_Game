@@ -106,7 +106,7 @@ public class K_dialogue_cutscene : MonoBehaviour
 
     private IEnumerator LoadSceneRoutine()
     {
-        GameHandler.instance.ChangeRespawnPoint("");
+        GameHandler.instance.ChangeRespawnPoint(sceneName);
         FindObjectOfType<PauseUI>().DialogSceneClosed();
         yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(sceneName);

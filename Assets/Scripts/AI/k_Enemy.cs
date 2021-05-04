@@ -51,7 +51,7 @@ public class k_Enemy : MonoBehaviour
 
     private void Start()
     {
-        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
+       // playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
     }
 
     private void Update()
@@ -120,6 +120,7 @@ public class k_Enemy : MonoBehaviour
     private void ChasePlayer()
     {
         player = GameHandler.instance.GetPlayer();
+        playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
         agent.speed = chaseSpeed;
        
         animator.SetBool("Running", true);
@@ -142,6 +143,7 @@ public class k_Enemy : MonoBehaviour
         {
             alreadyAttacked = true;
             player = GameHandler.instance.GetPlayer();
+            playerPoint = GameObject.FindWithTag("PlayerPoint").transform;
 
             agent.SetDestination(transform.position);
             if (player != null)

@@ -105,6 +105,6 @@ public class PauseUI : MonoBehaviour
     public void DialogSceneClosed()
     {
         UIElement.SetActive(true);
-        isMenuActivated = true;
+        isMenuActivated = false;
     }
 }

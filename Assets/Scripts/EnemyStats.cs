@@ -32,7 +32,6 @@ public class EnemyStats : MonoBehaviour
         if (m_Health <= 0f && !Dead)
         {
             Dead = true;
-            Debug.Log("Golem Died 1");
             k_Enemy enemyAI = GetComponentInParent<k_Enemy>();
             k_EnemyRangeAtk enemyAI2 = GetComponentInParent<k_EnemyRangeAtk>();
             StatsUI.instance.SetExperience(m_XPGains);
@@ -42,7 +41,6 @@ public class EnemyStats : MonoBehaviour
                     if (enemyAI.gameObject.tag == "Boss")
                     {
                         FindObjectOfType<k_winning>().Win();
-                        Debug.Log("Golem Died 2");
                     }
                     enemyAI.Death();
                 }
